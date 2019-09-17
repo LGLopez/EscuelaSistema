@@ -10,12 +10,12 @@ package escuela;
  * @author destr
  */
 public class Escuela {
-
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new Registrar().setVisible(true);
+        new Entrar().setVisible(true);
         // TODO code application logic here
     }
     
