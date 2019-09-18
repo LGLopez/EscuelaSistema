@@ -5,8 +5,16 @@
  */
 package escuela;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,7 +22,9 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class panelPrincipal extends javax.swing.JFrame {
-
+    File file = new File("Usuarios.txt");
+    ArrayList<Usuario> users = new ArrayList<Usuario>();
+    
     /**
      * Creates new form panelPrincipal
      */
@@ -35,6 +45,8 @@ public class panelPrincipal extends javax.swing.JFrame {
                 panelTabs.setEnabledAt(5, false);
                 panelTabs.setEnabledAt(6, false);
                 panelTabs.setEnabledAt(7, false);
+                
+                btnEliminar.setVisible(false);
                 
                 break;
             case "Administrador":
@@ -97,6 +109,7 @@ public class panelPrincipal extends javax.swing.JFrame {
         comboPerfil = new javax.swing.JComboBox<>();
         btnGuardarUsuario = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         panelAlumnos = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -164,32 +177,45 @@ public class panelPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGap(286, 577, Short.MAX_VALUE)
+                        .addGap(304, 599, Short.MAX_VALUE)
                         .addComponent(Cancelar))
                     .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                                         .addComponent(txtNombreUsuario, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addComponent(jLabel6))
-                                .addGap(34, 34, 34)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(comboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6)
                                     .addGroup(jPanel9Layout.createSequentialGroup()
-                                        .addComponent(btnGuardarUsuario)
+                                        .addGap(85, 85, 85)
+                                        .addComponent(btnGuardarUsuario)))
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel9Layout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel8)
+                                            .addComponent(comboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel9Layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
-                                        .addComponent(btnEliminar))))
+                                        .addComponent(btnEliminar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnEditar))))
                             .addComponent(jLabel7)
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -205,7 +231,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
                             .addComponent(txtPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 306, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -248,7 +274,8 @@ public class panelPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cancelar)
                     .addComponent(btnGuardarUsuario)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnEliminar)
+                    .addComponent(btnEditar))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -262,7 +289,7 @@ public class panelPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 28, Short.MAX_VALUE))
         );
 
         panelTabs.addTab("Usuario", jPanel1);
@@ -423,12 +450,84 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        try {
+            DataInputStream archivoRead;
+            
+            archivoRead = new DataInputStream(new FileInputStream(file));
+        
+            while(archivoRead.available() > 0){
+                int readID = archivoRead.readInt();
+                String readNombre = archivoRead.readUTF();
+                String readPaterno = archivoRead.readUTF();
+                String readMaterno = archivoRead.readUTF();
+                String readNombreUsuario = archivoRead.readUTF();
+                String readPassword = archivoRead.readUTF();
+                String readPerfil = archivoRead.readUTF();
+                String readSeparador = archivoRead.readUTF();
+
+                Usuario temp = new Usuario();
+
+                temp.setId(readID);
+                temp.setNombre(readNombre);
+                temp.setaPaterno(readPaterno);
+                temp.setaMaterno(readMaterno);
+                temp.setNombreUsuario(readNombreUsuario);
+                temp.setPassword(readPassword);
+                temp.setPerfil(readPerfil);
+
+                users.add(temp);
+                
+            }
+            
+            String userToDelete = JOptionPane.showInputDialog(this, "Ingrese el nombre del ususario que desea eliminar: ");
+            
+            boolean found = false;
+            for(int i=0; i<users.size() && !found; i++){
+                if(users.get(i).getNombreUsuario().equals(userToDelete)){
+                    found = true;
+                    users.remove(i);
+                    file.delete();
+                    
+                    DataOutputStream archivoWrite;
+        
+                    archivoWrite = new DataOutputStream(new FileOutputStream(file));
+        
+                    for(int j=0; j<users.size(); j++){
+                        archivoWrite.writeInt(users.get(j).getId());
+                        archivoWrite.writeUTF(users.get(j).getNombre());
+                        archivoWrite.writeUTF(users.get(j).getaPaterno());
+                        archivoWrite.writeUTF(users.get(j).getaMaterno());
+                        archivoWrite.writeUTF(users.get(j).getNombreUsuario());
+                        archivoWrite.writeUTF(users.get(j).getPassword());
+                        archivoWrite.writeUTF(users.get(j).getPerfil());
+                        archivoWrite.writeUTF("#");
+
+                    }
+                    archivoWrite.close();
+                    JOptionPane.showMessageDialog(this, "El usuario se ha eliminado con exito.");
+                }
+            }
+            
+        } catch (FileNotFoundException ex) {
+            //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
         
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardarUsuario;
     private javax.swing.JComboBox<String> comboPerfil;
