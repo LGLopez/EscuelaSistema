@@ -5,6 +5,10 @@
  */
 package escuela;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -195,58 +199,55 @@ public class Registrar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
-        Entrar n = new Entrar();
-        n.setVisible(true);
-        dispose();
+        Entrar n;
+        try {
+            n = new Entrar();
+            n.setVisible(true);
+            dispose();
+
+        } catch (IOException ex) {
+            //Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void btnGuardarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarUsuarioActionPerformed
         if(txtNombre.getText().isEmpty() || txtAPaterno.getText().isEmpty() || txtAMaterno.getText().isEmpty() || txtNombreUsuario.getText().isEmpty() || txtPassword.getText().isEmpty() || txtPasswordConfirm.getText().isEmpty() ){
             JOptionPane.showMessageDialog(this, "Faltan campos por llenar");
+            return;
+        }
+      
+        if(!txtPassword.getText().equals(txtPasswordConfirm.getText())){
+            JOptionPane.showMessageDialog(this, "La contraseña no coincide.");
+            return;
         }
         
-        Usuario us;
         
+        Usuario us = new Usuario();
         
+        us.setNombre(txtNombre.getText());
+        us.setNombreUsuario(txtNombreUsuario.getText());
+        us.setPassword(txtPassword.getText());
+        us.setPerfil(comboPerfil.getSelectedItem().toString());
+        us.setaMaterno(txtAMaterno.getText());
+        us.setaPaterno(txtAPaterno.getText());
+        
+        Entrar n;
+        try {
+            n = new Entrar(us);
+            n.setVisible(true);
+            dispose();
+        } catch (FileNotFoundException ex) {
+            //Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            //Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }//GEN-LAST:event_btnGuardarUsuarioActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Registrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Registrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Registrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Registrar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Registrar().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar;

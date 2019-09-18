@@ -6,7 +6,16 @@
 package escuela;
 
 import java.awt.Color;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,19 +23,101 @@ import javax.swing.JOptionPane;
  * @author destr
  */
 public class Entrar extends javax.swing.JFrame {
-    int id;
+    int id =0;
     Usuario user;
     ArrayList<Usuario> users = new ArrayList<Usuario>();
+    File file = new File("Usuarios.txt");
     /**
      * Creates new form Registrar
      */
-    public Entrar() {
+    public Entrar() throws FileNotFoundException, IOException {
         initComponents();
+        
+        DataInputStream archivoRead;
+        
+        archivoRead = new DataInputStream(new FileInputStream(file));
+        
+        
+        while(archivoRead.available() > 0){
+            int readID = archivoRead.readInt();
+            String readNombre = archivoRead.readUTF();
+            String readPaterno = archivoRead.readUTF();
+            String readMaterno = archivoRead.readUTF();
+            String readNombreUsuario = archivoRead.readUTF();
+            String readPassword = archivoRead.readUTF();
+            String readPerfil = archivoRead.readUTF();
+            String readSeparador = archivoRead.readUTF();
+            
+            Usuario temp = new Usuario();
+            
+            temp.setId(readID);
+            temp.setNombre(readNombre);
+            temp.setaPaterno(readPaterno);
+            temp.setaMaterno(readMaterno);
+            temp.setNombreUsuario(readNombreUsuario);
+            temp.setPassword(readPassword);
+            temp.setPerfil(readPerfil);
+            
+            users.add(temp);
+        }
         
     }
     
-    public Entrar(Usuario us){
+    public Entrar(Usuario us) throws FileNotFoundException, IOException{
+        initComponents();
+        
+        DataInputStream archivoRead;
+        
+        archivoRead = new DataInputStream(new FileInputStream(file));
+        
+        
+        while(archivoRead.available() > 0){
+            int readID = archivoRead.readInt();
+            String readNombre = archivoRead.readUTF();
+            String readPaterno = archivoRead.readUTF();
+            String readMaterno = archivoRead.readUTF();
+            String readNombreUsuario = archivoRead.readUTF();
+            String readPassword = archivoRead.readUTF();
+            String readPerfil = archivoRead.readUTF();
+            String readSeparador = archivoRead.readUTF();
+            
+            Usuario temp = new Usuario();
+            
+            temp.setId(readID);
+            temp.setNombre(readNombre);
+            temp.setaPaterno(readPaterno);
+            temp.setaMaterno(readMaterno);
+            temp.setNombreUsuario(readNombreUsuario);
+            temp.setPassword(readPassword);
+            temp.setPerfil(readPerfil);
+            
+            users.add(temp);
+        }
+        
+        us.setId(id);
+        id+=1;
         users.add(us);
+                
+        file.delete();
+        
+        DataOutputStream archivoWrite;
+        
+        archivoWrite = new DataOutputStream(new FileOutputStream(file));
+        
+        for(int i=0; i<users.size(); i++){
+            archivoWrite.writeInt(users.get(i).getId());
+            archivoWrite.writeUTF(users.get(i).getNombre());
+            archivoWrite.writeUTF(users.get(i).getaPaterno());
+            archivoWrite.writeUTF(users.get(i).getaMaterno());
+            archivoWrite.writeUTF(users.get(i).getNombreUsuario());
+            archivoWrite.writeUTF(users.get(i).getPassword());
+            archivoWrite.writeUTF(users.get(i).getPerfil());
+            archivoWrite.writeUTF("#");
+            
+        }
+        
+        archivoWrite.close();
+
     }
     
     /**
@@ -45,7 +136,7 @@ public class Entrar extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         contraseñaCampo = new javax.swing.JPasswordField();
         jCheckBox1 = new javax.swing.JCheckBox();
-        btnResgistrar = new javax.swing.JButton();
+        btnEntrar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         registrar = new javax.swing.JButton();
 
@@ -105,10 +196,10 @@ public class Entrar extends javax.swing.JFrame {
             }
         });
 
-        btnResgistrar.setText("Entrar");
-        btnResgistrar.addActionListener(new java.awt.event.ActionListener() {
+        btnEntrar.setText("Entrar");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResgistrarActionPerformed(evt);
+                btnEntrarActionPerformed(evt);
             }
         });
 
@@ -145,7 +236,7 @@ public class Entrar extends javax.swing.JFrame {
                             .addComponent(usuarioCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(btnResgistrar)
+                            .addComponent(btnEntrar)
                             .addGap(18, 18, 18)
                             .addComponent(registrar))
                         .addComponent(contraseñaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -166,7 +257,7 @@ public class Entrar extends javax.swing.JFrame {
                 .addComponent(jCheckBox1)
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnResgistrar)
+                    .addComponent(btnEntrar)
                     .addComponent(registrar))
                 .addGap(60, 60, 60)
                 .addComponent(jButton2)
@@ -231,12 +322,36 @@ public class Entrar extends javax.swing.JFrame {
 
     }//GEN-LAST:event_contraseñaCampoActionPerformed
 
-    private void btnResgistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResgistrarActionPerformed
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        for(int i =0; i<users.size(); i++){
+            
+            if(users.get(i).getNombreUsuario().equals(usuarioCampo.getText())){
+                if(users.get(i).getPassword().equals(contraseñaCampo.getText())){
+                    if(users.get(i).getPerfil().equals("Administrador")){
+                        panelPrincipal n = new panelPrincipal();
+                        n.setVisible(true);
+                        dispose();
+                        return;
+                    }
+                    else{
+                        panelPrincipal n = new panelPrincipal();
+                        n.setVisible(true);
+                        dispose();
+                        return;
+                    }
+                }
+            }
+        }
         
-    }//GEN-LAST:event_btnResgistrarActionPerformed
+        JOptionPane.showMessageDialog(this, "Todo mal");
+        
+        
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+        for(int i =0; i<users.size(); i++){
+            System.out.print(users.get(i).getNombreUsuario());
+        }
         
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -279,13 +394,17 @@ public class Entrar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Entrar().setVisible(true);
+                try {
+                    new Entrar().setVisible(true);
+                } catch (IOException ex) {
+                    //Logger.getLogger(Entrar.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnResgistrar;
+    private javax.swing.JButton btnEntrar;
     private javax.swing.JPasswordField contraseñaCampo;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;

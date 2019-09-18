@@ -16,7 +16,7 @@ public class Usuario {
     private String aMaterno;
     private String nombreUsuario;
     private String password;
-    private int perfil;
+    private String perfil;
 
     public int getId() {
         return id;
@@ -66,11 +66,11 @@ public class Usuario {
         this.password = password;
     }
 
-    public int getPerfil() {
+    public String getPerfil() {
         return perfil;
     }
 
-    public void setPerfil(int perfil) {
+    public void setPerfil(String perfil) {
         this.perfil = perfil;
     }
     
