@@ -47,7 +47,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                 panelTabs.setEnabledAt(7, false);
                 
                 btnEliminar.setVisible(false);
-                
+                btnEditar.setVisible(false);
                 break;
             case "Administrador":
                 panelTabs.setEnabledAt(0, true);
@@ -505,6 +505,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                     }
                     archivoWrite.close();
                     JOptionPane.showMessageDialog(this, "El usuario se ha eliminado con exito.");
+                    users.clear();
                 }
             }
             
@@ -521,7 +522,114 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        try {
+            DataInputStream archivoRead;
+            
+            archivoRead = new DataInputStream(new FileInputStream(file));
         
+            while(archivoRead.available() > 0){
+                int readID = archivoRead.readInt();
+                String readNombre = archivoRead.readUTF();
+                String readPaterno = archivoRead.readUTF();
+                String readMaterno = archivoRead.readUTF();
+                String readNombreUsuario = archivoRead.readUTF();
+                String readPassword = archivoRead.readUTF();
+                String readPerfil = archivoRead.readUTF();
+                String readSeparador = archivoRead.readUTF();
+
+                Usuario temp = new Usuario();
+
+                temp.setId(readID);
+                temp.setNombre(readNombre);
+                temp.setaPaterno(readPaterno);
+                temp.setaMaterno(readMaterno);
+                temp.setNombreUsuario(readNombreUsuario);
+                temp.setPassword(readPassword);
+                temp.setPerfil(readPerfil);
+
+                users.add(temp);
+                
+            }
+            
+            String userToDelete = JOptionPane.showInputDialog(this, "Ingrese el nombre del usuario que desea eliminar: ");
+            
+            boolean found = false;
+            int toChange =-1;
+            for(int i=0; i<users.size() && !found; i++){
+                if(users.get(i).getNombreUsuario().equals(userToDelete)){
+                    txtNombre.setText(users.get(i).getNombre());
+                    txtAPaterno.setText(users.get(i).getaPaterno());
+                    txtAMaterno.setText(users.get(i).getaMaterno());
+                    txtNombreUsuario.setText(users.get(i).getNombreUsuario());
+                    txtPassword.setText(users.get(i).getPassword());
+                    txtPasswordConfirm.setText(users.get(i).getPassword());
+                    
+                    found = true;
+                    toChange=i;
+                }
+            }
+            
+            String editNombre = "";
+            String editAPaterno = "";
+            String editAMaterno = "";
+            String editNombreUsuario = "";
+            String editPassword = "";
+            int editPerfil;
+            
+            if(found){
+                editNombre = JOptionPane.showInputDialog(this, "Ingrese el nuevo nombre: ");
+                editAPaterno = JOptionPane.showInputDialog(this, "Ingrese el nuevo apellido paterno:");
+                editAMaterno = JOptionPane.showInputDialog(this, "Ingrese el nuevo apellido materno:");
+                editNombreUsuario = JOptionPane.showInputDialog(this, "Ingrese el nuevo nombre de usuario:");
+                editPassword = JOptionPane.showInputDialog(this, "Ingrese la nueva contraseña:");
+                editPerfil = JOptionPane.showConfirmDialog(this, "Desea que sea administrador (ok=si):", "Editar Perfil.",JOptionPane.OK_CANCEL_OPTION );
+                
+                Usuario aux = new Usuario();
+                
+                aux.setNombre(editNombre);
+                aux.setaPaterno(editAPaterno);
+                aux.setaMaterno(editAMaterno);
+                aux.setNombreUsuario(editNombreUsuario);
+                aux.setPassword(editPassword);
+                if(editPerfil == 0){
+                    aux.setPerfil("Administrador");
+                }
+                else{
+                    aux.setPerfil("Coordinador");
+                }
+                
+                users.remove(toChange);
+                users.add(toChange, aux);
+                
+                file.delete();
+                
+                file.createNewFile();
+                
+                DataOutputStream archivoWrite = new DataOutputStream(new FileOutputStream(file));
+                
+                for(int i=0; i<users.size(); i++){
+                    archivoWrite.writeInt(users.get(i).getId());
+                    archivoWrite.writeUTF(users.get(i).getNombre());
+                    archivoWrite.writeUTF(users.get(i).getaPaterno());
+                    archivoWrite.writeUTF(users.get(i).getaMaterno());
+                    archivoWrite.writeUTF(users.get(i).getNombreUsuario());
+                    archivoWrite.writeUTF(users.get(i).getPassword());
+                    archivoWrite.writeUTF(users.get(i).getPerfil());
+                    archivoWrite.writeUTF("#");
+                }
+                archivoWrite.close();
+                JOptionPane.showMessageDialog(this, "El usuario fue actualizado.");
+                users.clear();
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "El usuario no fue encontrado.");
+            }
+            
+        } catch (FileNotFoundException ex) {
+            //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
 
