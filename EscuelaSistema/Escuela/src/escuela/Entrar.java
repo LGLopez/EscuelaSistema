@@ -139,6 +139,7 @@ public class Entrar extends javax.swing.JFrame {
         btnEntrar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         registrar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -217,6 +218,9 @@ public class Entrar extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Yu Gothic Medium", 0, 36)); // NOI18N
+        jLabel3.setText("Login");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -240,12 +244,18 @@ public class Entrar extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addComponent(registrar))
                         .addComponent(contraseñaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 94, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(88, 88, 88)
+                .addGap(31, 31, 31)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(usuarioCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,7 +271,7 @@ public class Entrar extends javax.swing.JFrame {
                     .addComponent(registrar))
                 .addGap(60, 60, 60)
                 .addComponent(jButton2)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -328,13 +338,13 @@ public class Entrar extends javax.swing.JFrame {
             if(users.get(i).getNombreUsuario().equals(usuarioCampo.getText())){
                 if(users.get(i).getPassword().equals(contraseñaCampo.getText())){
                     if(users.get(i).getPerfil().equals("Administrador")){
-                        panelPrincipal n = new panelPrincipal();
+                        panelPrincipal n = new panelPrincipal(users.get(i).getPerfil());
                         n.setVisible(true);
                         dispose();
                         return;
                     }
-                    else{
-                        panelPrincipal n = new panelPrincipal();
+                    if(users.get(i).getPerfil().equals("Coordinador")){
+                        panelPrincipal n = new panelPrincipal(users.get(i).getPerfil());
                         n.setVisible(true);
                         dispose();
                         return;
@@ -343,7 +353,7 @@ public class Entrar extends javax.swing.JFrame {
             }
         }
         
-        JOptionPane.showMessageDialog(this, "Todo mal");
+        JOptionPane.showMessageDialog(this, "El usuario / contraseña es incorrecto.");
         
         
     }//GEN-LAST:event_btnEntrarActionPerformed
@@ -357,7 +367,7 @@ public class Entrar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
-        Registrar n = new Registrar();
+        panelPrincipal n = new panelPrincipal("Registrar");
         n.setVisible(true);
         dispose();
     }//GEN-LAST:event_registrarActionPerformed
@@ -411,6 +421,7 @@ public class Entrar extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton registrar;
     private javax.swing.JTextField usuarioCampo;
