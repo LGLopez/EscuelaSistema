@@ -32,7 +32,7 @@ public class panelPrincipal extends javax.swing.JFrame {
     ArrayList<Alumnos> alumnos = new ArrayList<Alumnos>();
     
     File fileCarrera = new File("Carrera.txt");
-    ArrayList<Carrera> carrera = new ArrayList<Carrera>();
+    ArrayList<Carrera> carreras = new ArrayList<Carrera>();
     
     /**
      * Creates new form panelPrincipal
@@ -578,11 +578,16 @@ public class panelPrincipal extends javax.swing.JFrame {
 
         btnEditarC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEditarC.setText("Editar");
+        btnEditarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarCActionPerformed(evt);
+            }
+        });
 
         btnEliminarC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEliminarC.setText("Eliminar");
 
-        comboAreaC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboAreaC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ciencias Básicas", "Ingenierías", "Electrónica y Computación" }));
 
         comboSemestreC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Septimo", "Octavo" }));
 
@@ -595,7 +600,6 @@ public class panelPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAreaC)
                             .addComponent(lblNombreC)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(lblIDCarrera)
@@ -618,7 +622,9 @@ public class panelPrincipal extends javax.swing.JFrame {
                                 .addComponent(btnBuscarC))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblSemestreC)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblSemestreC)
+                            .addComponent(lblAreaC))
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -632,7 +638,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(comboSemestreC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(comboAreaC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -665,7 +671,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                     .addComponent(btnGuardarC)
                     .addComponent(btnEditarC)
                     .addComponent(btnEliminarC))
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(328, Short.MAX_VALUE))
         );
 
         panelTabs.addTab("Carrera", jPanel4);
@@ -1337,21 +1343,9 @@ public class panelPrincipal extends javax.swing.JFrame {
             }
             
             archivoWrite.close();
-            
+            materias.clear();
             JOptionPane.showMessageDialog(this, "La materia fue registrada exitosamente.");
-            /*
-            FileElement n;
-            try {
-            n = new FileElement(materia);
-            n.setVisible(true);
-            dispose();
-            JOptionPane.showMessageDialog(this,"Materia Registrada.","La Materia fue registrada exitosamente.",JOptionPane.PLAIN_MESSAGE);
-            } catch (FileNotFoundException ex) {
-            //Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-            //Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            */
+            
         } catch (FileNotFoundException ex) {
             //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -1372,6 +1366,8 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_comboAcademiaActionPerformed
 
     private void EditarMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarMActionPerformed
+        String[] academiaO = {"Ciencias Básicas", "Ingenierías", "Electrónica y Computación"};
+        materias.clear();
         try {
             DataInputStream archivoRead;
             
@@ -1407,7 +1403,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                     txtID.setText(Integer.toString(materias.get(i).getID()));
                     txtNombreMa.setText(materias.get(i).getNombreM());
                     txtCreditos.setText(Integer.toString(materias.get(i).getCreditos()));
-                    comboAcademia.setSelectedIndex(0);
+                    comboAcademia.setSelectedIndex(1);
                     comboIDCarrera.setSelectedIndex(0);
                     
                     found = true;
@@ -1415,10 +1411,65 @@ public class panelPrincipal extends javax.swing.JFrame {
                 }
             }
             
-            //hacer que pasa si lo encuentra
+            int editID = 0;
+            String editNombreMa = "";
+            int editCreditos = 0;
+            int editIdCarrera =0;
+            int editAcademia =0;
             
-            //nueva linea para commit
-            
+            if(found){
+                editID = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el nuevo ID: "));
+                editNombreMa = JOptionPane.showInputDialog(this, "Ingrese el nuevo Nombre de la materia:");
+                editCreditos = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese la nueva cantidad de creditos:"));
+                editAcademia = JOptionPane.showOptionDialog(this, "Seleccione la nueva academia: ", "Seleccione una opcion.", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, academiaO, academiaO[0]);
+                
+                
+                Materia aux = new Materia();
+                
+                aux.setID(editID);
+                aux.setNombreM(editNombreMa);
+                aux.setCreditos(editCreditos);
+                switch (editAcademia) {
+                    case 0:
+                        aux.setAcademia("Ciencias Básicas");
+                        break;
+                    case 1:
+                        aux.setAcademia("Ingenierías");
+                        break;
+                    case 2:
+                        aux.setAcademia("Electrónica y Computación");
+                        break;
+                    default:
+                        aux.setAcademia("Electrónica y Computación");
+                        break;
+                }
+                aux.setIdcarrera("INNI");
+                
+                materias.remove(toChange);
+                materias.add(toChange, aux);
+                
+                fileMateria.delete();
+                
+                fileMateria.createNewFile();
+                
+                DataOutputStream archivoWrite = new DataOutputStream(new FileOutputStream(fileMateria));
+                
+                for(int i=0; i<materias.size(); i++){
+                    archivoWrite.writeInt(materias.get(i).getID());
+                    archivoWrite.writeUTF(materias.get(i).getNombreM());
+                    archivoWrite.writeInt(materias.get(i).getCreditos());
+                    archivoWrite.writeUTF(materias.get(i).getIdcarrera());
+                    archivoWrite.writeUTF(materias.get(i).getAcademia());
+                    
+                    archivoWrite.writeUTF("#");
+                }
+                archivoWrite.close();
+                JOptionPane.showMessageDialog(this, "La materia fue actualizada.");
+                materias.clear();
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "La materia no fue encontrada.");
+            }
             
         } catch (IOException ex) {
             //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -1652,33 +1703,97 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarAActionPerformed
 
     private void btnGuardarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCActionPerformed
-        if(txtIDC.getText().isEmpty() || txtNombreC.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this, "Faltan campos por llenar");
-            return;
-        }
-
-        Carrera carrera = new Carrera();
-
-        carrera.setId(txtIDA.getText());
-        carrera.setNombre(txtNombreA.getText());
-        carrera.setArea(comboAreaC.getSelectedItem().toString());
-        carrera.setSemestre(comboSemestre.getSelectedItem().toString());
-        carrera.setFechaD(comboFechaD.getSelectedItem().toString());
-        carrera.setFechaM(comboFechaM.getSelectedItem().toString());
-        carrera.setFechaA(comboFechaA.getSelectedItem().toString());
-        
-        FileElement n;
         try {
-            n = new FileElement(carrera);
-            n.setVisible(true);
-            dispose();
-            JOptionPane.showMessageDialog(this,"Carrera Registrada.","La Carrera fue registrada exitosamente.",JOptionPane.PLAIN_MESSAGE);
+            if(txtIDC.getText().isEmpty() || txtNombreC.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Faltan campos por llenar");
+                return;
+            }
+            
+            
+            
+            Carrera carrera = new Carrera();
+            
+            carrera.setId(txtIDA.getText());
+            carrera.setNombre(txtNombreA.getText());
+            carrera.setArea(comboAreaC.getSelectedItem().toString());
+            carrera.setSemestre(comboSemestre.getSelectedItem().toString());
+            carrera.setFechaD(comboFechaD.getSelectedItem().toString());
+            carrera.setFechaM(comboFechaM.getSelectedItem().toString());
+            carrera.setFechaA(comboFechaA.getSelectedItem().toString());
+            
+            DataInputStream archivoRead;
+            
+            archivoRead = new DataInputStream(new FileInputStream(fileCarrera));
+            
+            while(archivoRead.available() > 0){
+                String readID = archivoRead.readUTF();
+                String readNombre = archivoRead.readUTF();
+                String readArea = archivoRead.readUTF();
+                String readSemestre = archivoRead.readUTF();
+                String readFechaD = archivoRead.readUTF();
+                String readFechaM = archivoRead.readUTF();
+                String readFechaA = archivoRead.readUTF();
+                String readSeparador = archivoRead.readUTF();
+                
+                Carrera temp = new Carrera();
+                
+                temp.setId(readID);
+                temp.setNombre(readNombre);
+                temp.setArea(readArea);
+                temp.setSemestre(readSemestre);
+                temp.setFechaD(readFechaD);
+                temp.setFechaM(readFechaM);
+                temp.setFechaA(readFechaA);
+                
+                carreras.add(temp);
+            }
+            
+            carreras.add(carrera);
+            
+            fileCarrera.delete();
+            
+            DataOutputStream archivoWrite;
+            
+            archivoWrite = new DataOutputStream(new FileOutputStream(fileCarrera));
+            
+            for(int i=0; i<carreras.size() ; i++){
+                archivoWrite.writeUTF(carreras.get(i).getId());
+                archivoWrite.writeUTF(carreras.get(i).getNombre());
+                archivoWrite.writeUTF(carreras.get(i).getArea());
+                archivoWrite.writeUTF(carreras.get(i).getSemestre());
+                archivoWrite.writeUTF(carreras.get(i).getFechaD());
+                archivoWrite.writeUTF(carreras.get(i).getFechaM());
+                archivoWrite.writeUTF(carreras.get(i).getFechaA());
+                
+                archivoWrite.writeUTF("#");
+            }
+            
+            archivoWrite.close();
+            carreras.clear();
+            JOptionPane.showMessageDialog(this, "La carrera fue registrada exitosamente.");
+            
+            
+//        FileElement n;
+//        try {
+//            n = new FileElement(carrera);
+//            n.setVisible(true);
+//            dispose();
+//            JOptionPane.showMessageDialog(this,"Carrera Registrada.","La Carrera fue registrada exitosamente.",JOptionPane.PLAIN_MESSAGE);
+//        } catch (FileNotFoundException ex) {
+//            //Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            //Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         } catch (FileNotFoundException ex) {
-            //Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            //Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnGuardarCActionPerformed
+
+    private void btnEditarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarCActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
