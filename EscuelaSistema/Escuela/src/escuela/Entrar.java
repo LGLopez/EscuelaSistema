@@ -27,6 +27,7 @@ public class Entrar extends javax.swing.JFrame {
     Usuario user;
     ArrayList<Usuario> users = new ArrayList<Usuario>();
     File file = new File("Usuarios.txt");
+   
     /**
      * Creates new form Registrar
      */
@@ -60,8 +61,11 @@ public class Entrar extends javax.swing.JFrame {
             
             users.add(temp);
         }
+
         
     }
+    
+
     
     public Entrar(Usuario us) throws FileNotFoundException, IOException{
         initComponents();
@@ -140,6 +144,7 @@ public class Entrar extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         registrar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -221,12 +226,24 @@ public class Entrar extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Yu Gothic Medium", 0, 36)); // NOI18N
         jLabel3.setText("Login");
 
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 94, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSalir)
                     .addComponent(jButton2)
                     .addComponent(jCheckBox1)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,10 +262,6 @@ public class Entrar extends javax.swing.JFrame {
                             .addComponent(registrar))
                         .addComponent(contraseñaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 94, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,9 +282,11 @@ public class Entrar extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEntrar)
                     .addComponent(registrar))
-                .addGap(60, 60, 60)
+                .addGap(38, 38, 38)
                 .addComponent(jButton2)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnSalir)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -372,6 +387,10 @@ public class Entrar extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_registrarActionPerformed
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnSalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -415,6 +434,7 @@ public class Entrar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JPasswordField contraseñaCampo;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
