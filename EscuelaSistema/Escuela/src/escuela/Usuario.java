@@ -10,7 +10,7 @@ package escuela;
  * @author destr
  */
 public class Usuario {
-    private static int id;
+    private int id;
     private String nombre;
     private String aPaterno;
     private String aMaterno;

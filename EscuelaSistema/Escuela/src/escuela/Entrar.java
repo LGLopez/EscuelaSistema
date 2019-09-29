@@ -99,7 +99,8 @@ public class Entrar extends javax.swing.JFrame {
             users.add(temp);
         }
         
-        us.setId(users.size() + 1);
+        int temp = users.size()-1;
+        us.setId(users.get(temp).getId() + 1);
         
         users.add(us);
                 
