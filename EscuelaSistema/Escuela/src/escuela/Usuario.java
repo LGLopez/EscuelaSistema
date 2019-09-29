@@ -10,7 +10,7 @@ package escuela;
  * @author destr
  */
 public class Usuario {
-    private int id;
+    private static int id;
     private String nombre;
     private String aPaterno;
     private String aMaterno;
@@ -18,6 +18,11 @@ public class Usuario {
     private String password;
     private String perfil;
 
+    public int addAndIncrease(){
+        id++;
+        return id;
+    }
+    
     public int getId() {
         return id;
     }

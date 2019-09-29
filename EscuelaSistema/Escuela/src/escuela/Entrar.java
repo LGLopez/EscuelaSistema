@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -98,8 +99,8 @@ public class Entrar extends javax.swing.JFrame {
             users.add(temp);
         }
         
-        us.setId(id);
-        id+=1;
+        us.setId(users.size() + 1);
+        
         users.add(us);
                 
         file.delete();
@@ -376,6 +377,9 @@ public class Entrar extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         for(int i =0; i<users.size(); i++){
             System.out.print(users.get(i).getNombreUsuario());
+            System.out.println();
+            System.out.print(users.get(i).getId());
+            System.out.println();
         }
         
         

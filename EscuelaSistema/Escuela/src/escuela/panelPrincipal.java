@@ -506,7 +506,7 @@ public class panelPrincipal extends javax.swing.JFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("ID:");
+        jLabel9.setText("ID");
 
         txtCreditos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2387,7 +2387,8 @@ public class panelPrincipal extends javax.swing.JFrame {
         }
 
         Usuario us = new Usuario();
-
+        
+        us.setId(us.addAndIncrease());
         us.setNombre(txtNombre.getText());
         us.setNombreUsuario(txtNombreUsuario.getText());
         us.setPassword(txtPassword.getText());
