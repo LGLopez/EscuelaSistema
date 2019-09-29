@@ -37,6 +37,7 @@ public class panelPrincipal extends javax.swing.JFrame {
     File fileMaestro = new File("Maestros.txt");
     ArrayList<Maestros> maestros = new ArrayList<Maestros>();
     
+    int toEdit = -1;
     /**
      * Creates new form panelPrincipal
      */
@@ -2165,6 +2166,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                 for(int i=0; i<users.size() && !found; i++){
                     if(txtNombre.getText().equals(users.get(i).getNombre()) || txtNombreUsuario.getText().equals(users.get(i).getNombreUsuario())){
                         found = true;
+                        toEdit = i;
                         btnGuardarCambios.setVisible(true);
                         btnEditar.setVisible(false);
                         btnEliminarUser.setVisible(false);
@@ -2507,17 +2509,67 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarMaActionPerformed
 
     private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
-        
-        boolean found = false;
-        int toChange = -1;
-        
-        for(int i=0; i<users.size() && !found; i++){
-                    if(txtNombre.getText().equals(users.get(i).getNombre()) || txtNombreUsuario.getText().equals(users.get(i).getNombreUsuario())){
-                        found = true;
-                        
-                        toChange = i;
-                    }
+
+        try {
+            
+            Usuario temp = new Usuario();
+            
+            temp.setId(users.size() + 1);
+            temp.setNombre(txtNombre.getText());
+            temp.setNombreUsuario(txtNombreUsuario.getText());
+            temp.setPassword(txtPassword.getText());
+            temp.setPerfil(comboPerfil.getSelectedItem().toString());
+            temp.setaMaterno(txtAMaterno.getText());
+            temp.setaPaterno(txtAPaterno.getText());
+            
+            
+            if(toEdit == -1){
+                JOptionPane.showMessageDialog(this, "No se pudo editar el usuario.");
+            }
+            else{
+                users.remove(toEdit);
+                users.add(toEdit, temp);
+            
+                file.delete();
+
+                file.createNewFile();
+
+                DataOutputStream archivoWrite = new DataOutputStream(new FileOutputStream(file));
+
+                for(int i=0; i<users.size(); i++){
+                    archivoWrite.writeInt(users.get(i).getId());
+                    archivoWrite.writeUTF(users.get(i).getNombre());
+                    archivoWrite.writeUTF(users.get(i).getaPaterno());
+                    archivoWrite.writeUTF(users.get(i).getaMaterno());
+                    archivoWrite.writeUTF(users.get(i).getNombreUsuario());
+                    archivoWrite.writeUTF(users.get(i).getPassword());
+                    archivoWrite.writeUTF(users.get(i).getPerfil());
+                    archivoWrite.writeUTF("#");
                 }
+                archivoWrite.close();
+                JOptionPane.showMessageDialog(this, "El usuario fue actualizado.");
+                toEdit = -1;
+            }
+            txtNombre.setText("");
+            txtAPaterno.setText("");
+            txtAMaterno.setText("");
+            txtNombreUsuario.setText("");
+            txtPassword.setText("");
+            txtPasswordConfirm.setText("");
+
+            btnGuardarCambios.setVisible(false);
+            btnEditar.setVisible(true);
+            btnEliminarUser.setVisible(true);
+            btnGuardarUsuario.setVisible(true);
+            btnCancelUsEdit.setVisible(false);
+            btnCancelar.setVisible(true);
+            
+            
+            users.clear();
+        } catch (IOException ex) {
+            //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btnGuardarCambiosActionPerformed
 
     private void btnCancelUsEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelUsEditActionPerformed
