@@ -161,6 +161,8 @@ public class Entrar extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setName(""); // NOI18N
+
         jLabel1.setFont(new java.awt.Font("Yu Gothic Medium", 0, 14)); // NOI18N
         jLabel1.setText("Nombre de Usuario");
 

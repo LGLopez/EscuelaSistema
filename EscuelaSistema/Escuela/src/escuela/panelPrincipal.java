@@ -147,6 +147,7 @@ public class panelPrincipal extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         btnGuardarCambios = new javax.swing.JButton();
         btnCancelUsEdit = new javax.swing.JButton();
+        lblID = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnGuardarMateria = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
@@ -384,6 +385,9 @@ public class panelPrincipal extends javax.swing.JFrame {
             }
         });
 
+        lblID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblID.setText("0");
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -426,7 +430,8 @@ public class panelPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNombre)
                             .addComponent(txtAPaterno)
-                            .addComponent(txtAMaterno, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)))
+                            .addComponent(txtAMaterno, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(lblID)))
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(txtPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -442,7 +447,9 @@ public class panelPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(lblUsuarioID)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblUsuarioID)
+                            .addComponent(lblID))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -491,7 +498,7 @@ public class panelPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 150, Short.MAX_VALUE))
+                .addGap(0, 149, Short.MAX_VALUE))
         );
 
         panelTabs.addTab("Usuario", jPanel1);
@@ -2092,7 +2099,9 @@ public class panelPrincipal extends javax.swing.JFrame {
 
                 materias.add(temp);
             }
-
+            int temp = materias.size() - 1;
+            materia.setID(materias.get(temp).getID()+1);
+            
             materias.add(materia);
 
             fileMateria.delete();
@@ -2180,7 +2189,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                         txtNombreUsuario.setText(users.get(i).getNombreUsuario());
                         txtPassword.setText(users.get(i).getPassword());
                         txtPasswordConfirm.setText(users.get(i).getPassword());
-                        
+                        lblID.setText(Integer.toString(users.get(i).getId()));
                     }
                 }
                 if(!found){
@@ -2395,7 +2404,7 @@ public class panelPrincipal extends javax.swing.JFrame {
         us.setPerfil(comboPerfil.getSelectedItem().toString());
         us.setaMaterno(txtAMaterno.getText());
         us.setaPaterno(txtAPaterno.getText());
-
+                                                                                                                            
         Entrar n;
         try {
             n = new Entrar(us);
@@ -2722,6 +2731,7 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblFNacimiento;
     private javax.swing.JLabel lblFechaA;
+    private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblIDA;
     private javax.swing.JLabel lblIDCarrera;
     private javax.swing.JLabel lblIDMateria;
