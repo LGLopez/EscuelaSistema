@@ -123,7 +123,7 @@ public class Entrar extends javax.swing.JFrame {
         }
         
         archivoWrite.close();
-
+        JOptionPane.showMessageDialog(this, "El usuario fue agregado.");
     }
     
     /**
@@ -160,6 +160,7 @@ public class Entrar extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
 
         jPanel1.setName(""); // NOI18N
 

@@ -16,6 +16,11 @@ public class Materia {
     private String academia;
     private String idCarrera;
 
+    public int addAndIncreaseID(){
+        ID++;
+        return ID;
+    }
+    
     public String getAcademia() {
         return academia;
     }

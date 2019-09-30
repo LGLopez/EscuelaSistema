@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -2064,6 +2066,8 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCreditosActionPerformed
 
     private void btnGuardarMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarMateriaActionPerformed
+        String patToCheckCredits = "^[0-9]{1,2}$";
+        
         try {
             if(txtNombreMa.getText().isEmpty() || txtCreditos.getText().isEmpty()  ){
                 JOptionPane.showMessageDialog(this, "Faltan campos por llenar");
@@ -2375,7 +2379,10 @@ public class panelPrincipal extends javax.swing.JFrame {
                     users.clear();
                 }
             }
-
+            if(!found){
+                users.clear();
+                JOptionPane.showMessageDialog(this, "El usuario no fue encontrado.");
+            }
         } catch (FileNotFoundException ex) {
             //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -2385,6 +2392,12 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarUserActionPerformed
 
     private void btnGuardarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarUsuarioActionPerformed
+        String patronNombres = "^[a-zA-Z]{2,50}$";
+        Pattern patToCheckNombre = Pattern.compile(patronNombres);
+        
+        String patronUsername = "^[a-zA-Z0-9]{3,20}$";
+        Pattern patToCheckUs = Pattern.compile(patronUsername);
+        
         if(txtNombre.getText().isEmpty() || txtAPaterno.getText().isEmpty() || txtAMaterno.getText().isEmpty() || txtNombreUsuario.getText().isEmpty() || txtPassword.getText().isEmpty() || txtPasswordConfirm.getText().isEmpty() ){
             JOptionPane.showMessageDialog(this, "Faltan campos por llenar");
             return;
@@ -2394,27 +2407,39 @@ public class panelPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "La contraseña no coincide.");
             return;
         }
-
-        Usuario us = new Usuario();
         
-        us.setId(us.addAndIncrease());
-        us.setNombre(txtNombre.getText());
-        us.setNombreUsuario(txtNombreUsuario.getText());
-        us.setPassword(txtPassword.getText());
-        us.setPerfil(comboPerfil.getSelectedItem().toString());
-        us.setaMaterno(txtAMaterno.getText());
-        us.setaPaterno(txtAPaterno.getText());
-                                                                                                                            
-        Entrar n;
-        try {
-            n = new Entrar(us);
-            n.setVisible(true);
-            dispose();
-        } catch (FileNotFoundException ex) {
-            //Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            //Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+        Matcher regexMatcherNombre = patToCheckNombre.matcher(txtNombre.getText());
+        Matcher regexMatcherAPaterno = patToCheckNombre.matcher(txtAPaterno.getText());
+        Matcher regexMatcherAMaterno = patToCheckNombre.matcher(txtAMaterno.getText());
+        Matcher regexMatcherPassword = patToCheckUs.matcher(txtNombreUsuario.getText());
+        
+        
+        if(regexMatcherNombre.matches() && regexMatcherAPaterno.matches() && regexMatcherAMaterno.matches() && regexMatcherPassword.matches()){
+            Usuario us = new Usuario();
+        
+            us.setId(us.addAndIncrease());
+            us.setNombre(txtNombre.getText());
+            us.setNombreUsuario(txtNombreUsuario.getText());
+            us.setPassword(txtPassword.getText());
+            us.setPerfil(comboPerfil.getSelectedItem().toString());
+            us.setaMaterno(txtAMaterno.getText());
+            us.setaPaterno(txtAPaterno.getText());
+
+            Entrar n;
+            try {
+                n = new Entrar(us);
+                n.setVisible(true);
+                dispose();
+            } catch (FileNotFoundException ex) {
+                //Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                //Logger.getLogger(Registrar.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        else{
+            JOptionPane.showMessageDialog(this, "Los campos no cumplen con el formato adecuado.");
+        }
+        
     }//GEN-LAST:event_btnGuardarUsuarioActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -2519,47 +2544,67 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarMaActionPerformed
 
     private void btnGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosActionPerformed
+        String patronNombres = "^[a-zA-Z]{2,50}$";
+        Pattern patToCheckNombre = Pattern.compile(patronNombres);
+        
+        String patronUsername = "^[a-zA-Z0-9]{3,20}$";
+        Pattern patToCheckUs = Pattern.compile(patronUsername);
+        
+        Matcher regexMatcherNombre = patToCheckNombre.matcher(txtNombre.getText());
+        Matcher regexMatcherAPaterno = patToCheckNombre.matcher(txtAPaterno.getText());
+        Matcher regexMatcherAMaterno = patToCheckNombre.matcher(txtAMaterno.getText());
+        Matcher regexMatcherPassword = patToCheckUs.matcher(txtNombreUsuario.getText());
+        
+        if(regexMatcherNombre.matches() && regexMatcherAPaterno.matches() && regexMatcherAMaterno.matches() && regexMatcherPassword.matches()){
+        
+            try {
 
-        try {
-            
-            Usuario temp = new Usuario();
-            
-            temp.setId(users.size() + 1);
-            temp.setNombre(txtNombre.getText());
-            temp.setNombreUsuario(txtNombreUsuario.getText());
-            temp.setPassword(txtPassword.getText());
-            temp.setPerfil(comboPerfil.getSelectedItem().toString());
-            temp.setaMaterno(txtAMaterno.getText());
-            temp.setaPaterno(txtAPaterno.getText());
-            
-            
-            if(toEdit == -1){
-                JOptionPane.showMessageDialog(this, "No se pudo editar el usuario.");
-            }
-            else{
-                users.remove(toEdit);
-                users.add(toEdit, temp);
-            
-                file.delete();
+                Usuario temp = new Usuario();
 
-                file.createNewFile();
+                temp.setId(users.size() + 1);
+                temp.setNombre(txtNombre.getText());
+                temp.setNombreUsuario(txtNombreUsuario.getText());
+                temp.setPassword(txtPassword.getText());
+                temp.setPerfil(comboPerfil.getSelectedItem().toString());
+                temp.setaMaterno(txtAMaterno.getText());
+                temp.setaPaterno(txtAPaterno.getText());
 
-                DataOutputStream archivoWrite = new DataOutputStream(new FileOutputStream(file));
 
-                for(int i=0; i<users.size(); i++){
-                    archivoWrite.writeInt(users.get(i).getId());
-                    archivoWrite.writeUTF(users.get(i).getNombre());
-                    archivoWrite.writeUTF(users.get(i).getaPaterno());
-                    archivoWrite.writeUTF(users.get(i).getaMaterno());
-                    archivoWrite.writeUTF(users.get(i).getNombreUsuario());
-                    archivoWrite.writeUTF(users.get(i).getPassword());
-                    archivoWrite.writeUTF(users.get(i).getPerfil());
-                    archivoWrite.writeUTF("#");
+                if(toEdit == -1){
+                    JOptionPane.showMessageDialog(this, "No se pudo editar el usuario.");
                 }
-                archivoWrite.close();
-                JOptionPane.showMessageDialog(this, "El usuario fue actualizado.");
-                toEdit = -1;
+                else{
+                    users.remove(toEdit);
+                    users.add(toEdit, temp);
+
+                    file.delete();
+
+                    file.createNewFile();
+
+                    DataOutputStream archivoWrite = new DataOutputStream(new FileOutputStream(file));
+
+                    for(int i=0; i<users.size(); i++){
+                        archivoWrite.writeInt(users.get(i).getId());
+                        archivoWrite.writeUTF(users.get(i).getNombre());
+                        archivoWrite.writeUTF(users.get(i).getaPaterno());
+                        archivoWrite.writeUTF(users.get(i).getaMaterno());
+                        archivoWrite.writeUTF(users.get(i).getNombreUsuario());
+                        archivoWrite.writeUTF(users.get(i).getPassword());
+                        archivoWrite.writeUTF(users.get(i).getPerfil());
+                        archivoWrite.writeUTF("#");
+                    }
+                    archivoWrite.close();
+                    JOptionPane.showMessageDialog(this, "El usuario fue actualizado.");
+                    toEdit = -1;
+                }
+                } catch (IOException ex) {
+                    
+                }
             }
+        else{
+            JOptionPane.showMessageDialog(this, "Los campos no cuentan con el formate indicado, saliendo de editar.");
+        }
+            
             txtNombre.setText("");
             txtAPaterno.setText("");
             txtAMaterno.setText("");
@@ -2576,9 +2621,7 @@ public class panelPrincipal extends javax.swing.JFrame {
             
             
             users.clear();
-        } catch (IOException ex) {
-            //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
         
     }//GEN-LAST:event_btnGuardarCambiosActionPerformed
 
