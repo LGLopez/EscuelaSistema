@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -2702,9 +2703,10 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnGuardarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarSActionPerformed
+        SimpleDateFormat semFormato = new SimpleDateFormat("dd/MM/yyyy");
+        String semInicio = semFormato.format(chooserIncioSem.getDate());
         
-        
-        
+        String semFinal = semFormato.format(chooserFinSem.getDate());
         
         
         

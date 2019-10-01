@@ -15,6 +15,11 @@ public class Semestre {
     String fechaI;
     String fechaF;
 
+    public int addAndIncrease(){
+        id++;
+        return id;
+    }
+    
     public int getId() {
         return id;
     }
