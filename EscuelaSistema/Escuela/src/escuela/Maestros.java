@@ -17,6 +17,11 @@ public class Maestros {
     String direccion;
     String telefono;
 
+    public int addAndIncrease(){
+        id++;
+        return id;
+    }
+    
     public int getId() {
         return id;
     }

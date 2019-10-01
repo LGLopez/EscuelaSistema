@@ -164,6 +164,7 @@ public class panelPrincipal extends javax.swing.JFrame {
         EliminarM = new javax.swing.JButton();
         jLabel38 = new javax.swing.JLabel();
         txtNombreMa = new javax.swing.JTextField();
+        lblMateriaID = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -176,6 +177,9 @@ public class panelPrincipal extends javax.swing.JFrame {
         txtBuscarS = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         comboPeriodoS = new javax.swing.JComboBox<>();
+        chooserIncioSem = new com.toedter.calendar.JDateChooser();
+        chooserFinSem = new com.toedter.calendar.JDateChooser();
+        lblSemID = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -576,6 +580,9 @@ public class panelPrincipal extends javax.swing.JFrame {
             }
         });
 
+        lblMateriaID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblMateriaID.setText("0");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -600,7 +607,9 @@ public class panelPrincipal extends javax.swing.JFrame {
                                 .addComponent(jLabel38))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(169, 169, 169)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblMateriaID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(140, 140, 140)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(comboAcademia, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel13)))))
@@ -615,7 +624,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                         .addComponent(EditarM, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(EliminarM, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(422, Short.MAX_VALUE))
+                .addContainerGap(423, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -627,7 +636,8 @@ public class panelPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13))
+                            .addComponent(jLabel13)
+                            .addComponent(lblMateriaID))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -655,7 +665,7 @@ public class panelPrincipal extends javax.swing.JFrame {
         jLabel14.setText("Semestre");
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel15.setText("ID");
+        jLabel15.setText("ID:");
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Periodo");
@@ -665,6 +675,11 @@ public class panelPrincipal extends javax.swing.JFrame {
 
         btnGuardarS.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnGuardarS.setText("Guardar");
+        btnGuardarS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarSActionPerformed(evt);
+            }
+        });
 
         btnEditarS.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEditarS.setText("Editar");
@@ -673,11 +688,19 @@ public class panelPrincipal extends javax.swing.JFrame {
         btnEliminarS.setText("Eliminar");
 
         jButton4.setText("jButton4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel20.setText("Fecha Fin");
 
         comboPeriodoS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2020A", "2019B", "2019A", "2018B", "2018A", "2017B", "2017A", "2016B", "2016A" }));
+
+        lblSemID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblSemID.setText("0");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -688,26 +711,29 @@ public class panelPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblSemID, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
                         .addComponent(txtBuscarS, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton4)
                         .addGap(296, 296, 296))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnGuardarS)
-                                    .addComponent(jLabel16))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addComponent(btnEditarS)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnEliminarS))
-                                    .addComponent(comboPeriodoS, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnGuardarS)
+                            .addComponent(jLabel16)
                             .addComponent(jLabel17)
                             .addComponent(jLabel20))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(btnEditarS)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEliminarS))
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(chooserFinSem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(chooserIncioSem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(comboPeriodoS, javax.swing.GroupLayout.Alignment.LEADING, 0, 100, Short.MAX_VALUE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(193, 193, 193)
@@ -723,15 +749,22 @@ public class panelPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jButton4)
-                    .addComponent(txtBuscarS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBuscarS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSemID))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(comboPeriodoS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel17)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel20)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel16)
+                                    .addComponent(comboPeriodoS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel17))
+                            .addComponent(chooserIncioSem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel20))
+                    .addComponent(chooserFinSem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardarS)
@@ -2139,6 +2172,10 @@ public class panelPrincipal extends javax.swing.JFrame {
                 }
 
                 archivoWrite.close();
+                
+                lblMateriaID.setText(String.valueOf(materia.getID()));
+                txtNombreMa.setText("");
+                txtCreditos.setText("");
                 materias.clear();
                 JOptionPane.showMessageDialog(this, "La materia fue registrada exitosamente.");
 
@@ -2660,6 +2697,19 @@ public class panelPrincipal extends javax.swing.JFrame {
         btnCancelar.setVisible(true);
     }//GEN-LAST:event_btnCancelUsEditActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnGuardarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarSActionPerformed
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btnGuardarSActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EditarM;
@@ -2694,6 +2744,8 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardarMateria;
     private javax.swing.JButton btnGuardarS;
     private javax.swing.JButton btnGuardarUsuario;
+    private com.toedter.calendar.JDateChooser chooserFinSem;
+    private com.toedter.calendar.JDateChooser chooserIncioSem;
     private javax.swing.JComboBox<String> comboAcademia;
     private javax.swing.JComboBox<String> comboAreaC;
     private javax.swing.JComboBox<String> comboAño1;
@@ -2797,11 +2849,13 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblIDA;
     private javax.swing.JLabel lblIDCarrera;
     private javax.swing.JLabel lblIDMateria;
+    private javax.swing.JLabel lblMateriaID;
     private javax.swing.JLabel lblMes1;
     private javax.swing.JLabel lblMes2;
     private javax.swing.JLabel lblNombreA;
     private javax.swing.JLabel lblNombreC;
     private javax.swing.JLabel lblPeriodoA;
+    private javax.swing.JLabel lblSemID;
     private javax.swing.JLabel lblSemestreC;
     private javax.swing.JLabel lblTelefono;
     private javax.swing.JLabel lblUsuarioID;
