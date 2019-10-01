@@ -717,10 +717,10 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="btnEliminarS" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Component id="comboPeriodoS" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="chooserFinSem" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="chooserIncioSem" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="comboPeriodoS" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="chooserFinSem" alignment="0" pref="159" max="32767" attributes="0"/>
+                                      <Component id="chooserInicioSem" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -758,7 +758,7 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="chooserIncioSem" min="-2" max="-2" attributes="0"/>
+                                  <Component id="chooserInicioSem" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
@@ -874,7 +874,7 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="chooserIncioSem">
+            <Component class="com.toedter.calendar.JDateChooser" name="chooserInicioSem">
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="chooserFinSem">
             </Component>

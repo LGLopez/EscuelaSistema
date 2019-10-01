@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -39,6 +40,9 @@ public class panelPrincipal extends javax.swing.JFrame {
     
     File fileMaestro = new File("Maestros.txt");
     ArrayList<Maestros> maestros = new ArrayList<Maestros>();
+    
+    File fileSemestre = new File("Semestre.txt");
+    ArrayList<Semestre> semestres = new ArrayList<Semestre>();
     
     int toEdit = -1;
     /**
@@ -178,7 +182,7 @@ public class panelPrincipal extends javax.swing.JFrame {
         txtBuscarS = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         comboPeriodoS = new javax.swing.JComboBox<>();
-        chooserIncioSem = new com.toedter.calendar.JDateChooser();
+        chooserInicioSem = new com.toedter.calendar.JDateChooser();
         chooserFinSem = new com.toedter.calendar.JDateChooser();
         lblSemID = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -731,10 +735,10 @@ public class panelPrincipal extends javax.swing.JFrame {
                                 .addComponent(btnEditarS)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnEliminarS))
+                            .addComponent(comboPeriodoS, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(chooserFinSem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(chooserIncioSem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(comboPeriodoS, javax.swing.GroupLayout.Alignment.LEADING, 0, 100, Short.MAX_VALUE)))
+                                .addComponent(chooserFinSem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                .addComponent(chooserInicioSem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(193, 193, 193)
@@ -762,7 +766,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                                     .addComponent(comboPeriodoS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel17))
-                            .addComponent(chooserIncioSem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(chooserInicioSem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel20))
                     .addComponent(chooserFinSem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2703,12 +2707,92 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnGuardarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarSActionPerformed
-        SimpleDateFormat semFormato = new SimpleDateFormat("dd/MM/yyyy");
-        String semInicio = semFormato.format(chooserIncioSem.getDate());
         
-        String semFinal = semFormato.format(chooserFinSem.getDate());
-        
-        
+        try {
+            Date toCheckInicio = chooserInicioSem.getDate();
+            Date toCheckFinal = chooserFinSem.getDate();
+            
+            if(toCheckInicio == null || toCheckFinal == null){
+                JOptionPane.showMessageDialog(this, "No se selecciono la fecha.");
+                return;
+            }
+            
+            
+            SimpleDateFormat semFormato = new SimpleDateFormat("dd/MM/yyyy");
+            String semInicio = semFormato.format(chooserInicioSem.getDate());
+            
+            String semFinal = semFormato.format(chooserFinSem.getDate());
+            
+            Semestre semestre = new Semestre();
+            
+            semestre.setPeriodo(comboPeriodoS.getSelectedItem().toString());
+            semestre.setFechaI(semInicio);
+            semestre.setFechaF(semFinal);
+            
+            if(fileSemestre.length() != 0){
+                try {
+                    DataInputStream archivoRead;
+                    
+                    archivoRead = new DataInputStream(new FileInputStream(fileSemestre));
+                    
+                    while(archivoRead.available() > 0){
+                        int readID = archivoRead.readInt();
+                        String readPeriodo = archivoRead.readUTF();
+                        String readInicioSem = archivoRead.readUTF();
+                        String readFinSem = archivoRead.readUTF();
+                        String readSeparador = archivoRead.readUTF();
+                        
+                        Semestre temp = new Semestre();
+                        
+                        temp.setId(readID);
+                        temp.setPeriodo(readPeriodo);
+                        temp.setFechaI(readInicioSem);
+                        temp.setFechaF(readFinSem);
+                        
+                        semestres.add(temp);
+                    }
+                    int temp = semestres.size() - 1;
+                    semestre.setId(semestres.get(temp).getId() + 1);
+                } catch (FileNotFoundException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+                semestre.setId(1);
+            }
+            
+            semestres.add(semestre);
+            
+            fileSemestre.delete();
+            
+            DataOutputStream archivoWrite;
+            
+            archivoWrite = new DataOutputStream(new FileOutputStream(fileSemestre));
+            
+            for(int i=0; i<semestres.size() ; i++){
+                archivoWrite.writeInt(semestres.get(i).getId());
+                archivoWrite.writeUTF(semestres.get(i).getPeriodo());
+                archivoWrite.writeUTF(semestres.get(i).getFechaI());
+                archivoWrite.writeUTF(semestres.get(i).getFechaF());
+                
+                archivoWrite.writeUTF("#");
+                
+            }
+            
+            archivoWrite.close();
+            
+            lblSemID.setText(String.valueOf(semestre.getId()));
+            
+            semestres.clear();
+            
+            JOptionPane.showMessageDialog(this, "El semestre fue registrado exitosamente.");
+        } catch (FileNotFoundException ex) {
+            //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btnGuardarSActionPerformed
 
@@ -2747,7 +2831,7 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardarS;
     private javax.swing.JButton btnGuardarUsuario;
     private com.toedter.calendar.JDateChooser chooserFinSem;
-    private com.toedter.calendar.JDateChooser chooserIncioSem;
+    private com.toedter.calendar.JDateChooser chooserInicioSem;
     private javax.swing.JComboBox<String> comboAcademia;
     private javax.swing.JComboBox<String> comboAreaC;
     private javax.swing.JComboBox<String> comboAño1;
