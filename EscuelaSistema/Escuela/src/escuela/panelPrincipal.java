@@ -1882,6 +1882,7 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarCActionPerformed
 
     private void EliminarMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarMActionPerformed
+
         try {
             DataInputStream archivoRead;
 
@@ -2044,6 +2045,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                 materias.clear();
             }
             else{
+                materias.clear();
                 JOptionPane.showMessageDialog(this, "La materia no fue encontrada.");
             }
 
@@ -2066,72 +2068,89 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCreditosActionPerformed
 
     private void btnGuardarMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarMateriaActionPerformed
-        String patToCheckCredits = "^[0-9]{1,2}$";
+        String patronCredits = "^[0-9]{1,2}$";
+        Pattern patToCheckCredits = Pattern.compile(patronCredits);
         
-        try {
-            if(txtNombreMa.getText().isEmpty() || txtCreditos.getText().isEmpty()  ){
-                JOptionPane.showMessageDialog(this, "Faltan campos por llenar");
-                return;
+        String patronMaterias = "^[a-zA-Z\\s]{1,20}$";
+        Pattern patToCheckMaterias = Pattern.compile(patronMaterias);
+        
+        Matcher regexMatcherCredits = patToCheckCredits.matcher(txtCreditos.getText());
+        Matcher regexMatcherMaterias = patToCheckMaterias.matcher(txtNombreMa.getText());
+        
+        if(regexMatcherCredits.matches() && regexMatcherMaterias.matches()){
+            try {
+                if(txtNombreMa.getText().isEmpty() || txtCreditos.getText().isEmpty()  ){
+                    JOptionPane.showMessageDialog(this, "Faltan campos por llenar");
+                    return;
+                }
+
+                Materia materia = new Materia();
+
+                materia.setNombreM(txtNombreMa.getText());
+                materia.setCreditos(Integer.parseInt(txtCreditos.getText()));
+                materia.setIdcarrera(comboIDCarrera.getSelectedItem().toString());
+                materia.setAcademia(comboAcademia.getSelectedItem().toString());
+
+                if(fileMateria.length() != 0){
+                    DataInputStream archivoRead;
+
+                    archivoRead = new DataInputStream(new FileInputStream(fileMateria));
+
+                    while(archivoRead.available() > 0){
+                        int readID = archivoRead.readInt();
+                        String readNombreM = archivoRead.readUTF();
+                        int readCredito = archivoRead.readInt();
+                        String readIdCarrera = archivoRead.readUTF();
+                        String readAcademia = archivoRead.readUTF();
+                        String readSeparador = archivoRead.readUTF();
+
+                        Materia temp = new Materia();
+
+                        temp.setID(readID);
+                        temp.setNombreM(readNombreM);
+                        temp.setCreditos(readCredito);
+                        temp.setIdcarrera(readIdCarrera);
+                        temp.setAcademia(readAcademia);
+
+                        materias.add(temp);
+                    }
+                    int temp = materias.size() - 1;
+                    materia.setID(materias.get(temp).getID()+1);
+                }
+                else{
+                    materia.setID(1);
+                }
+                materias.add(materia);
+
+                fileMateria.delete();
+
+                DataOutputStream archivoWrite;
+
+                archivoWrite = new DataOutputStream(new FileOutputStream(fileMateria));
+
+                for(int i=0; i<materias.size() ; i++){
+                    archivoWrite.writeInt(materias.get(i).getID());
+                    archivoWrite.writeUTF(materias.get(i).getNombreM());
+                    archivoWrite.writeInt(materias.get(i).getCreditos());
+                    archivoWrite.writeUTF(materias.get(i).getIdcarrera());
+                    archivoWrite.writeUTF(materias.get(i).getAcademia());
+                    archivoWrite.writeUTF("#");
+
+                }
+
+                archivoWrite.close();
+                materias.clear();
+                JOptionPane.showMessageDialog(this, "La materia fue registrada exitosamente.");
+
+            } catch (FileNotFoundException ex) {
+                //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            Materia materia = new Materia();
-
-            materia.setNombreM(txtNombreMa.getText());
-            materia.setCreditos(Integer.parseInt(txtCreditos.getText()));
-            materia.setIdcarrera(comboIDCarrera.getSelectedItem().toString());
-            materia.setAcademia(comboAcademia.getSelectedItem().toString());
-
-            DataInputStream archivoRead;
-
-            archivoRead = new DataInputStream(new FileInputStream(fileMateria));
-
-            while(archivoRead.available() > 0){
-                int readID = archivoRead.readInt();
-                String readNombreM = archivoRead.readUTF();
-                int readCredito = archivoRead.readInt();
-                String readIdCarrera = archivoRead.readUTF();
-                String readAcademia = archivoRead.readUTF();
-                String readSeparador = archivoRead.readUTF();
-
-                Materia temp = new Materia();
-
-                temp.setID(readID);
-                temp.setNombreM(readNombreM);
-                temp.setCreditos(readCredito);
-                temp.setIdcarrera(readIdCarrera);
-                temp.setAcademia(readAcademia);
-
-                materias.add(temp);
-            }
-            int temp = materias.size() - 1;
-            materia.setID(materias.get(temp).getID()+1);
             
-            materias.add(materia);
-
-            fileMateria.delete();
-
-            DataOutputStream archivoWrite;
-
-            archivoWrite = new DataOutputStream(new FileOutputStream(fileMateria));
-
-            for(int i=0; i<materias.size() ; i++){
-                archivoWrite.writeInt(materias.get(i).getID());
-                archivoWrite.writeUTF(materias.get(i).getNombreM());
-                archivoWrite.writeInt(materias.get(i).getCreditos());
-                archivoWrite.writeUTF(materias.get(i).getIdcarrera());
-                archivoWrite.writeUTF(materias.get(i).getAcademia());
-                archivoWrite.writeUTF("#");
-
-            }
-
-            archivoWrite.close();
-            materias.clear();
-            JOptionPane.showMessageDialog(this, "La materia fue registrada exitosamente.");
-
-        } catch (FileNotFoundException ex) {
-            //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Los campos no cumplen con el formato requerido");
         }
     }//GEN-LAST:event_btnGuardarMateriaActionPerformed
 
