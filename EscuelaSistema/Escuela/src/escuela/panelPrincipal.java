@@ -81,6 +81,11 @@ public class panelPrincipal extends javax.swing.JFrame {
                 panelTabs.setEnabledAt(6, true);
                 panelTabs.setEnabledAt(7, true);
                 
+                //Botones de semestre
+                btnCambiosSem.setVisible(false);
+                btnCancelarEdicion.setVisible(false);
+                
+                //Botones de usario
                 btnGuardarCambios.setVisible(false);
                 btnCancelUsEdit.setVisible(false);
                 break;
@@ -96,6 +101,11 @@ public class panelPrincipal extends javax.swing.JFrame {
                 panelTabs.setEnabledAt(6, true);
                 panelTabs.setEnabledAt(7, true);
                 
+                //Botones de semestre
+                btnCambiosSem.setVisible(false);
+                btnCancelarEdicion.setVisible(false);
+                
+                //Botones de usuario
                 btnGuardarCambios.setVisible(false);
                 btnCancelUsEdit.setVisible(false);
                 break;
@@ -185,6 +195,9 @@ public class panelPrincipal extends javax.swing.JFrame {
         chooserInicioSem = new com.toedter.calendar.JDateChooser();
         chooserFinSem = new com.toedter.calendar.JDateChooser();
         lblSemID = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        btnCambiosSem = new javax.swing.JButton();
+        btnCancelarEdicion = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -691,6 +704,11 @@ public class panelPrincipal extends javax.swing.JFrame {
 
         btnEliminarS.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEliminarS.setText("Eliminar");
+        btnEliminarS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarSActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("jButton4");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -706,6 +724,22 @@ public class panelPrincipal extends javax.swing.JFrame {
 
         lblSemID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblSemID.setText("0");
+
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnCambiosSem.setText("Guardar Cambios");
+        btnCambiosSem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiosSemActionPerformed(evt);
+            }
+        });
+
+        btnCancelarEdicion.setText("Cancelar Edicion");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -734,16 +768,27 @@ public class panelPrincipal extends javax.swing.JFrame {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(btnEditarS)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnEliminarS))
-                            .addComponent(comboPeriodoS, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(chooserFinSem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                                .addComponent(chooserInicioSem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(btnEliminarS)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCambiosSem)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCancelarEdicion)
+                                .addGap(123, 123, 123))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(comboPeriodoS, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(chooserFinSem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                        .addComponent(chooserInicioSem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(193, 193, 193)
                 .addComponent(jLabel14)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -774,8 +819,12 @@ public class panelPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardarS)
                     .addComponent(btnEditarS)
-                    .addComponent(btnEliminarS))
-                .addContainerGap(368, Short.MAX_VALUE))
+                    .addComponent(btnEliminarS)
+                    .addComponent(btnCambiosSem)
+                    .addComponent(btnCancelarEdicion))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(326, Short.MAX_VALUE))
         );
 
         panelTabs.addTab("Semestre", jPanel5);
@@ -2796,6 +2845,104 @@ public class panelPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnGuardarSActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnEliminarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarSActionPerformed
+        if(!semestres.isEmpty())
+            semestres.clear();
+        
+        if(fileSemestre.length() != 0){
+                try {
+                    DataInputStream archivoRead;
+                    
+                    archivoRead = new DataInputStream(new FileInputStream(fileSemestre));
+                    
+                    while(archivoRead.available() > 0){
+                        int readID = archivoRead.readInt();
+                        String readPeriodo = archivoRead.readUTF();
+                        String readInicioSem = archivoRead.readUTF();
+                        String readFinSem = archivoRead.readUTF();
+                        String readSeparador = archivoRead.readUTF();
+                        
+                        Semestre temp = new Semestre();
+                        
+                        temp.setId(readID);
+                        temp.setPeriodo(readPeriodo);
+                        temp.setFechaI(readInicioSem);
+                        temp.setFechaF(readFinSem);
+                        
+                        semestres.add(temp);
+                    }
+                    
+                } catch (FileNotFoundException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "No hay semestres guardados.");
+            }
+        
+        String semToDelete = JOptionPane.showInputDialog(this, "Ingrese el periodo que desea eliminar:");
+        
+        String patronPeriodo = "^[1|2]{1}[0|9]{1}[0-9]{2}[A|B]{1}$";
+        Pattern patToCheckPeriodo = Pattern.compile(patronPeriodo);
+        
+        Matcher regexMatcherPeriodo = patToCheckPeriodo.matcher(semToDelete);
+        boolean found = false;
+        
+        if(regexMatcherPeriodo.matches()){
+            for(int i=0; i<semestres.size() && !found; i++){
+                if(semestres.get(i).getPeriodo().equals(semToDelete)){
+                    try {
+                        semestres.remove(i);
+                        
+                        
+                        fileSemestre.delete();
+                        
+                        DataOutputStream archivoWrite;
+                        
+                        archivoWrite = new DataOutputStream(new FileOutputStream(fileSemestre));
+                        
+                        for(int j=0; j<semestres.size(); j++){
+                            archivoWrite.writeInt(semestres.get(i).getId());
+                            archivoWrite.writeUTF(semestres.get(i).getPeriodo());
+                            archivoWrite.writeUTF(semestres.get(i).getFechaI());
+                            archivoWrite.writeUTF(semestres.get(i).getFechaF());
+                            archivoWrite.writeUTF("#");
+                        }
+                        archivoWrite.close();
+                        
+                        semestres.clear();
+                        JOptionPane.showMessageDialog(this, "El semestre fue eliminado.");
+                        found = true;
+                        
+                    } catch (FileNotFoundException ex) {
+                        //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }
+                
+            }
+            if(!found){
+                JOptionPane.showMessageDialog(this, "El semestre no fue encontrado.");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "El periodo no cumple con el formato establecido.");
+        }
+        
+    }//GEN-LAST:event_btnEliminarSActionPerformed
+
+    private void btnCambiosSemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiosSemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCambiosSemActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EditarM;
@@ -2805,8 +2952,10 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarC;
     private javax.swing.JButton btnBuscarG;
     private javax.swing.JButton btnBuscarH;
+    private javax.swing.JButton btnCambiosSem;
     private javax.swing.JButton btnCancelUsEdit;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCancelarEdicion;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEditarA;
     private javax.swing.JButton btnEditarC;
@@ -2859,6 +3008,7 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboSemestre;
     private javax.swing.JLabel comboSemestreA;
     private javax.swing.JComboBox<String> comboSemestreC;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
