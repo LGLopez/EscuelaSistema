@@ -10,55 +10,28 @@ package escuela;
  * @author roman
  */
 public class Carrera {
-    int cont;
-
-    public int getCont() {
-        return cont;
-    }
-
-    public void setCont(int cont) {
-        this.cont = cont;
-    }
-    String id;
+    int id;
     String nombre;
     String area;
     String semestre;
-    String fechaD;
-    String fechaM;
-    String fechaA;
+    String fechaC;
 
-    public String getFechaD() {
-        return fechaD;
+    public String getFechaC() {
+        return fechaC;
     }
 
-    public void setFechaD(String fechaD) {
-        this.fechaD = fechaD;
+    public void setFechaC(String fechaC) {
+        this.fechaC = fechaC;
     }
 
-    public String getFechaM() {
-        return fechaM;
-    }
-
-    public void setFechaM(String fechaM) {
-        this.fechaM = fechaM;
-    }
-
-    public String getFechaA() {
-        return fechaA;
-    }
-
-    public void setFechaA(String fechaA) {
-        this.fechaA = fechaA;
-    }
-
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
-
+    
     public String getNombre() {
         return nombre;
     }

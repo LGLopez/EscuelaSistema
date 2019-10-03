@@ -305,7 +305,8 @@ public class panelPrincipal extends javax.swing.JFrame {
         comboAreaC = new javax.swing.JComboBox<>();
         comboSemestreC = new javax.swing.JComboBox<>();
         jLabel39 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        chooserFechaC = new com.toedter.calendar.JDateChooser();
+        jLabel42 = new javax.swing.JLabel();
         panelAlumnos = new javax.swing.JPanel();
         txtNombreA = new javax.swing.JTextField();
         txtAP = new javax.swing.JTextField();
@@ -1276,6 +1277,9 @@ public class panelPrincipal extends javax.swing.JFrame {
         jLabel39.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         jLabel39.setText("Carrera");
 
+        jLabel42.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel42.setText("0");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -1290,7 +1294,10 @@ public class panelPrincipal extends javax.swing.JFrame {
                                 .addGap(193, 193, 193)
                                 .addComponent(jLabel39))
                             .addComponent(txtNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblIDCarrera))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(lblIDCarrera)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(60, 60, 60)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -1300,7 +1307,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel18)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(chooserFechaC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(79, 79, 79)
                         .addComponent(btnGuardarC)
@@ -1331,10 +1338,12 @@ public class panelPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel18)
-                            .addComponent(lblIDCarrera))
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblIDCarrera)
+                                .addComponent(jLabel42)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblNombreC))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(chooserFechaC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1935,71 +1944,95 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarCActionPerformed
 
     private void btnGuardarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCActionPerformed
+        String patronCarrera = "^[a-zA-Z\\s]{5,30}$";
+        Pattern patToCheckCarrera = Pattern.compile(patronCarrera);
+        
+        Matcher regexMatcherCarrera = patToCheckCarrera.matcher(txtNombreC.getText());
+        
+        Date toCheckCarrera = chooserFechaC.getDate();
+        
         try {
+            
+            if(toCheckCarrera == null){
+                JOptionPane.showMessageDialog(this, "No se selecciono la fecha.");
+                return;
+            }
+            
             if(txtNombreC.getText().isEmpty()){
                 JOptionPane.showMessageDialog(this, "Faltan campos por llenar");
                 return;
             }
+            
+            
+            if(regexMatcherCarrera.matches()){
+                SimpleDateFormat fechaFormato = new SimpleDateFormat("dd/MM/yyyy");
+                String fechaCarrera = fechaFormato.format(chooserFechaC.getDate());
+                
+                Carrera carrera = new Carrera();
+                
+                carrera.setNombre(txtNombreC.getText());
+                carrera.setArea(comboAreaC.getSelectedItem().toString());
+                carrera.setSemestre(comboSemestreC.getSelectedItem().toString());
+                carrera.setFechaC(fechaCarrera);
 
-            Carrera carrera = new Carrera();
+                if(fileCarrera.length() !=0){
+                    DataInputStream archivoRead;
 
-            carrera.setNombre(txtNombreA.getText());
-            carrera.setArea(comboAreaC.getSelectedItem().toString());
-            carrera.setSemestre(comboSemestre.getSelectedItem().toString());
-//            carrera.setFechaD(comboFechaD.getSelectedItem().toString());
-//            carrera.setFechaM(comboFechaM.getSelectedItem().toString());
-//            carrera.setFechaA(comboFechaA.getSelectedItem().toString());
+                    archivoRead = new DataInputStream(new FileInputStream(fileCarrera));
 
-            DataInputStream archivoRead;
+                    while(archivoRead.available() > 0){
+                        int readID = archivoRead.readInt();
+                        String readNombre = archivoRead.readUTF();
+                        String readArea = archivoRead.readUTF();
+                        String readSemestre = archivoRead.readUTF();
+                        String readFechaC = archivoRead.readUTF();
+                        String readSeparador = archivoRead.readUTF();
 
-            archivoRead = new DataInputStream(new FileInputStream(fileCarrera));
+                        Carrera temp = new Carrera();
 
-            while(archivoRead.available() > 0){
-                String readID = archivoRead.readUTF();
-                String readNombre = archivoRead.readUTF();
-                String readArea = archivoRead.readUTF();
-                String readSemestre = archivoRead.readUTF();
-                String readFechaD = archivoRead.readUTF();
-                String readFechaM = archivoRead.readUTF();
-                String readFechaA = archivoRead.readUTF();
-                String readSeparador = archivoRead.readUTF();
+                        temp.setId(readID);
+                        temp.setNombre(readNombre);
+                        temp.setArea(readArea);
+                        temp.setSemestre(readSemestre);
+                        temp.setFechaC(readFechaC);
 
-                Carrera temp = new Carrera();
 
-                temp.setId(readID);
-                temp.setNombre(readNombre);
-                temp.setArea(readArea);
-                temp.setSemestre(readSemestre);
-                temp.setFechaD(readFechaD);
-                temp.setFechaM(readFechaM);
-                temp.setFechaA(readFechaA);
+                        carreras.add(temp);
+                    }
+                    int temp = carreras.size() - 1;
+                    carrera.setId(carreras.get(temp).getId() + 1);
+                    
+                }
+                else{
+                    carrera.setId(1);
+                }   
 
-                carreras.add(temp);
+                carreras.add(carrera);
+
+                fileCarrera.delete();
+
+                DataOutputStream archivoWrite;
+
+                archivoWrite = new DataOutputStream(new FileOutputStream(fileCarrera));
+
+                for(int i=0; i<carreras.size() ; i++){
+                    archivoWrite.writeInt(carreras.get(i).getId());
+                    archivoWrite.writeUTF(carreras.get(i).getNombre());
+                    archivoWrite.writeUTF(carreras.get(i).getArea());
+                    archivoWrite.writeUTF(carreras.get(i).getSemestre());
+                    archivoWrite.writeUTF(carreras.get(i).getFechaC());
+                    
+                    archivoWrite.writeUTF("#");
+                }
+
+                archivoWrite.close();
+                carreras.clear();
+                JOptionPane.showMessageDialog(this, "La carrera fue registrada exitosamente.");
             }
-
-            carreras.add(carrera);
-
-            fileCarrera.delete();
-
-            DataOutputStream archivoWrite;
-
-            archivoWrite = new DataOutputStream(new FileOutputStream(fileCarrera));
-
-            for(int i=0; i<carreras.size() ; i++){
-                archivoWrite.writeUTF(carreras.get(i).getId());
-                archivoWrite.writeUTF(carreras.get(i).getNombre());
-                archivoWrite.writeUTF(carreras.get(i).getArea());
-                archivoWrite.writeUTF(carreras.get(i).getSemestre());
-                archivoWrite.writeUTF(carreras.get(i).getFechaD());
-                archivoWrite.writeUTF(carreras.get(i).getFechaM());
-                archivoWrite.writeUTF(carreras.get(i).getFechaA());
-
-                archivoWrite.writeUTF("#");
+            else{
+                JOptionPane.showMessageDialog(this, "El nombre de la carrera no cuenta con el formato correcto.");
             }
-
-            archivoWrite.close();
-            carreras.clear();
-            JOptionPane.showMessageDialog(this, "La carrera fue registrada exitosamente.");
+                
 
         } catch (FileNotFoundException ex) {
             //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -2797,6 +2830,7 @@ public class panelPrincipal extends javax.swing.JFrame {
             lblSemID.setText(String.valueOf(semestre.getId()));
             
             semestres.clear();
+            comboSemestreC.addItem(semestre.getPeriodo());
             
             JOptionPane.showMessageDialog(this, "El semestre fue registrado exitosamente.");
         } catch (FileNotFoundException ex) {
@@ -2941,6 +2975,7 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardarMateria;
     private javax.swing.JButton btnGuardarS;
     private javax.swing.JButton btnGuardarUsuario;
+    private com.toedter.calendar.JDateChooser chooserFechaC;
     private com.toedter.calendar.JDateChooser chooserFinSem;
     private com.toedter.calendar.JDateChooser chooserInicioSem;
     private javax.swing.JComboBox<String> comboAcademia;
@@ -2970,7 +3005,6 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3007,6 +3041,7 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
