@@ -2578,78 +2578,95 @@ public class panelPrincipal extends javax.swing.JFrame {
 
     private void btnGuardarMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarMaActionPerformed
         try {
-            int id=0;
             
             if(txtNombreMaestro.getText().isEmpty() || txtDireccionMa.getText().isEmpty() ||txtTelefonoM.getText().isEmpty() ){
                 JOptionPane.showMessageDialog(this, "Faltan campos por llenar");
                 return;
             }
-
-            Maestros maestro = new Maestros();
             
-            maestro.setNombre(txtNombreMaestro.getText());
-            maestro.setGradoA(comboGradoAcad.toString());
-            maestro.setGrupoA(comboGrupoAcad.getSelectedItem().toString());
-            maestro.setDireccion(txtDireccionMa.getText());
-            maestro.setTelefono(txtTelefonoM.getText());
+            String patronMaestro = "^[a-zA-Z]{3,40}$";
+            Pattern patToCheckMaestro = Pattern.compile(patronMaestro);
+            
+            String patronDireccion = "^[a-zA-Z0-9\\s]{3,100}$";
+            Pattern patToCheckDireccion = Pattern.compile(patronDireccion);
+            
+            String patronTelefono = "^[0-9]{8,10}$";
+            Pattern patToCheckTelefono = Pattern.compile(patronTelefono);
+            
+            
+            Matcher regexMatcherMaestro = patToCheckMaestro.matcher(txtNombreMaestro.getText());
+            
+            
+            
+            if(regexMatcherMaestro.matches()){
+                Maestros maestro = new Maestros();
 
-            DataInputStream archivoRead;
+                maestro.setNombre(txtNombreMaestro.getText());
+                maestro.setGradoA(comboGradoAcad.toString());
+                maestro.setGrupoA(comboGrupoAcad.getSelectedItem().toString());
+                maestro.setDireccion(txtDireccionMa.getText());
+                maestro.setTelefono(txtTelefonoM.getText());
 
-            archivoRead = new DataInputStream(new FileInputStream(fileMaestro));
+                DataInputStream archivoRead;
 
-            while(archivoRead.available() > 0){
-                int readID = archivoRead.readInt();
-                String readNombre = archivoRead.readUTF();
-                String readGradoA = archivoRead.readUTF();
-                String readGrupoA = archivoRead.readUTF();
-                String readDireccion = archivoRead.readUTF();
-                String readTelefono = archivoRead.readUTF();
-                String readSeparador = archivoRead.readUTF();
+                archivoRead = new DataInputStream(new FileInputStream(fileMaestro));
 
-                Maestros temp = new Maestros();
+                while(archivoRead.available() > 0){
+                    int readID = archivoRead.readInt();
+                    String readNombre = archivoRead.readUTF();
+                    String readGradoA = archivoRead.readUTF();
+                    String readGrupoA = archivoRead.readUTF();
+                    String readDireccion = archivoRead.readUTF();
+                    String readTelefono = archivoRead.readUTF();
+                    String readSeparador = archivoRead.readUTF();
 
-                temp.setId(readID);
-                temp.setNombre(readNombre);
-                temp.setGradoA(readGradoA);
-                temp.setGrupoA(readGrupoA);
-                temp.setDireccion(readDireccion);
-                temp.setTelefono(readTelefono);
+                    Maestros temp = new Maestros();
+
+                    temp.setId(readID);
+                    temp.setNombre(readNombre);
+                    temp.setGradoA(readGradoA);
+                    temp.setGrupoA(readGrupoA);
+                    temp.setDireccion(readDireccion);
+                    temp.setTelefono(readTelefono);
+
+
+                    maestros.add(temp);
+                }
+
+
+                maestros.add(maestro);
+
+                fileMaestro.delete();
+
+                DataOutputStream archivoWrite;
+
+                archivoWrite = new DataOutputStream(new FileOutputStream(fileMaestro));
+
+                for(int i=0; i<maestros.size() ; i++){
+                    archivoWrite.writeInt(maestros.get(i).getId());
+                    archivoWrite.writeUTF(maestros.get(i).getNombre());
+                    archivoWrite.writeUTF(maestros.get(i).getGradoA());
+                    archivoWrite.writeUTF(maestros.get(i).getGrupoA());
+                    archivoWrite.writeUTF(maestros.get(i).getDireccion());
+                    archivoWrite.writeUTF(maestros.get(i).getTelefono());
+                    archivoWrite.writeUTF("#");
+
+                }
+
+                archivoWrite.close();
+                maestros.clear();
+                JOptionPane.showMessageDialog(this, "El Maestro fue registrado exitosamente.");
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Los datos no cuentan con el formato correccto.");
+            }
                 
 
-                maestros.add(temp);
+            } catch (FileNotFoundException ex) {
+                //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            maestro.setId(id);
-            id+=1;
-
-            maestros.add(maestro);
-
-            fileMaestro.delete();
-
-            DataOutputStream archivoWrite;
-
-            archivoWrite = new DataOutputStream(new FileOutputStream(fileMaestro));
-
-            for(int i=0; i<maestros.size() ; i++){
-                archivoWrite.writeInt(maestros.get(i).getId());
-                archivoWrite.writeUTF(maestros.get(i).getNombre());
-                archivoWrite.writeUTF(maestros.get(i).getGradoA());
-                archivoWrite.writeUTF(maestros.get(i).getGrupoA());
-                archivoWrite.writeUTF(maestros.get(i).getDireccion());
-                archivoWrite.writeUTF(maestros.get(i).getTelefono());
-                archivoWrite.writeUTF("#");
-
-            }
-
-            archivoWrite.close();
-            maestros.clear();
-            JOptionPane.showMessageDialog(this, "El Maestro fue registrado exitosamente.");
-
-        } catch (FileNotFoundException ex) {
-            //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
     }//GEN-LAST:event_btnGuardarMaActionPerformed
 
