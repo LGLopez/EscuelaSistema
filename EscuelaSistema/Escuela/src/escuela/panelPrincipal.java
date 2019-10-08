@@ -2751,7 +2751,7 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btnGuardarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarSActionPerformed
-        
+        semestres.clear();
         try {
             Date toCheckInicio = chooserInicioSem.getDate();
             Date toCheckFinal = chooserFinSem.getDate();
@@ -2830,6 +2830,7 @@ public class panelPrincipal extends javax.swing.JFrame {
             lblSemID.setText(String.valueOf(semestre.getId()));
             
             semestres.clear();
+            
             comboSemestreC.addItem(semestre.getPeriodo());
             
             JOptionPane.showMessageDialog(this, "El semestre fue registrado exitosamente.");
