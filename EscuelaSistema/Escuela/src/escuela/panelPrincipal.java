@@ -45,6 +45,9 @@ public class panelPrincipal extends javax.swing.JFrame {
     File fileSemestre = new File("Semestre.txt");
     ArrayList<Semestre> semestres = new ArrayList<Semestre>();
     
+    File fileGrupo = new File("Grupos.txt");
+    ArrayList<Grupos> grupos = new ArrayList<Grupos>();
+    
     int toEdit = -1;
     /**
      * Creates new form panelPrincipal
@@ -123,10 +126,118 @@ public class panelPrincipal extends javax.swing.JFrame {
                     else{
                         comboSemestreC.removeAll();
                         comboSemestreC.addItem("No hay semestres agregados.");
+                    }
+                    
+                    if(fileCarrera.length() !=0){
+                        DataInputStream archivoRead;
+
+                        archivoRead = new DataInputStream(new FileInputStream(fileCarrera));
+
+                        while(archivoRead.available() > 0){
+                            int readID = archivoRead.readInt();
+                            String readNombre = archivoRead.readUTF();
+                            String readArea = archivoRead.readUTF();
+                            String readSemestre = archivoRead.readUTF();
+                            String readFechaC = archivoRead.readUTF();
+                            String readSeparador = archivoRead.readUTF();
+
+                            Carrera temp = new Carrera();
+
+                            temp.setId(readID);
+                            temp.setNombre(readNombre);
+                            temp.setArea(readArea);
+                            temp.setSemestre(readSemestre);
+                            temp.setFechaC(readFechaC);
+
+
+                            carreras.add(temp);
+                        }
+                        comboIDCarrera.removeAll();
                         
+                        for(int i=0; i<carreras.size(); i++){
+                            comboIDCarrera.addItem(carreras.get(i).getNombre());
+                        }
                         
                     }
+                    else{
+                        comboIDCarrera.removeAll();
+                        comboIDCarrera.addItem("No hay carreras disponibles");
+                    }
+                    
+                    if(fileMateria.length() != 0){
+                        DataInputStream archivoRead;
+
+                        archivoRead = new DataInputStream(new FileInputStream(fileMateria));
+
+                        while(archivoRead.available() > 0){
+                            int readID = archivoRead.readInt();
+                            String readNombreM = archivoRead.readUTF();
+                            int readCredito = archivoRead.readInt();
+                            String readIdCarrera = archivoRead.readUTF();
+                            String readAcademia = archivoRead.readUTF();
+                            String readSeparador = archivoRead.readUTF();
+
+                            Materia temp = new Materia();
+
+                            temp.setID(readID);
+                            temp.setNombreM(readNombreM);
+                            temp.setCreditos(readCredito);
+                            temp.setIdcarrera(readIdCarrera);
+                            temp.setAcademia(readAcademia);
+
+                            materias.add(temp);
+                        }
                         
+                        comboIDMateria.removeAll();
+                        
+                        for(int i=0; i<materias.size(); i++){
+                            comboIDMateria.addItem(materias.get(i).getNombreM());
+                        }
+                        
+                    }
+                    else{
+                        comboIDMateria.removeAll();
+                        comboIDMateria.addItem("No hay materias");
+                    }
+                    
+                    if(fileMaestro.length() != 0){
+                        DataInputStream archivoRead;
+
+                        archivoRead = new DataInputStream(new FileInputStream(fileMaestro));
+
+                        while(archivoRead.available() > 0){
+                            int readID = archivoRead.readInt();
+                            String readNombre = archivoRead.readUTF();
+                            String readGradoA = archivoRead.readUTF();
+                            String readGrupoA = archivoRead.readUTF();
+                            String readDireccion = archivoRead.readUTF();
+                            String readTelefono = archivoRead.readUTF();
+                            String readSeparador = archivoRead.readUTF();
+
+                            Maestros temp = new Maestros();
+
+                            temp.setId(readID);
+                            temp.setNombre(readNombre);
+                            temp.setGradoA(readGradoA);
+                            temp.setGrupoA(readGrupoA);
+                            temp.setDireccion(readDireccion);
+                            temp.setTelefono(readTelefono);
+
+
+                            maestros.add(temp);
+                        }
+                    
+                    comboIDMaestro.removeAll();
+                    
+                    for(int i=0; i<maestros.size(); i++){
+                        comboIDMaestro.addItem(maestros.get(i).getNombre());
+                    }
+                    
+                    }
+                    else{
+                        comboIDMaestro.removeAllItems();
+                        comboIDMaestro.addItem("No hay maestros");
+                    }
                     
                     break;
                 case "Coordinador":
@@ -274,6 +385,7 @@ public class panelPrincipal extends javax.swing.JFrame {
         btnGuardarG = new javax.swing.JButton();
         btnEditarG = new javax.swing.JButton();
         btnEliminarG = new javax.swing.JButton();
+        lblIDGrupo = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -597,7 +709,6 @@ public class panelPrincipal extends javax.swing.JFrame {
         jLabel11.setText("Creditos:");
 
         comboIDCarrera.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        comboIDCarrera.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "INNI", "INCO", "QFB", " " }));
         comboIDCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboIDCarreraActionPerformed(evt);
@@ -686,8 +797,8 @@ public class panelPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboIDCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(423, Short.MAX_VALUE))
+                        .addComponent(comboIDCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(549, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1020,15 +1131,22 @@ public class panelPrincipal extends javax.swing.JFrame {
         lblIDMateria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblIDMateria.setText("ID Materia");
 
-        comboIDMaestro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        comboIDMateria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtNombreGrupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreGrupoActionPerformed(evt);
+            }
+        });
 
         btnBuscarG.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnBuscarG.setText("Buscar");
 
         btnGuardarG.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnGuardarG.setText("Guardar");
+        btnGuardarG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarGActionPerformed(evt);
+            }
+        });
 
         btnEditarG.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEditarG.setText("Editar");
@@ -1036,48 +1154,51 @@ public class panelPrincipal extends javax.swing.JFrame {
         btnEliminarG.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEliminarG.setText("Eliminar");
 
+        lblIDGrupo.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        lblIDGrupo.setText("0");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addComponent(jLabel34))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel35)
-                        .addGap(141, 141, 141)
-                        .addComponent(txtBuscarG, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscarG))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel36))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(txtNombreGrupo))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
-                                .addGap(69, 69, 69)
-                                .addComponent(btnGuardarG)))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEditarG)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminarG))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(comboIDMaestro, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel37, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(comboIDMateria, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblIDMateria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(430, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(comboIDMaestro, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addGap(172, 172, 172)
+                            .addComponent(jLabel34))
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel35)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lblIDGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel36))
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addGap(69, 69, 69)
+                            .addComponent(btnGuardarG)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnEditarG)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnEliminarG))
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel37))
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblIDMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(comboIDMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(txtNombreGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                .addComponent(txtBuscarG, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(btnBuscarG)
+                .addGap(261, 261, 261))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1088,7 +1209,8 @@ public class panelPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
                     .addComponent(txtBuscarG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarG))
+                    .addComponent(btnBuscarG)
+                    .addComponent(lblIDGrupo))
                 .addGap(24, 24, 24)
                 .addComponent(jLabel36)
                 .addGap(2, 2, 2)
@@ -1106,7 +1228,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                     .addComponent(btnGuardarG)
                     .addComponent(btnEditarG)
                     .addComponent(btnEliminarG))
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addContainerGap(377, Short.MAX_VALUE))
         );
 
         panelTabs.addTab("Grupos", jPanel7);
@@ -1518,7 +1640,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                             .addComponent(txtAP, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNombreA, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblMes2)
                         .addGap(54, 54, 54)
                         .addComponent(lblAño2)
@@ -2028,6 +2150,8 @@ public class panelPrincipal extends javax.swing.JFrame {
                 archivoWrite.close();
                 carreras.clear();
                 JOptionPane.showMessageDialog(this, "La carrera fue registrada exitosamente.");
+                
+                comboIDCarrera.addItem(carrera.getNombre());
             }
             else{
                 JOptionPane.showMessageDialog(this, "El nombre de la carrera no cuenta con el formato correcto.");
@@ -2305,6 +2429,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                 txtCreditos.setText("");
                 materias.clear();
                 JOptionPane.showMessageDialog(this, "La materia fue registrada exitosamente.");
+                comboIDMateria.addItem(materia.getNombreM());
 
             } catch (FileNotFoundException ex) {
                 //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -2631,6 +2756,8 @@ public class panelPrincipal extends javax.swing.JFrame {
                 maestros.clear();
                 JOptionPane.showMessageDialog(this, "El Maestro fue registrado exitosamente.");
                 
+                comboIDMaestro.addItem(maestro.getNombre());
+                
                 txtNombreMaestro.setText("");
                 txtDireccionMa.setText("");
                 txtTelefonoM.setText("");
@@ -2940,6 +3067,101 @@ public class panelPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCambiosSemActionPerformed
 
+    private void btnGuardarGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarGActionPerformed
+        grupos.clear();
+        
+        String patronNombreG = "^[1-9]{1}-[A-Z]{1}$";
+        Pattern patToCheckNombreG = Pattern.compile(patronNombreG);
+        Matcher regexMatcherNombreG = patToCheckNombreG.matcher(txtNombreGrupo.getText());
+        
+        if(regexMatcherNombreG.matches()){
+            
+            Grupos grupo = new Grupos();
+            
+            grupo.setNombre(txtNombreGrupo.getText());
+            grupo.setIdMaestro(comboIDMaestro.getSelectedItem().toString());
+            grupo.setIdMateria(comboIDMateria.getSelectedItem().toString());
+            
+            
+            if(fileGrupo.length() != 0){
+                try {
+                    DataInputStream archivoRead;
+                    
+                    archivoRead = new DataInputStream(new FileInputStream(fileGrupo));
+                    
+                    while(archivoRead.available() > 0){
+                        int readID = archivoRead.readInt();
+                        String readNombre = archivoRead.readUTF();
+                        String readMaestro = archivoRead.readUTF();
+                        String readMateria = archivoRead.readUTF();
+                        String readSeparador = archivoRead.readUTF();
+                        
+                        Grupos temp = new Grupos();
+                        
+                        temp.setId(readID);
+                        temp.setNombre(readNombre);
+                        temp.setIdMaestro(readMaestro);
+                        temp.setIdMateria(readMateria);
+                        
+                        grupos.add(temp);
+                    }
+                    int temp = grupos.size() - 1;
+                    grupo.setId(grupos.get(temp).getId() + 1);
+                } catch (FileNotFoundException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+                grupo.setId(1);
+            }
+            
+            grupos.add(grupo);
+            
+            fileGrupo.delete();
+            
+            DataOutputStream archivoWrite;
+            
+            try {
+                archivoWrite = new DataOutputStream(new FileOutputStream(fileGrupo));
+            
+                for(int i=0; i<grupos.size() ; i++){
+                    archivoWrite.writeInt(grupos.get(i).getId());
+                    archivoWrite.writeUTF(grupos.get(i).getNombre());
+                    archivoWrite.writeUTF(grupos.get(i).getIdMaestro());
+                    archivoWrite.writeUTF(grupos.get(i).getIdMateria());
+
+                    archivoWrite.writeUTF("#");
+
+                }
+
+                archivoWrite.close();
+
+                lblIDGrupo.setText(String.valueOf(grupo.getId()));
+
+                grupos.clear();
+
+                JOptionPane.showMessageDialog(this, "El grupo fue agregado exitosamente.");
+
+
+            } catch (FileNotFoundException ex) {
+                //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "El nombre no cumple con el formato requerido.");
+        }
+        
+    }//GEN-LAST:event_btnGuardarGActionPerformed
+
+    private void txtNombreGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreGrupoActionPerformed
+    }//GEN-LAST:event_txtNombreGrupoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EditarM;
@@ -3081,6 +3303,7 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblIDA;
     private javax.swing.JLabel lblIDCarrera;
+    private javax.swing.JLabel lblIDGrupo;
     private javax.swing.JLabel lblIDMateria;
     private javax.swing.JLabel lblMateriaID;
     private javax.swing.JLabel lblMes1;
