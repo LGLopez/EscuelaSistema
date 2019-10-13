@@ -17,67 +17,30 @@ public class Alumnos {
     String direccion;
     String telefono;
     String email;
-    String fNacimientoDia;
-    String fNacimientoMes;
-    String fNacimientoAnio;
-    String fechaDia;
-    String fechaMes;
-    String fechaAnio;
+    String fNacimiento;
+    String fechaInicio;
     String ciudad;
     String carrera;
     String semestre;
     String grupo;
     String periodo;
 
-    public String getFnacimientodia() {
-        return fNacimientoDia;
+    public String getfNacimiento() {
+        return fNacimiento;
     }
 
-    public void setFnacimientodia(String fnacimientodia) {
-        this.fNacimientoDia = fnacimientodia;
+    public void setfNacimiento(String fNacimiento) {
+        this.fNacimiento = fNacimiento;
     }
 
-    public String getFnacimientomes() {
-        return fNacimientoMes;
+    public String getFechaInicio() {
+        return fechaInicio;
     }
 
-    public void setFnacimientomes(String fnacimientomes) {
-        this.fNacimientoMes = fNacimientoMes;
-    }
-
-    public String getFnacimientoanio() {
-        return fNacimientoAnio;
-    }
-
-    public void setFnacimientoanio(String fnacimientoanio) {
-        this.fNacimientoAnio = fNacimientoAnio;
-    }
-
-    public String getFechadia() {
-        return fechaDia;
-    }
-
-    public void setFechadia(String fechaDia) {
-        this.fechaDia = fechaDia;
-    }
-
-    public String getFechames() {
-        return fechaMes;
-    }
-
-    public void setFechames(String fechames) {
-        this.fechaMes = fechames;
-    }
-
-    public String getFechaanio() {
-        return fechaAnio;
-    }
-
-    public void setFechaanio(String fechaanio) {
-        this.fechaAnio = fechaanio;
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
     
-
     public int getId() {
         return id;
     }
