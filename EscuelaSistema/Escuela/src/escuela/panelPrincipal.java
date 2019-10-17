@@ -49,6 +49,9 @@ public class panelPrincipal extends javax.swing.JFrame {
     ArrayList<Grupos> grupos = new ArrayList<Grupos>();
     
     int toEdit = -1;
+    
+
+    
     /**
      * Creates new form panelPrincipal
      */
@@ -559,6 +562,47 @@ public class panelPrincipal extends javax.swing.JFrame {
                 default:
                     break;
             }
+        horarioL7.setVisible(false);
+        horarioL8.setVisible(false);
+        horarioL9.setVisible(false);
+        horarioL10.setVisible(false);
+        horarioL11.setVisible(false);
+        horarioL12.setVisible(false);
+        horarioL13.setVisible(false);
+        
+        horarioM7.setVisible(false);
+        horarioM8.setVisible(false);
+        horarioM9.setVisible(false);
+        horarioM10.setVisible(false);
+        horarioM11.setVisible(false);
+        horarioM12.setVisible(false);
+        horarioM13.setVisible(false);
+        
+        horarioI7.setVisible(false);
+        horarioI8.setVisible(false);
+        horarioI9.setVisible(false);
+        horarioI10.setVisible(false);
+        horarioI11.setVisible(false);
+        horarioI12.setVisible(false);
+        horarioI13.setVisible(false);
+        
+        horarioJ7.setVisible(false);
+        horarioJ8.setVisible(false);
+        horarioJ9.setVisible(false);
+        horarioJ10.setVisible(false);
+        horarioJ11.setVisible(false);
+        horarioJ12.setVisible(false);
+        horarioJ13.setVisible(false);
+        
+        horarioV7.setVisible(false);
+        horarioV8.setVisible(false);
+        horarioV9.setVisible(false);
+        horarioV10.setVisible(false);
+        horarioV11.setVisible(false);
+        horarioV12.setVisible(false);
+        horarioV13.setVisible(false);
+        
+                
         } catch (FileNotFoundException ex) {
             //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -690,11 +734,59 @@ public class panelPrincipal extends javax.swing.JFrame {
         btnBuscarH = new javax.swing.JButton();
         comboHoraI = new javax.swing.JComboBox<>();
         comboIDGrupoH = new javax.swing.JComboBox<>();
-        btnGuardarH = new javax.swing.JButton();
+        btnGenerarH = new javax.swing.JButton();
         btnEliminarH = new javax.swing.JButton();
         btnEditarH = new javax.swing.JButton();
         jLabel42 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        jLabel52 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
+        horarioL7 = new javax.swing.JLabel();
+        horarioL8 = new javax.swing.JLabel();
+        horarioL9 = new javax.swing.JLabel();
+        horarioL10 = new javax.swing.JLabel();
+        horarioL11 = new javax.swing.JLabel();
+        jLabel59 = new javax.swing.JLabel();
+        jLabel60 = new javax.swing.JLabel();
+        horarioL12 = new javax.swing.JLabel();
+        horarioL13 = new javax.swing.JLabel();
+        horarioM7 = new javax.swing.JLabel();
+        horarioM8 = new javax.swing.JLabel();
+        horarioM9 = new javax.swing.JLabel();
+        horarioM10 = new javax.swing.JLabel();
+        horarioM11 = new javax.swing.JLabel();
+        horarioM12 = new javax.swing.JLabel();
+        horarioM13 = new javax.swing.JLabel();
+        horarioI7 = new javax.swing.JLabel();
+        horarioI8 = new javax.swing.JLabel();
+        horarioI9 = new javax.swing.JLabel();
+        horarioI10 = new javax.swing.JLabel();
+        horarioI11 = new javax.swing.JLabel();
+        horarioI12 = new javax.swing.JLabel();
+        horarioI13 = new javax.swing.JLabel();
+        horarioJ7 = new javax.swing.JLabel();
+        horarioJ8 = new javax.swing.JLabel();
+        horarioJ9 = new javax.swing.JLabel();
+        horarioJ10 = new javax.swing.JLabel();
+        horarioJ11 = new javax.swing.JLabel();
+        horarioJ12 = new javax.swing.JLabel();
+        horarioJ13 = new javax.swing.JLabel();
+        horarioV7 = new javax.swing.JLabel();
+        horarioV8 = new javax.swing.JLabel();
+        horarioV9 = new javax.swing.JLabel();
+        horarioV10 = new javax.swing.JLabel();
+        horarioV11 = new javax.swing.JLabel();
+        horarioV12 = new javax.swing.JLabel();
+        horarioV13 = new javax.swing.JLabel();
         panelAlumnos = new javax.swing.JPanel();
         txtNombreA = new javax.swing.JTextField();
         txtAP = new javax.swing.JTextField();
@@ -1332,7 +1424,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                                 .addGroup(jPanel6Layout.createSequentialGroup()
                                     .addGap(33, 33, 33)
                                     .addComponent(btnEliminarMa))))))
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1386,7 +1478,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                     .addComponent(btnEliminarMa))
                 .addGap(1, 1, 1)
                 .addComponent(jButton3)
-                .addContainerGap(354, Short.MAX_VALUE))
+                .addContainerGap(365, Short.MAX_VALUE))
         );
 
         panelTabs.addTab("Maestros", jPanel6);
@@ -1588,8 +1680,13 @@ public class panelPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnGuardarH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnGuardarH.setText("Guardar");
+        btnGenerarH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnGenerarH.setText("Generar");
+        btnGenerarH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarHActionPerformed(evt);
+            }
+        });
 
         btnEliminarH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEliminarH.setText("Eliminar");
@@ -1602,6 +1699,115 @@ public class panelPrincipal extends javax.swing.JFrame {
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes" }));
 
+        jLabel43.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel43.setText("Horas");
+
+        jLabel44.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel44.setText("Lunes");
+
+        jLabel45.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel45.setText("Martes");
+
+        jLabel46.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel46.setText("Miercoles");
+
+        jLabel47.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel47.setText("Jueves");
+
+        jLabel48.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel48.setText("Viernes");
+
+        jLabel49.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel49.setText("7:00 - 8:00");
+
+        jLabel50.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel50.setText("8:00 - 9:00");
+
+        jLabel51.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel51.setText("9:00 - 10:00");
+
+        jLabel52.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel52.setText("10:00 - 11:00");
+
+        jLabel53.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel53.setText("11:00 - 12:00");
+
+        horarioL7.setText("MateriaL7");
+
+        horarioL8.setText("jLabel55");
+
+        horarioL9.setText("jLabel56");
+
+        horarioL10.setText("jLabel57");
+
+        horarioL11.setText("jLabel58");
+
+        jLabel59.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel59.setText("12:00-13:00");
+
+        jLabel60.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel60.setText("13:00 - 14:00");
+
+        horarioL12.setText("jLabel61");
+
+        horarioL13.setText("jLabel62");
+
+        horarioM7.setText("jLabel63");
+
+        horarioM8.setText("jLabel64");
+
+        horarioM9.setText("jLabel65");
+
+        horarioM10.setText("jLabel66");
+
+        horarioM11.setText("jLabel67");
+
+        horarioM12.setText("jLabel68");
+
+        horarioM13.setText("jLabel69");
+
+        horarioI7.setText("jLabel70");
+
+        horarioI8.setText("jLabel71");
+
+        horarioI9.setText("jLabel72");
+
+        horarioI10.setText("jLabel73");
+
+        horarioI11.setText("jLabel74");
+
+        horarioI12.setText("jLabel75");
+
+        horarioI13.setText("jLabel76");
+
+        horarioJ7.setText("jLabel77");
+
+        horarioJ8.setText("jLabel78");
+
+        horarioJ9.setText("jLabel79");
+
+        horarioJ10.setText("jLabel80");
+
+        horarioJ11.setText("jLabel81");
+
+        horarioJ12.setText("jLabel82");
+
+        horarioJ13.setText("jLabel83");
+
+        horarioV7.setText("jLabel84");
+
+        horarioV8.setText("jLabel85");
+
+        horarioV9.setText("jLabel86");
+
+        horarioV10.setText("jLabel87");
+
+        horarioV11.setText("jLabel88");
+
+        horarioV12.setText("jLabel89");
+
+        horarioV13.setText("jLabel90");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -1611,7 +1817,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(btnGuardarH)
+                        .addComponent(btnGenerarH)
                         .addGap(32, 32, 32)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel22)
@@ -1631,10 +1837,77 @@ public class panelPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel42))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboHoraI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboIDGrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(485, Short.MAX_VALUE))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel50)
+                                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(jPanel8Layout.createSequentialGroup()
+                                            .addComponent(comboIDGrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel49))
+                                        .addGroup(jPanel8Layout.createSequentialGroup()
+                                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(259, 259, 259)
+                                            .addComponent(jLabel43)))
+                                    .addComponent(jLabel51)
+                                    .addComponent(jLabel52)
+                                    .addComponent(jLabel53)
+                                    .addComponent(jLabel59)
+                                    .addComponent(jLabel60))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel44)
+                                            .addComponent(horarioL7))
+                                        .addComponent(horarioL8, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(horarioL9)
+                                    .addComponent(horarioL10)
+                                    .addComponent(horarioL11)
+                                    .addComponent(horarioL12)
+                                    .addComponent(horarioL13))
+                                .addGap(40, 40, 40)
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel45)
+                                    .addComponent(horarioM7)
+                                    .addComponent(horarioM8)
+                                    .addComponent(horarioM9)
+                                    .addComponent(horarioM10)
+                                    .addComponent(horarioM11)
+                                    .addComponent(horarioM12)
+                                    .addComponent(horarioM13))
+                                .addGap(40, 40, 40)
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel46)
+                                    .addComponent(horarioI7)
+                                    .addComponent(horarioI8)
+                                    .addComponent(horarioI9)
+                                    .addComponent(horarioI10)
+                                    .addComponent(horarioI11)
+                                    .addComponent(horarioI12)
+                                    .addComponent(horarioI13))
+                                .addGap(36, 36, 36)
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel47)
+                                    .addComponent(horarioJ7)
+                                    .addComponent(horarioJ8)
+                                    .addComponent(horarioJ9)
+                                    .addComponent(horarioJ10)
+                                    .addComponent(horarioJ11)
+                                    .addComponent(horarioJ12)
+                                    .addComponent(horarioJ13))
+                                .addGap(34, 34, 34)
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(horarioV13)
+                                    .addComponent(horarioV12)
+                                    .addComponent(horarioV11)
+                                    .addComponent(horarioV10)
+                                    .addComponent(horarioV9)
+                                    .addComponent(horarioV8)
+                                    .addComponent(horarioV7)
+                                    .addComponent(jLabel48))))))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1649,20 +1922,83 @@ public class panelPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
                     .addComponent(comboHoraI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel42)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel42)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel43)
+                            .addComponent(jLabel44)
+                            .addComponent(jLabel45)
+                            .addComponent(jLabel46)
+                            .addComponent(jLabel47)
+                            .addComponent(jLabel48))))
+                .addGap(23, 23, 23)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboIDGrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel27))
-                .addGap(104, 104, 104)
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel49)
+                    .addComponent(horarioL7)
+                    .addComponent(horarioM7)
+                    .addComponent(horarioI7)
+                    .addComponent(horarioJ7)
+                    .addComponent(horarioV7))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardarH)
+                    .addComponent(jLabel50)
+                    .addComponent(horarioL8)
+                    .addComponent(horarioM8)
+                    .addComponent(horarioI8)
+                    .addComponent(horarioJ8)
+                    .addComponent(horarioV8))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel51)
+                    .addComponent(horarioL9)
+                    .addComponent(horarioM9)
+                    .addComponent(horarioI9)
+                    .addComponent(horarioJ9)
+                    .addComponent(horarioV9))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel52)
+                    .addComponent(horarioL10)
+                    .addComponent(horarioM10)
+                    .addComponent(horarioI10)
+                    .addComponent(horarioJ10)
+                    .addComponent(horarioV10))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGenerarH)
                     .addComponent(btnEliminarH)
-                    .addComponent(btnEditarH))
-                .addContainerGap(343, Short.MAX_VALUE))
+                    .addComponent(btnEditarH)
+                    .addComponent(jLabel53)
+                    .addComponent(horarioL11)
+                    .addComponent(horarioM11)
+                    .addComponent(horarioI11)
+                    .addComponent(horarioJ11)
+                    .addComponent(horarioV11))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel59)
+                    .addComponent(horarioL12)
+                    .addComponent(horarioM12)
+                    .addComponent(horarioI12)
+                    .addComponent(horarioJ12)
+                    .addComponent(horarioV12))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel60)
+                    .addComponent(horarioL13)
+                    .addComponent(horarioM13)
+                    .addComponent(horarioI13)
+                    .addComponent(horarioJ13)
+                    .addComponent(horarioV13))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
 
         panelTabs.addTab("Horarios", jPanel8);
@@ -5282,6 +5618,10 @@ public class panelPrincipal extends javax.swing.JFrame {
         txtBuscarG.setText("");
     }//GEN-LAST:event_btnBuscarGActionPerformed
 
+    private void btnGenerarHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarHActionPerformed
+        
+    }//GEN-LAST:event_btnGenerarHActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EditarM;
@@ -5317,6 +5657,7 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarMa;
     private javax.swing.JButton btnEliminarS;
     private javax.swing.JButton btnEliminarUser;
+    private javax.swing.JButton btnGenerarH;
     private javax.swing.JButton btnGuardarA;
     private javax.swing.JButton btnGuardarC;
     private javax.swing.JButton btnGuardarCambios;
@@ -5326,7 +5667,6 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardarCambiosMa;
     private javax.swing.JButton btnGuardarCambiosMat;
     private javax.swing.JButton btnGuardarG;
-    private javax.swing.JButton btnGuardarH;
     private javax.swing.JButton btnGuardarMa;
     private javax.swing.JButton btnGuardarMateria;
     private javax.swing.JButton btnGuardarS;
@@ -5355,6 +5695,41 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboSemestreC;
     private com.toedter.calendar.JDateChooser dateChooserFecha;
     private com.toedter.calendar.JDateChooser dateChooserNacimiento;
+    private javax.swing.JLabel horarioI10;
+    private javax.swing.JLabel horarioI11;
+    private javax.swing.JLabel horarioI12;
+    private javax.swing.JLabel horarioI13;
+    private javax.swing.JLabel horarioI7;
+    private javax.swing.JLabel horarioI8;
+    private javax.swing.JLabel horarioI9;
+    private javax.swing.JLabel horarioJ10;
+    private javax.swing.JLabel horarioJ11;
+    private javax.swing.JLabel horarioJ12;
+    private javax.swing.JLabel horarioJ13;
+    private javax.swing.JLabel horarioJ7;
+    private javax.swing.JLabel horarioJ8;
+    private javax.swing.JLabel horarioJ9;
+    private javax.swing.JLabel horarioL10;
+    private javax.swing.JLabel horarioL11;
+    private javax.swing.JLabel horarioL12;
+    private javax.swing.JLabel horarioL13;
+    private javax.swing.JLabel horarioL7;
+    private javax.swing.JLabel horarioL8;
+    private javax.swing.JLabel horarioL9;
+    private javax.swing.JLabel horarioM10;
+    private javax.swing.JLabel horarioM11;
+    private javax.swing.JLabel horarioM12;
+    private javax.swing.JLabel horarioM13;
+    private javax.swing.JLabel horarioM7;
+    private javax.swing.JLabel horarioM8;
+    private javax.swing.JLabel horarioM9;
+    private javax.swing.JLabel horarioV10;
+    private javax.swing.JLabel horarioV11;
+    private javax.swing.JLabel horarioV12;
+    private javax.swing.JLabel horarioV13;
+    private javax.swing.JLabel horarioV7;
+    private javax.swing.JLabel horarioV8;
+    private javax.swing.JLabel horarioV9;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -5400,8 +5775,21 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
