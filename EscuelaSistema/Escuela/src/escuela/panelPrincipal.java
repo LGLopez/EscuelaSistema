@@ -87,8 +87,8 @@ public class panelPrincipal extends javax.swing.JFrame {
                     panelTabs.setEnabledAt(7, true);
                     
                     //Botones de semestre
-                    btnCambiosSem.setVisible(false);
-                    btnCancelarEdicion.setVisible(false);
+                    btnCambiosS.setVisible(false);
+                    btnCancelarEdicionS.setVisible(false);
                     
                     //Botones carrera
                     btnGuardarCambiosC.setVisible(false);
@@ -97,6 +97,23 @@ public class panelPrincipal extends javax.swing.JFrame {
                     //Botones de usario
                     btnGuardarCambios.setVisible(false);
                     btnCancelUsEdit.setVisible(false);
+                    
+                    //Botones de Alumno
+                    btnGuardarCambiosA.setVisible(false);
+                    btnCancelarEditA.setVisible(false);
+                    
+                    //Botones de Grupo
+                    btnGuardarCambiosG.setVisible(false);
+                    btnCancelarEditG.setVisible(false);
+                    
+                    //Botones de Maestro
+                    btnGuardarCambiosMa.setVisible(false);
+                    btnCancelarEditMa.setVisible(false);
+                    
+                    //Botones de Materias
+                    btnGuardarCambiosMat.setVisible(false);
+                    btnCancelarEditMat.setVisible(false);
+                    
                     //Agregar semestres
                     if(fileSemestre.length() != 0){
                         DataInputStream archivoRead;
@@ -198,15 +215,23 @@ public class panelPrincipal extends javax.swing.JFrame {
                         }
                         
                         comboIDMateria.removeAll();
+                        comboMateriaM.removeAllItems();
                         
                         for(int i=0; i<materias.size(); i++){
                             comboIDMateria.addItem(materias.get(i).getNombreM());
+                        }
+                        
+                        for(int i=0; i<materias.size(); i++){
+                            comboMateriaM.addItem(materias.get(i).getNombreM());
                         }
                         
                     }
                     else{
                         comboIDMateria.removeAll();
                         comboIDMateria.addItem("No hay materias");
+                        
+                        comboMateriaM.removeAllItems();
+                        comboMateriaM.addItem("No hay materias");
                     }
                     //Agregar maestros 
                     if(fileMaestro.length() != 0){
@@ -271,15 +296,23 @@ public class panelPrincipal extends javax.swing.JFrame {
                             grupos.add(temp);
                         }
                         comboGrupo.removeAllItems();
+                        comboIDGrupoH.removeAllItems();
                     
                         for(int i =0; i<grupos.size(); i++){
                             comboGrupo.addItem(grupos.get(i).getNombre());
+                        }
+                        
+                        for(int i =0; i<grupos.size(); i++){
+                            comboIDGrupoH.addItem(grupos.get(i).getNombre());
                         }
                     
                     }
                     else{
                         comboGrupo.removeAllItems();
                         comboGrupo.addItem("No hay grupos");
+                        
+                        comboIDGrupoH.removeAllItems();
+                        comboIDGrupoH.addItem("No hay grupos");
                     }
                     
                     break;
@@ -296,12 +329,232 @@ public class panelPrincipal extends javax.swing.JFrame {
                     panelTabs.setEnabledAt(7, true);
                     
                     //Botones de semestre
-                    btnCambiosSem.setVisible(false);
-                    btnCancelarEdicion.setVisible(false);
+                    btnCambiosS.setVisible(false);
+                    btnCancelarEdicionS.setVisible(false);
                     
-                    //Botones de usuario
+                    //Botones carrera
+                    btnGuardarCambiosC.setVisible(false);
+                    btnCancelarEditC.setVisible(false);
+                    
+                    //Botones de usario
                     btnGuardarCambios.setVisible(false);
                     btnCancelUsEdit.setVisible(false);
+                    
+                    //Botones de Alumno
+                    btnGuardarCambiosA.setVisible(false);
+                    btnCancelarEditA.setVisible(false);
+                    
+                    //Botones de Grupo
+                    btnGuardarCambiosG.setVisible(false);
+                    btnCancelarEditG.setVisible(false);
+                    
+                    //Botones de Maestro
+                    btnGuardarCambiosMa.setVisible(false);
+                    btnCancelarEditMa.setVisible(false);
+                    
+                    //Botones de Materias
+                    btnGuardarCambiosMat.setVisible(false);
+                    btnCancelarEditMat.setVisible(false);
+                    if(fileSemestre.length() != 0){
+                        DataInputStream archivoRead;
+
+                        archivoRead = new DataInputStream(new FileInputStream(fileSemestre));
+
+                        while(archivoRead.available() > 0){
+                            int readID = archivoRead.readInt();
+                            String readPeriodo = archivoRead.readUTF();
+                            String readInicioSem = archivoRead.readUTF();
+                            String readFinSem = archivoRead.readUTF();
+                            String readSeparador = archivoRead.readUTF();
+
+                            Semestre temp = new Semestre();
+
+                            temp.setId(readID);
+                            temp.setPeriodo(readPeriodo);
+                            temp.setFechaI(readInicioSem);
+                            temp.setFechaF(readFinSem);
+
+                            semestres.add(temp);
+                        }
+                        comboSemestreC.removeAll();
+
+                        
+                        for(int i=0; i<semestres.size(); i++){
+                            comboSemestreC.addItem(semestres.get(i).getPeriodo());
+                            comboPeriodo.addItem(semestres.get(i).getPeriodo());
+                        }
+                        
+                    }
+                    else{
+                        comboSemestreC.removeAll();
+                        comboSemestreC.addItem("No hay semestres agregados.");
+                        comboPeriodo.addItem("No hay semestres agregados.");
+                        
+                    }
+                    //Agregar carreras
+                    if(fileCarrera.length() !=0){
+                        DataInputStream archivoRead;
+
+                        archivoRead = new DataInputStream(new FileInputStream(fileCarrera));
+
+                        while(archivoRead.available() > 0){
+                            int readID = archivoRead.readInt();
+                            String readNombre = archivoRead.readUTF();
+                            String readArea = archivoRead.readUTF();
+                            String readSemestre = archivoRead.readUTF();
+                            String readFechaC = archivoRead.readUTF();
+                            String readSeparador = archivoRead.readUTF();
+
+                            Carrera temp = new Carrera();
+
+                            temp.setId(readID);
+                            temp.setNombre(readNombre);
+                            temp.setArea(readArea);
+                            temp.setSemestre(readSemestre);
+                            temp.setFechaC(readFechaC);
+
+
+                            carreras.add(temp);
+                        }
+                        comboIDCarrera.removeAll();
+                        
+                        for(int i=0; i<carreras.size(); i++){
+                            comboIDCarrera.addItem(carreras.get(i).getNombre());
+                            comboCarreraA.addItem(carreras.get(i).getNombre());
+                        }
+                        
+                    }
+                    else{
+                        comboIDCarrera.removeAll();
+                        comboIDCarrera.addItem("No hay carreras disponibles");
+                        comboCarreraA.addItem("No hay carreras disponibles");
+                    }
+                    //Agregar materias
+                    if(fileMateria.length() != 0){
+                        DataInputStream archivoRead;
+
+                        archivoRead = new DataInputStream(new FileInputStream(fileMateria));
+
+                        while(archivoRead.available() > 0){
+                            int readID = archivoRead.readInt();
+                            String readNombreM = archivoRead.readUTF();
+                            int readCredito = archivoRead.readInt();
+                            String readIdCarrera = archivoRead.readUTF();
+                            String readAcademia = archivoRead.readUTF();
+                            String readSeparador = archivoRead.readUTF();
+
+                            Materia temp = new Materia();
+
+                            temp.setID(readID);
+                            temp.setNombreM(readNombreM);
+                            temp.setCreditos(readCredito);
+                            temp.setIdcarrera(readIdCarrera);
+                            temp.setAcademia(readAcademia);
+
+                            materias.add(temp);
+                        }
+                        
+                        comboIDMateria.removeAll();
+                        comboMateriaM.removeAllItems();
+                        
+                        for(int i=0; i<materias.size(); i++){
+                            comboIDMateria.addItem(materias.get(i).getNombreM());
+                        }
+                        
+                        for(int i=0; i<materias.size(); i++){
+                            comboMateriaM.addItem(materias.get(i).getNombreM());
+                        }
+                        
+                    }
+                    else{
+                        comboIDMateria.removeAll();
+                        comboIDMateria.addItem("No hay materias");
+                        
+                        comboMateriaM.removeAllItems();
+                        comboMateriaM.addItem("No hay materias");
+                    }
+                    //Agregar maestros 
+                    if(fileMaestro.length() != 0){
+                        DataInputStream archivoRead;
+
+                        archivoRead = new DataInputStream(new FileInputStream(fileMaestro));
+
+                        while(archivoRead.available() > 0){
+                            int readID = archivoRead.readInt();
+                            String readNombre = archivoRead.readUTF();
+                            String readGradoA = archivoRead.readUTF();
+                            String readGrupoA = archivoRead.readUTF();
+                            String readDireccion = archivoRead.readUTF();
+                            String readTelefono = archivoRead.readUTF();
+                            String readSeparador = archivoRead.readUTF();
+
+                            Maestros temp = new Maestros();
+
+                            temp.setId(readID);
+                            temp.setNombre(readNombre);
+                            temp.setGradoA(readGradoA);
+                            temp.setGrupoA(readGrupoA);
+                            temp.setDireccion(readDireccion);
+                            temp.setTelefono(readTelefono);
+
+
+                            maestros.add(temp);
+                        }
+                    
+                        comboIDMaestro.removeAll();
+
+                        for(int i=0; i<maestros.size(); i++){
+                            comboIDMaestro.addItem(maestros.get(i).getNombre());
+                        }
+                    
+                    }
+                    else{
+                        comboIDMaestro.removeAllItems();
+                        comboIDMaestro.addItem("No hay maestros");
+                    }
+                    
+                    //Agregar grupos
+                    if(fileGrupo.length() != 0){
+                        DataInputStream archivoRead;
+                    
+                        archivoRead = new DataInputStream(new FileInputStream(fileGrupo));
+
+                        while(archivoRead.available() > 0){
+                            int readID = archivoRead.readInt();
+                            String readNombre = archivoRead.readUTF();
+                            String readMaestro = archivoRead.readUTF();
+                            String readMateria = archivoRead.readUTF();
+                            String readSeparador = archivoRead.readUTF();
+
+                            Grupos temp = new Grupos();
+
+                            temp.setId(readID);
+                            temp.setNombre(readNombre);
+                            temp.setIdMaestro(readMaestro);
+                            temp.setIdMateria(readMateria);
+
+                            grupos.add(temp);
+                        }
+                        comboGrupo.removeAllItems();
+                        comboIDGrupoH.removeAllItems();
+                    
+                        for(int i =0; i<grupos.size(); i++){
+                            comboGrupo.addItem(grupos.get(i).getNombre());
+                        }
+                        
+                        for(int i =0; i<grupos.size(); i++){
+                            comboIDGrupoH.addItem(grupos.get(i).getNombre());
+                        }
+                    
+                    }
+                    else{
+                        comboGrupo.removeAllItems();
+                        comboGrupo.addItem("No hay grupos");
+                        
+                        comboIDGrupoH.removeAllItems();
+                        comboIDGrupoH.addItem("No hay grupos");
+                    }
+                    
                     break;
                 default:
                     break;
@@ -338,6 +591,11 @@ public class panelPrincipal extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jTextField3 = new javax.swing.JTextField();
+        txtNumeroH = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        comboHoraF = new javax.swing.JComboBox<>();
+        jLabel26 = new javax.swing.JLabel();
         panelTabs = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
@@ -364,26 +622,6 @@ public class panelPrincipal extends javax.swing.JFrame {
         btnGuardarCambios = new javax.swing.JButton();
         btnCancelUsEdit = new javax.swing.JButton();
         lblID = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        btnGuardarMateria = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        txtCreditos = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        comboIDCarrera = new javax.swing.JComboBox<>();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        comboAcademia = new javax.swing.JComboBox<>();
-        EditarM = new javax.swing.JButton();
-        EliminarM = new javax.swing.JButton();
-        jLabel38 = new javax.swing.JLabel();
-        txtNombreMa = new javax.swing.JTextField();
-        lblMateriaID = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
-        btnGuardarCambiosMat = new javax.swing.JButton();
-        btnCancelarEditMat = new javax.swing.JButton();
-        txtBuscarMat = new javax.swing.JTextField();
-        btnBuscarMat = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -392,7 +630,7 @@ public class panelPrincipal extends javax.swing.JFrame {
         btnGuardarS = new javax.swing.JButton();
         btnEditarS = new javax.swing.JButton();
         btnEliminarS = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnBuscarS = new javax.swing.JButton();
         txtBuscarS = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         comboPeriodoS = new javax.swing.JComboBox<>();
@@ -400,8 +638,8 @@ public class panelPrincipal extends javax.swing.JFrame {
         chooserFinSem = new com.toedter.calendar.JDateChooser();
         lblSemID = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        btnCambiosSem = new javax.swing.JButton();
-        btnCancelarEdicion = new javax.swing.JButton();
+        btnCambiosS = new javax.swing.JButton();
+        btnCancelarEdicionS = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
@@ -424,6 +662,8 @@ public class panelPrincipal extends javax.swing.JFrame {
         txtBuscarMa = new javax.swing.JTextField();
         btnBuscarMa = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        comboMateriaM = new javax.swing.JComboBox<>();
+        jLabel41 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
@@ -444,20 +684,17 @@ public class panelPrincipal extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        txtNumeroH = new javax.swing.JTextField();
         txtBuscarH = new javax.swing.JTextField();
         btnBuscarH = new javax.swing.JButton();
         comboHoraI = new javax.swing.JComboBox<>();
-        comboHoraF = new javax.swing.JComboBox<>();
         comboIDGrupoH = new javax.swing.JComboBox<>();
         btnGuardarH = new javax.swing.JButton();
         btnEliminarH = new javax.swing.JButton();
         btnEditarH = new javax.swing.JButton();
+        jLabel42 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
         panelAlumnos = new javax.swing.JPanel();
         txtNombreA = new javax.swing.JTextField();
         txtAP = new javax.swing.JTextField();
@@ -516,6 +753,26 @@ public class panelPrincipal extends javax.swing.JFrame {
         btnGuardarCambiosC = new javax.swing.JButton();
         btnCancelarEditC = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        btnGuardarMateria = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        txtCreditos = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        comboIDCarrera = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        comboAcademia = new javax.swing.JComboBox<>();
+        EditarM = new javax.swing.JButton();
+        EliminarM = new javax.swing.JButton();
+        jLabel38 = new javax.swing.JLabel();
+        txtNombreMa = new javax.swing.JTextField();
+        lblMateriaID = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
+        btnGuardarCambiosMat = new javax.swing.JButton();
+        btnCancelarEditMat = new javax.swing.JButton();
+        txtBuscarMat = new javax.swing.JTextField();
+        btnBuscarMat = new javax.swing.JButton();
 
         jTextField8.setText("jTextField8");
 
@@ -538,6 +795,23 @@ public class panelPrincipal extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jTextField3.setText("jTextField3");
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel24.setText("Número de horas");
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel23.setText("ID");
+
+        comboHoraF.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        comboHoraF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "07:55", "08:55", "09:55", "10:55", "11:55", "12:55", "13:55", "14:55", "15:55", "16:55", "17:55", "18:55", "19:55", "20:55", " " }));
+        comboHoraF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboHoraFActionPerformed(evt);
+            }
+        });
+
+        jLabel26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel26.setText("Hora Final");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -732,215 +1006,10 @@ public class panelPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 149, Short.MAX_VALUE))
+                .addGap(0, 247, Short.MAX_VALUE))
         );
 
         panelTabs.addTab("Usuario", jPanel1);
-
-        btnGuardarMateria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnGuardarMateria.setText("Guardar");
-        btnGuardarMateria.setActionCommand("Guardad");
-        btnGuardarMateria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarMateriaActionPerformed(evt);
-            }
-        });
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("ID");
-
-        txtCreditos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCreditosActionPerformed(evt);
-            }
-        });
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("Nombre de Materia:");
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("Creditos:");
-
-        comboIDCarrera.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        comboIDCarrera.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboIDCarreraActionPerformed(evt);
-            }
-        });
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setText("ID Carrera:");
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel13.setText("Academia:");
-
-        comboAcademia.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        comboAcademia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ciencias Básicas", "Ingenierías", "Electrónica y Computación" }));
-        comboAcademia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboAcademiaActionPerformed(evt);
-            }
-        });
-
-        EditarM.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        EditarM.setText("Editar");
-        EditarM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditarMActionPerformed(evt);
-            }
-        });
-
-        EliminarM.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        EliminarM.setText("Eliminar");
-        EliminarM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EliminarMActionPerformed(evt);
-            }
-        });
-
-        jLabel38.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
-        jLabel38.setText("Materias");
-
-        txtNombreMa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreMaActionPerformed(evt);
-            }
-        });
-
-        lblMateriaID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblMateriaID.setText("0");
-
-        jButton7.setText("Salir");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        btnGuardarCambiosMat.setText("Guardar Cambios");
-        btnGuardarCambiosMat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarCambiosMatActionPerformed(evt);
-            }
-        });
-
-        btnCancelarEditMat.setText("Cancelar Edicion");
-        btnCancelarEditMat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarEditMatActionPerformed(evt);
-            }
-        });
-
-        txtBuscarMat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarMatActionPerformed(evt);
-            }
-        });
-
-        btnBuscarMat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnBuscarMat.setText("Buscar");
-        btnBuscarMat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarMatActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton7)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addGap(125, 125, 125)
-                                    .addComponent(jLabel38))
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(lblMateriaID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(140, 140, 140)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(comboAcademia, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel13)))))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel12)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(comboIDCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addGap(40, 40, 40)
-                                    .addComponent(btnGuardarMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(EditarM, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(EliminarM, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtNombreMa, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGap(117, 117, 117)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(txtBuscarMat, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnBuscarMat))
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(btnGuardarCambiosMat)
-                                    .addGap(27, 27, 27)
-                                    .addComponent(btnCancelarEditMat))))))
-                .addContainerGap(227, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(jLabel38)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13)
-                            .addComponent(lblMateriaID))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboAcademia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNombreMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtBuscarMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscarMat))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel11))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(comboIDCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardarMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EditarM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EliminarM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarCambiosMat)
-                    .addComponent(btnCancelarEditMat))
-                .addGap(66, 66, 66)
-                .addComponent(jButton7)
-                .addContainerGap())
-        );
-
-        panelTabs.addTab("Materias", jPanel3);
 
         jLabel14.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         jLabel14.setText("Semestre");
@@ -978,10 +1047,11 @@ public class panelPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("jButton4");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarS.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnBuscarS.setText("Buscar");
+        btnBuscarS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnBuscarSActionPerformed(evt);
             }
         });
 
@@ -1006,14 +1076,19 @@ public class panelPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnCambiosSem.setText("Guardar Cambios");
-        btnCambiosSem.addActionListener(new java.awt.event.ActionListener() {
+        btnCambiosS.setText("Guardar Cambios");
+        btnCambiosS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCambiosSemActionPerformed(evt);
+                btnCambiosSActionPerformed(evt);
             }
         });
 
-        btnCancelarEdicion.setText("Cancelar Edicion");
+        btnCancelarEdicionS.setText("Cancelar Edicion");
+        btnCancelarEdicionS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarEdicionSActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -1035,34 +1110,32 @@ public class panelPrincipal extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnEliminarS)
                                 .addGap(131, 131, 131)
-                                .addComponent(btnCambiosSem)
-                                .addGap(123, 408, Short.MAX_VALUE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(comboPeriodoS, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(chooserFinSem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                                        .addComponent(chooserInicioSem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(btnCambiosS))
+                            .addComponent(comboPeriodoS, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(chooserFinSem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                                .addComponent(chooserInicioSem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblSemID, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 360, Short.MAX_VALUE)
-                        .addComponent(txtBuscarS, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCancelarEdicion)
-                            .addComponent(jButton4))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton1))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblSemID, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 360, Short.MAX_VALUE)
+                                .addComponent(txtBuscarS, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnCancelarEdicionS)
+                                    .addComponent(btnBuscarS))))
                         .addGap(258, 258, 258))))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(193, 193, 193)
                 .addComponent(jLabel14)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1072,7 +1145,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jButton4)
+                    .addComponent(btnBuscarS)
                     .addComponent(txtBuscarS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSemID))
                 .addGap(18, 18, 18)
@@ -1094,11 +1167,11 @@ public class panelPrincipal extends javax.swing.JFrame {
                     .addComponent(btnGuardarS)
                     .addComponent(btnEditarS)
                     .addComponent(btnEliminarS)
-                    .addComponent(btnCambiosSem)
-                    .addComponent(btnCancelarEdicion))
-                .addGap(18, 18, 18)
+                    .addComponent(btnCambiosS)
+                    .addComponent(btnCancelarEdicionS))
+                .addGap(56, 56, 56)
                 .addComponent(jButton1)
-                .addContainerGap(413, Short.MAX_VALUE))
+                .addContainerGap(373, Short.MAX_VALUE))
         );
 
         panelTabs.addTab("Semestre", jPanel5);
@@ -1198,6 +1271,9 @@ public class panelPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel41.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel41.setText("Materia");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -1238,15 +1314,24 @@ public class panelPrincipal extends javax.swing.JFrame {
                                     .addComponent(txtTelefonoM))))
                         .addGroup(jPanel6Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(btnGuardarMa)
-                            .addGap(33, 33, 33)
-                            .addComponent(btnEditarMa)
-                            .addGap(34, 34, 34)
-                            .addComponent(btnEliminarMa)
-                            .addGap(169, 169, 169)
-                            .addComponent(btnGuardarCambiosMa)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnCancelarEditMa))))
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                    .addComponent(btnGuardarMa)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnEditarMa))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                    .addComponent(jLabel41)
+                                    .addGap(45, 45, 45)
+                                    .addComponent(comboMateriaM, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel6Layout.createSequentialGroup()
+                                    .addGap(279, 279, 279)
+                                    .addComponent(btnGuardarCambiosMa)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnCancelarEditMa))
+                                .addGroup(jPanel6Layout.createSequentialGroup()
+                                    .addGap(33, 33, 33)
+                                    .addComponent(btnEliminarMa))))))
                 .addContainerGap(219, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -1283,14 +1368,23 @@ public class panelPrincipal extends javax.swing.JFrame {
                     .addComponent(comboGradoAcad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTelefonoM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnGuardarCambiosMa)
+                            .addComponent(btnCancelarEditMa)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel41)
+                            .addComponent(comboMateriaM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(22, 22, 22)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardarMa)
                     .addComponent(btnEditarMa)
-                    .addComponent(btnEliminarMa)
-                    .addComponent(btnGuardarCambiosMa)
-                    .addComponent(btnCancelarEditMa))
-                .addGap(48, 48, 48)
+                    .addComponent(btnEliminarMa))
+                .addGap(1, 1, 1)
                 .addComponent(jButton3)
                 .addContainerGap(354, Short.MAX_VALUE))
         );
@@ -1318,8 +1412,19 @@ public class panelPrincipal extends javax.swing.JFrame {
             }
         });
 
+        comboIDMaestro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboIDMaestroActionPerformed(evt);
+            }
+        });
+
         btnBuscarG.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnBuscarG.setText("Buscar");
+        btnBuscarG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarGActionPerformed(evt);
+            }
+        });
 
         btnGuardarG.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnGuardarG.setText("Guardar");
@@ -1464,18 +1569,9 @@ public class panelPrincipal extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         jLabel22.setText("Horario");
 
-        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel23.setText("ID");
-
-        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel24.setText("Número de horas");
-
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel25.setText("Hora Inicio");
         jLabel25.setToolTipText("");
-
-        jLabel26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel26.setText("Hora Final");
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel27.setText("ID Grupo");
@@ -1484,17 +1580,13 @@ public class panelPrincipal extends javax.swing.JFrame {
         btnBuscarH.setText("Buscar");
 
         comboHoraI.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        comboHoraI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", " " }));
+        comboHoraI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "07:00-08:00", "08:00-09:00", "09:00-10:00", "10:00-11:00", "11:00-12:00", "12:00-13:00", "13:00-14:00", " ", " " }));
 
-        comboHoraF.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        comboHoraF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "07:55", "08:55", "09:55", "10:55", "11:55", "12:55", "13:55", "14:55", "15:55", "16:55", "17:55", "18:55", "19:55", "20:55", " " }));
-        comboHoraF.addActionListener(new java.awt.event.ActionListener() {
+        comboIDGrupoH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboHoraFActionPerformed(evt);
+                comboIDGrupoHActionPerformed(evt);
             }
         });
-
-        comboIDGrupoH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnGuardarH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnGuardarH.setText("Guardar");
@@ -1505,6 +1597,11 @@ public class panelPrincipal extends javax.swing.JFrame {
         btnEditarH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEditarH.setText("Editar");
 
+        jLabel42.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel42.setText("Día");
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes" }));
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -1512,39 +1609,31 @@ public class panelPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(comboIDGrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel26)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(comboHoraF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel25)
-                                .addGap(18, 18, 18)
-                                .addComponent(comboHoraI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(btnGuardarH)
+                        .addGap(32, 32, 32)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtNumeroH, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel23)
-                                    .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(138, 138, 138))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                                .addComponent(btnGuardarH)
-                                .addGap(32, 32, 32)
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel22)
-                                    .addComponent(btnEditarH))
-                                .addGap(22, 22, 22)))
+                            .addComponent(jLabel22)
+                            .addComponent(btnEditarH))
+                        .addGap(22, 22, 22)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addComponent(txtBuscarH, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBuscarH))
-                            .addComponent(btnEliminarH))))
+                            .addComponent(btnEliminarH)))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel25)
+                                .addComponent(jLabel27))
+                            .addComponent(jLabel42))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboHoraI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboIDGrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(485, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -1553,34 +1642,27 @@ public class panelPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel22)
                 .addGap(37, 37, 37)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel27)
-                        .addComponent(comboIDGrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel23)
-                            .addComponent(txtBuscarH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscarH))
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel24)
-                        .addGap(12, 12, 12)
-                        .addComponent(txtNumeroH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel25)
-                            .addComponent(comboHoraI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel26)
-                            .addComponent(comboHoraF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)))
-                .addGap(48, 48, 48)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBuscarH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarH))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(comboHoraI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel42)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboIDGrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27))
+                .addGap(104, 104, 104)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardarH)
                     .addComponent(btnEliminarH)
                     .addComponent(btnEditarH))
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addContainerGap(343, Short.MAX_VALUE))
         );
 
         panelTabs.addTab("Horarios", jPanel8);
@@ -1628,6 +1710,11 @@ public class panelPrincipal extends javax.swing.JFrame {
 
         btnBuscarA.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnBuscarA.setText("Buscar");
+        btnBuscarA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarAActionPerformed(evt);
+            }
+        });
 
         lblFNacimiento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblFNacimiento.setText("F.Nacimiento");
@@ -2060,6 +2147,211 @@ public class panelPrincipal extends javax.swing.JFrame {
 
         panelTabs.addTab("Carrera", jPanel4);
 
+        btnGuardarMateria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnGuardarMateria.setText("Guardar");
+        btnGuardarMateria.setActionCommand("Guardad");
+        btnGuardarMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarMateriaActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("ID");
+
+        txtCreditos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCreditosActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("Nombre de Materia:");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Creditos:");
+
+        comboIDCarrera.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        comboIDCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboIDCarreraActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("ID Carrera:");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setText("Academia:");
+
+        comboAcademia.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        comboAcademia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ciencias Básicas", "Ingenierías", "Electrónica y Computación" }));
+        comboAcademia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboAcademiaActionPerformed(evt);
+            }
+        });
+
+        EditarM.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        EditarM.setText("Editar");
+        EditarM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarMActionPerformed(evt);
+            }
+        });
+
+        EliminarM.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        EliminarM.setText("Eliminar");
+        EliminarM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarMActionPerformed(evt);
+            }
+        });
+
+        jLabel38.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        jLabel38.setText("Materias");
+
+        txtNombreMa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreMaActionPerformed(evt);
+            }
+        });
+
+        lblMateriaID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblMateriaID.setText("0");
+
+        jButton7.setText("Salir");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        btnGuardarCambiosMat.setText("Guardar Cambios");
+        btnGuardarCambiosMat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarCambiosMatActionPerformed(evt);
+            }
+        });
+
+        btnCancelarEditMat.setText("Cancelar Edicion");
+        btnCancelarEditMat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarEditMatActionPerformed(evt);
+            }
+        });
+
+        txtBuscarMat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarMatActionPerformed(evt);
+            }
+        });
+
+        btnBuscarMat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnBuscarMat.setText("Buscar");
+        btnBuscarMat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarMatActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton7)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGap(125, 125, 125)
+                                    .addComponent(jLabel38))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblMateriaID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(140, 140, 140)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(comboAcademia, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel13)))))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jLabel12)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(comboIDCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGap(40, 40, 40)
+                                    .addComponent(btnGuardarMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(EditarM, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(EliminarM, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtNombreMa, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGap(117, 117, 117)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(txtBuscarMat, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnBuscarMat))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(btnGuardarCambiosMat)
+                                    .addGap(27, 27, 27)
+                                    .addComponent(btnCancelarEditMat))))))
+                .addContainerGap(227, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addComponent(jLabel38)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13)
+                            .addComponent(lblMateriaID))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboAcademia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNombreMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBuscarMat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscarMat))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCreditos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel11))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(comboIDCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardarMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EditarM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EliminarM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardarCambiosMat)
+                    .addComponent(btnCancelarEditMat))
+                .addGap(66, 66, 66)
+                .addComponent(jButton7)
+                .addContainerGap())
+        );
+
+        panelTabs.addTab("Materias", jPanel3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -2127,7 +2419,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                     }
                     
                 }
-                
+                JOptionPane.showMessageDialog(this, "No se encontro la carrera");
             } catch (FileNotFoundException ex) {
                 //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
@@ -2378,7 +2670,7 @@ public class panelPrincipal extends javax.swing.JFrame {
             
         }
         else{
-            JOptionPane.showMessageDialog(this, "No hay Materias agregados.");
+            JOptionPane.showMessageDialog(this, "No hay Materias agregadas.");
         }
 
     }//GEN-LAST:event_EditarMActionPerformed
@@ -2743,6 +3035,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                 maestro.setNombre(txtNombreMaestro.getText());
                 maestro.setGradoA(comboGradoAcad.getSelectedItem().toString());
                 maestro.setGrupoA(comboGrupoAcad.getSelectedItem().toString());
+                maestro.setGrupoA(comboMateriaM.getSelectedItem().toString());
                 maestro.setDireccion(txtDireccionMa.getText());
                 maestro.setTelefono(txtTelefonoM.getText());
                 
@@ -2757,6 +3050,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                         String readNombre = archivoRead.readUTF();
                         String readGradoA = archivoRead.readUTF();
                         String readGrupoA = archivoRead.readUTF();
+                        String readMateria = archivoRead.readUTF();
                         String readDireccion = archivoRead.readUTF();
                         String readTelefono = archivoRead.readUTF();
                         String readSeparador = archivoRead.readUTF();
@@ -2767,6 +3061,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                         temp.setNombre(readNombre);
                         temp.setGradoA(readGradoA);
                         temp.setGrupoA(readGrupoA);
+                        temp.setMateria(readMateria);
                         temp.setDireccion(readDireccion);
                         temp.setTelefono(readTelefono);
 
@@ -2794,6 +3089,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                     archivoWrite.writeUTF(maestros.get(i).getNombre());
                     archivoWrite.writeUTF(maestros.get(i).getGradoA());
                     archivoWrite.writeUTF(maestros.get(i).getGrupoA());
+                    archivoWrite.writeUTF(maestros.get(i).getMateria());
                     archivoWrite.writeUTF(maestros.get(i).getDireccion());
                     archivoWrite.writeUTF(maestros.get(i).getTelefono());
                     archivoWrite.writeUTF("#");
@@ -2921,9 +3217,61 @@ public class panelPrincipal extends javax.swing.JFrame {
         btnCancelar.setVisible(true);
     }//GEN-LAST:event_btnCancelUsEditActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void btnBuscarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarSActionPerformed
+        String patronSemestre = "^[0-9]{4}[A-Z]{1}$";
+        Pattern patToCheckSemestre = Pattern.compile(patronSemestre);
+        
+        Matcher regexMatcherSemestre = patToCheckSemestre.matcher(txtBuscarS.getText());
+        
+        if(regexMatcherSemestre.matches()){
+            semestres.clear();
+            if(fileSemestre.length() !=0){
+                String toSearchSemestre = txtBuscarS.getText();
+                try {
+                    DataInputStream archivoRead;
+                    
+                    archivoRead = new DataInputStream(new FileInputStream(fileSemestre));
+                    
+                    while(archivoRead.available() > 0){
+                        int readID = archivoRead.readInt();
+                        String readPeriodo = archivoRead.readUTF();
+                        String readInicioSem = archivoRead.readUTF();
+                        String readFinSem = archivoRead.readUTF();
+                        String readSeparador = archivoRead.readUTF();
+                        
+                        Semestre temp = new Semestre();
+                        
+                        temp.setId(readID);
+                        temp.setPeriodo(readPeriodo);
+                        temp.setFechaI(readInicioSem);
+                        temp.setFechaF(readFinSem);
+                        
+                        semestres.add(temp);
+                    }  
+                    for(int i =0; i<semestres.size(); i++){
+                        if(toSearchSemestre.equals(semestres.get(i).getPeriodo())){
+                            JOptionPane.showMessageDialog(this,"ID: " +Integer.toString(semestres.get(i).getId()) + "\nPeriodo: "+semestres.get(i).getPeriodo()+ "\nFecha Inicio: "+semestres.get(i).getFechaI()+"\nFecha Final: " + semestres.get(i).getFechaF(), "Semestre Encontrado!",JOptionPane.INFORMATION_MESSAGE);
+                            txtBuscarS.setText("");
+                            return;
+                        }
+                    }
+                    JOptionPane.showMessageDialog(this, "No se encontro el Semestre.");
+                } catch (FileNotFoundException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "No hay semestres guardados.");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"No cuenta con el formato correcto." );
+        }
+        txtBuscarS.setText("");
+    }//GEN-LAST:event_btnBuscarSActionPerformed
 
     private void btnGuardarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarSActionPerformed
         semestres.clear();
@@ -3111,9 +3459,81 @@ public class panelPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnEliminarSActionPerformed
 
-    private void btnCambiosSemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiosSemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCambiosSemActionPerformed
+    private void btnCambiosSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiosSActionPerformed
+        
+        Date toCheckSemestre = chooserInicioSem.getDate();
+        
+        if(toCheckSemestre == null){
+            JOptionPane.showMessageDialog(this, "No se selecciono una fecha.");
+            return;
+        }
+        
+        Date toCheckSemestre2 = chooserFinSem.getDate();
+        
+        if(toCheckSemestre2 == null){
+            JOptionPane.showMessageDialog(this, "No se selecciono una fecha.");
+            return;
+        }
+        
+            SimpleDateFormat fechaFormatoE = new SimpleDateFormat("dd/MM/yyyy");
+            String fechaSemestre = fechaFormatoE.format(chooserInicioSem.getDate());
+            
+            SimpleDateFormat fechaFormatoE2 = new SimpleDateFormat("dd/MM/yyyy");
+            String fechaSemestre2 = fechaFormatoE2.format(chooserFinSem.getDate());
+            
+            Semestre aux = new Semestre();
+            
+            aux.setPeriodo(comboPeriodoS.getSelectedItem().toString());
+            aux.setFechaI(fechaSemestre);
+            aux.setFechaF(fechaSemestre2);
+            
+            if(toEdit == -1){
+                JOptionPane.showMessageDialog(this, "No se encuentra guardado.");
+            }
+            else{
+                try {
+                    semestres.remove(toEdit);
+                    semestres.add(toEdit, aux);
+                    
+                    fileSemestre.delete();
+                    
+                    fileSemestre.createNewFile();
+                    
+                    DataOutputStream archivoWrite;
+                    
+                    archivoWrite = new DataOutputStream(new FileOutputStream(fileSemestre));
+                    
+                    for(int i=0; i<semestres.size() ; i++){
+                        archivoWrite.writeInt(semestres.get(i).getId());
+                        archivoWrite.writeUTF(semestres.get(i).getPeriodo());
+                        archivoWrite.writeUTF(semestres.get(i).getFechaI());
+                        archivoWrite.writeUTF(semestres.get(i).getFechaF());
+
+                        archivoWrite.writeUTF("#");
+                
+                    }
+                    
+                    archivoWrite.close();
+                    JOptionPane.showMessageDialog(this, "El semestre fue actualizado.");
+                    toEdit = -1;
+                } catch (IOException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+            
+        lblSemID.setText("0");
+        
+        btnGuardarS.setVisible(true);
+        btnEditarS.setVisible(true);
+        btnEliminarS.setVisible(true);
+        btnCambiosS.setVisible(false);
+        btnCancelarEdicionS.setVisible(false);
+        btnBuscarS.setVisible(true);
+        txtBuscarS.setVisible(true);
+        
+        semestres.clear();
+    }//GEN-LAST:event_btnCambiosSActionPerformed
 
     private void btnGuardarGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarGActionPerformed
         grupos.clear();
@@ -3189,7 +3609,10 @@ public class panelPrincipal extends javax.swing.JFrame {
                 lblIDGrupo.setText(String.valueOf(grupo.getId()));
 
                 grupos.clear();
+                
                 comboGrupo.addItem(grupo.getNombre());
+                comboIDGrupoH.addItem(grupo.getNombre());
+                
                 JOptionPane.showMessageDialog(this, "El grupo fue agregado exitosamente.");
 
 
@@ -3269,18 +3692,18 @@ public class panelPrincipal extends javax.swing.JFrame {
                     archivoWrite = new DataOutputStream(new FileOutputStream(fileAlumno));
 
                     for(int j=0; j<alumnos.size(); j++){
-                        archivoWrite.writeInt(alumnos.get(i).getId());
-                        archivoWrite.writeUTF(alumnos.get(i).getNombre());
-                        archivoWrite.writeUTF(alumnos.get(i).getAp());
-                        archivoWrite.writeUTF(alumnos.get(i).getAm());
-                        archivoWrite.writeUTF(alumnos.get(i).getDireccion());
-                        archivoWrite.writeUTF(alumnos.get(i).getTelefono());
-                        archivoWrite.writeUTF(alumnos.get(i).getEmail());
-                        archivoWrite.writeUTF(alumnos.get(i).getCiudad());
-                        archivoWrite.writeUTF(alumnos.get(i).getCarrera());
-                        archivoWrite.writeUTF(alumnos.get(i).getSemestre());
-                        archivoWrite.writeUTF(alumnos.get(i).getGrupo());
-                        archivoWrite.writeUTF(alumnos.get(i).getPeriodo());
+                        archivoWrite.writeInt(alumnos.get(j).getId());
+                        archivoWrite.writeUTF(alumnos.get(j).getNombre());
+                        archivoWrite.writeUTF(alumnos.get(j).getAp());
+                        archivoWrite.writeUTF(alumnos.get(j).getAm());
+                        archivoWrite.writeUTF(alumnos.get(j).getDireccion());
+                        archivoWrite.writeUTF(alumnos.get(j).getTelefono());
+                        archivoWrite.writeUTF(alumnos.get(j).getEmail());
+                        archivoWrite.writeUTF(alumnos.get(j).getCiudad());
+                        archivoWrite.writeUTF(alumnos.get(j).getCarrera());
+                        archivoWrite.writeUTF(alumnos.get(j).getSemestre());
+                        archivoWrite.writeUTF(alumnos.get(j).getGrupo());
+                        archivoWrite.writeUTF(alumnos.get(j).getPeriodo());
                         archivoWrite.writeUTF("#");
 
                     }
@@ -3529,6 +3952,8 @@ public class panelPrincipal extends javax.swing.JFrame {
     private void btnEditarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarSActionPerformed
         semestres.clear();
         
+        String toEditSemestre = comboPeriodoS.getSelectedItem().toString();
+        
         if(fileSemestre.length() !=0){
             try {
                 DataInputStream archivoRead;
@@ -3550,26 +3975,25 @@ public class panelPrincipal extends javax.swing.JFrame {
                         temp.setFechaF(readFinSem);
                         
                         semestres.add(temp);
-                }
-                /*
+                 }
+                
                 for(int i=0; i<semestres.size(); i++){
-                    if(toEditSemestre.equals(semestres.get(i).getNombre())){
-                        btnGuardarC.setVisible(false);
-                        btnEditarC.setVisible(false);
-                        btnEliminarC.setVisible(false);
-                        btnGuardarCambiosC.setVisible(true);
-                        btnCancelarEditC.setVisible(true);
-                        btnBuscarC.setVisible(false);
-                        txtBuscarC.setVisible(false);
+                    if(toEditSemestre.equals(semestres.get(i).getPeriodo())){
+                        btnGuardarS.setVisible(false);
+                        btnEditarS.setVisible(false);
+                        btnEliminarS.setVisible(false);
+                        btnCambiosS.setVisible(true);
+                        btnCancelarEdicionS.setVisible(true);
+                        btnBuscarS.setVisible(false);
+                        txtBuscarS.setVisible(false);
                         
-                        
-                        lblIDCarreraNum.setText(Integer.toString(carreras.get(i).getId()));
+                        lblSemID.setText(Integer.toString(semestres.get(i).getId()));
                         toEdit = i;
                         return;
                     }
                     
                 }
-                */
+                
             } catch (FileNotFoundException ex) {
                 //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
@@ -3578,7 +4002,7 @@ public class panelPrincipal extends javax.swing.JFrame {
             
         }
         else{
-            JOptionPane.showMessageDialog(this, "No hay carreras agregadas.");
+            JOptionPane.showMessageDialog(this, "No hay semestres agregados.");
         }
     }//GEN-LAST:event_btnEditarSActionPerformed
 
@@ -3933,7 +4357,64 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarMaActionPerformed
 
     private void btnBuscarMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMaActionPerformed
-        // TODO add your handling code here:
+        String patronMaestro = "^[a-zA-Z\\s]{5,30}$";
+        Pattern patToCheckMaestro = Pattern.compile(patronMaestro);
+        
+        Matcher regexMatcherMaestro = patToCheckMaestro.matcher(txtBuscarMa.getText());
+        
+        if(regexMatcherMaestro.matches()){
+            maestros.clear();
+            if(fileMaestro.length() !=0){
+                String toSearchMaestro = txtBuscarMa.getText();
+                try {
+                    DataInputStream archivoRead;
+                    
+                    archivoRead = new DataInputStream(new FileInputStream(fileMaestro));
+                    
+                    while(archivoRead.available() > 0){
+                        int readID = archivoRead.readInt();
+                        String readNombre = archivoRead.readUTF();
+                        String readGradoA = archivoRead.readUTF();
+                        String readGrupoA = archivoRead.readUTF();
+                        String readDireccion = archivoRead.readUTF();
+                        String readTelefono = archivoRead.readUTF();
+                        String readSeparador = archivoRead.readUTF();
+
+                        Maestros temp = new Maestros();
+
+                        temp.setId(readID);
+                        temp.setNombre(readNombre);
+                        temp.setGradoA(readGradoA);
+                        temp.setGrupoA(readGrupoA);
+                        temp.setDireccion(readDireccion);
+                        temp.setTelefono(readTelefono);
+
+
+                        maestros.add(temp);
+                    } 
+                    for(int i =0; i<maestros.size(); i++){
+                        if(toSearchMaestro.equals(maestros.get(i).getNombre())){
+                            JOptionPane.showMessageDialog(this,"ID: " +Integer.toString(maestros.get(i).getId()) + "\nNombre: "+maestros.get(i).getNombre() + "\nGrado Academico: "+maestros.get(i).getGradoA()+"\nGrupo Academico: " + maestros.get(i).getGrupoA() + "\nMateria: " + maestros.get(i).getMateria()+ "\nDireccion: " + maestros.get(i).getDireccion()+ "\nTelefono: " + maestros.get(i).getTelefono(), "Maestro Encontrado!",JOptionPane.INFORMATION_MESSAGE);
+                            txtBuscarMa.setText("");
+                            return;
+                        }
+                    }
+                    JOptionPane.showMessageDialog(this, "No se encontro la carrera.");
+                } catch (FileNotFoundException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "No hay maestros guardados.");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"No cuenta con el formato correcto." );
+        }
+        txtBuscarMa.setText("");
     }//GEN-LAST:event_btnBuscarMaActionPerformed
 
     private void btnEliminarMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarMaActionPerformed
@@ -4291,6 +4772,11 @@ public class panelPrincipal extends javax.swing.JFrame {
                     }
                     
                     archivoWrite.close();
+                    comboIDGrupoH.removeAllItems();
+                    for(int j=0; j<grupos.size(); j++){
+                        comboIDGrupoH.addItem(grupos.get(i).getNombre());
+                        
+                    }
                     JOptionPane.showMessageDialog(this, "El grupo ha sido eliminado exitosamente.");
                     grupos.clear();
                 }
@@ -4428,7 +4914,69 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarMatActionPerformed
 
     private void btnBuscarMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMatActionPerformed
-        // TODO add your handling code here:
+        String patronMateria = "^[a-zA-Z\\s]{5,30}$";
+        Pattern patToCheckMateria = Pattern.compile(patronMateria);
+        
+        Matcher regexMatcherMateria = patToCheckMateria.matcher(txtBuscarMat.getText());
+        
+        
+        if(regexMatcherMateria.matches()){
+            materias.clear();
+            if(fileMateria.length() !=0){
+                String toBusMaterias = txtBuscarMat.getText();
+                try {
+                    DataInputStream archivoRead;
+
+                    archivoRead = new DataInputStream(new FileInputStream(fileMateria));
+
+                    while(archivoRead.available() > 0){
+                            int readID = archivoRead.readInt();
+                            String readNombreM = archivoRead.readUTF();
+                            int readCredito = archivoRead.readInt();
+                            String readIdCarrera = archivoRead.readUTF();
+                            String readAcademia = archivoRead.readUTF();
+                            String readSeparador = archivoRead.readUTF();
+
+                            Materia temp = new Materia();
+
+                            temp.setID(readID);
+                            temp.setNombreM(readNombreM);
+                            temp.setCreditos(readCredito);
+                            temp.setIdcarrera(readIdCarrera);
+                            temp.setAcademia(readAcademia);
+
+                            materias.add(temp);
+                    }
+
+                    for(int i=0; i<materias.size(); i++){
+                        if(toBusMaterias.equals(materias.get(i).getNombreM())){
+                            JOptionPane.showMessageDialog(this,"ID: "+Integer.toString(materias.get(i).getID())+"\nNombre: "+materias.get(i).getNombreM()+"\nCreditos: "+materias.get(i).getCreditos()+"\nAcademia: "+(materias.get(i).getAcademia())+"\nID Carrera: "+materias.get(i).getIdcarrera());
+                            txtBuscarMat.setText("");
+
+                            return;
+                        }
+
+
+                    }
+                        JOptionPane.showMessageDialog(this, "No se encontro la materia.");
+                } catch (FileNotFoundException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "No hay Materias agregadas.");
+            }
+        
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"No cuenta con el formato correcto." );
+        }
+        txtBuscarMat.setText("");
+        
     }//GEN-LAST:event_btnBuscarMatActionPerformed
 
     private void btnGuardarCambiosAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCambiosAActionPerformed
@@ -4580,6 +5128,160 @@ public class panelPrincipal extends javax.swing.JFrame {
         carreras.clear();
     }//GEN-LAST:event_btnCancelarEditAActionPerformed
 
+    private void btnCancelarEdicionSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEdicionSActionPerformed
+        lblSemID.setText("0");
+        
+        btnGuardarS.setVisible(true);
+        btnEditarS.setVisible(true);
+        btnEliminarS.setVisible(true);
+        btnCambiosS.setVisible(false);
+        btnCancelarEdicionS.setVisible(false);
+        btnBuscarS.setVisible(true);
+        txtBuscarS.setVisible(true);
+        
+        semestres.clear();
+    }//GEN-LAST:event_btnCancelarEdicionSActionPerformed
+
+    private void comboIDMaestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboIDMaestroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboIDMaestroActionPerformed
+
+    private void comboIDGrupoHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboIDGrupoHActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboIDGrupoHActionPerformed
+
+    private void btnBuscarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAActionPerformed
+        String patronAlumnos = "^[a-zA-Z\\s]{5,30}$";
+        Pattern patToCheckAlumnos = Pattern.compile(patronAlumnos);
+        
+        Matcher regexMatcherAlumnos = patToCheckAlumnos.matcher(txtBuscarA.getText());
+        
+        if(regexMatcherAlumnos.matches()){
+            alumnos.clear();
+            if(fileAlumno.length() !=0){
+                String toSearchCarrera = txtBuscarA.getText();
+                try {
+                    DataInputStream archivoRead;
+                    
+                    archivoRead = new DataInputStream(new FileInputStream(fileAlumno));
+                    
+                    while(archivoRead.available() > 0){
+                        int readId = archivoRead.readInt();
+                        String readNombre = archivoRead.readUTF();
+                        String readAp = archivoRead.readUTF();
+                        String readAm = archivoRead.readUTF();
+                        String readDireccion = archivoRead.readUTF();
+                        String readTelefono = archivoRead.readUTF();
+                        String readEmail = archivoRead.readUTF();
+                        String readfNacimiento = archivoRead.readUTF();
+                        String readFechaInicio = archivoRead.readUTF();
+                        String readCiudad = archivoRead.readUTF();
+                        String readCarrera = archivoRead.readUTF();
+                        String readSemestre = archivoRead.readUTF();
+                        String readGrupo = archivoRead.readUTF();
+                        String readPeriodo = archivoRead.readUTF();
+                        String readSeparador = archivoRead.readUTF();
+
+                        Alumnos temp = new Alumnos();
+
+                        temp.setId(readId);
+                        temp.setNombre(readNombre);
+                        temp.setAp(readAp);
+                        temp.setAm(readAm);
+                        temp.setDireccion(readDireccion);
+                        temp.setTelefono(readTelefono);
+                        temp.setEmail(readEmail);
+                        temp.setfNacimiento(readfNacimiento);
+                        temp.setFechaInicio(readFechaInicio);
+                        temp.setCiudad(readCiudad);
+                        temp.setCarrera(readCarrera);
+                        temp.setSemestre(readSemestre);
+                        temp.setGrupo(readGrupo);
+                        temp.setPeriodo(readPeriodo);
+
+                        alumnos.add(temp);
+                    }
+                    for(int i =0; i<alumnos.size(); i++){
+                        if(toSearchCarrera.equals(alumnos.get(i).getNombre())){
+                            JOptionPane.showMessageDialog(this,"ID: " +Integer.toString(alumnos.get(i).getId()) + "\nNombre: "+alumnos.get(i).getNombre() +"\nApellido Paterno: "+alumnos.get(i).getAp()+"\nApellido Materno: "+alumnos.get(i).getAm()+"\nDireccion: "+alumnos.get(i).getDireccion()+"\nTelefono: "+alumnos.get(i).getTelefono()+"\nEmail: "+alumnos.get(i).getEmail()+"\nFecha de Nacimiento: "+alumnos.get(i).getfNacimiento()+"\nFecha: "+alumnos.get(i).getFechaInicio()+"\nCiudad: "+alumnos.get(i).getCiudad()+"\nCarrera: "+alumnos.get(i).getCarrera()+"\nSemestre: "+alumnos.get(i).getSemestre()+"\nGrupo: "+alumnos.get(i).getGrupo()+"\nPeriodo: "+alumnos.get(i).getPeriodo(), "Alumno Encontrado!",JOptionPane.INFORMATION_MESSAGE);
+                            txtBuscarA.setText("");
+                            return;
+                        }
+                    }
+                    JOptionPane.showMessageDialog(this, "No se encontro el alumno.");
+                } catch (FileNotFoundException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "No hay alumnos guardados.");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"No cuenta con el formato correcto." );
+        }
+        txtBuscarA.setText("");
+    }//GEN-LAST:event_btnBuscarAActionPerformed
+
+    private void btnBuscarGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarGActionPerformed
+        String patronGrupos = "^[1-9]{1}-[A-Z]{1}$";
+        Pattern patToCheckGrupos = Pattern.compile(patronGrupos);
+        
+        Matcher regexMatcherGrupos = patToCheckGrupos.matcher(txtBuscarG.getText());
+        
+        if(regexMatcherGrupos.matches()){
+            grupos.clear();
+            if(fileGrupo.length() !=0){
+                String toSearchCarrera = txtBuscarG.getText();
+                try {
+                    DataInputStream archivoRead;
+                    
+                    archivoRead = new DataInputStream(new FileInputStream(fileGrupo));
+                    
+                    while(archivoRead.available() > 0){
+                        int readID = archivoRead.readInt();
+                        String readNombre = archivoRead.readUTF();
+                        String readMaestro = archivoRead.readUTF();
+                        String readMateria = archivoRead.readUTF();
+                        String readSeparador = archivoRead.readUTF();
+                        
+                        Grupos temp = new Grupos();
+                        
+                        temp.setId(readID);
+                        temp.setNombre(readNombre);
+                        temp.setIdMaestro(readMaestro);
+                        temp.setIdMateria(readMateria);
+                        
+                        grupos.add(temp);
+                    }  
+                    for(int i =0; i<grupos.size(); i++){
+                        if(toSearchCarrera.equals(grupos.get(i).getNombre())){
+                            JOptionPane.showMessageDialog(this,"ID: " +Integer.toString(grupos.get(i).getId()) + "\nNombre: "+grupos.get(i).getNombre() + "\nID Maestro: "+grupos.get(i).getIdMaestro()+"\nID Materia: " + grupos.get(i).getIdMateria(), "Grupo Encontrado!",JOptionPane.INFORMATION_MESSAGE);
+                            txtBuscarG.setText("");
+                            return;
+                        }
+                    }
+                    JOptionPane.showMessageDialog(this, "No se encontro la carrera.");
+                } catch (FileNotFoundException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "No hay grupos guardados.");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"No cuenta con el formato correcto." );
+        }
+        txtBuscarG.setText("");
+    }//GEN-LAST:event_btnBuscarGActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EditarM;
@@ -4591,10 +5293,11 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarH;
     private javax.swing.JButton btnBuscarMa;
     private javax.swing.JButton btnBuscarMat;
-    private javax.swing.JButton btnCambiosSem;
+    private javax.swing.JButton btnBuscarS;
+    private javax.swing.JButton btnCambiosS;
     private javax.swing.JButton btnCancelUsEdit;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnCancelarEdicion;
+    private javax.swing.JButton btnCancelarEdicionS;
     private javax.swing.JButton btnCancelarEditA;
     private javax.swing.JButton btnCancelarEditC;
     private javax.swing.JButton btnCancelarEditG;
@@ -4643,6 +5346,7 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboIDGrupoH;
     private javax.swing.JComboBox<String> comboIDMaestro;
     private javax.swing.JComboBox<String> comboIDMateria;
+    private javax.swing.JComboBox<String> comboMateriaM;
     private javax.swing.JComboBox<String> comboPerfil;
     private javax.swing.JComboBox<String> comboPeriodo;
     private javax.swing.JComboBox<String> comboPeriodoS;
@@ -4654,11 +5358,11 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -4694,6 +5398,8 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

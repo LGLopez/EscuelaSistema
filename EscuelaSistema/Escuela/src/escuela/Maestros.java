@@ -16,6 +16,15 @@ public class Maestros {
     String grupoA;
     String direccion;
     String telefono;
+    String materia;
+
+    public String getMateria() {
+        return materia;
+    }
+
+    public void setMateria(String materia) {
+        this.materia = materia;
+    }
 
     public int addAndIncrease(){
         id++;
