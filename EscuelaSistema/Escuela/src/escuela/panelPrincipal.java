@@ -247,6 +247,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                             String readNombre = archivoRead.readUTF();
                             String readGradoA = archivoRead.readUTF();
                             String readGrupoA = archivoRead.readUTF();
+                            String readMateria = archivoRead.readUTF();
                             String readDireccion = archivoRead.readUTF();
                             String readTelefono = archivoRead.readUTF();
                             String readSeparador = archivoRead.readUTF();
@@ -257,12 +258,13 @@ public class panelPrincipal extends javax.swing.JFrame {
                             temp.setNombre(readNombre);
                             temp.setGradoA(readGradoA);
                             temp.setGrupoA(readGrupoA);
+                            temp.setMateria(readMateria);
                             temp.setDireccion(readDireccion);
                             temp.setTelefono(readTelefono);
 
 
-                            maestros.add(temp);
-                        }
+                        maestros.add(temp);
+                    }
                     
                         comboIDMaestro.removeAll();
 
@@ -483,26 +485,28 @@ public class panelPrincipal extends javax.swing.JFrame {
                         archivoRead = new DataInputStream(new FileInputStream(fileMaestro));
 
                         while(archivoRead.available() > 0){
-                            int readID = archivoRead.readInt();
-                            String readNombre = archivoRead.readUTF();
-                            String readGradoA = archivoRead.readUTF();
-                            String readGrupoA = archivoRead.readUTF();
-                            String readDireccion = archivoRead.readUTF();
-                            String readTelefono = archivoRead.readUTF();
-                            String readSeparador = archivoRead.readUTF();
+                        int readID = archivoRead.readInt();
+                        String readNombre = archivoRead.readUTF();
+                        String readGradoA = archivoRead.readUTF();
+                        String readGrupoA = archivoRead.readUTF();
+                        String readMateria = archivoRead.readUTF();
+                        String readDireccion = archivoRead.readUTF();
+                        String readTelefono = archivoRead.readUTF();
+                        String readSeparador = archivoRead.readUTF();
 
-                            Maestros temp = new Maestros();
+                        Maestros temp = new Maestros();
 
-                            temp.setId(readID);
-                            temp.setNombre(readNombre);
-                            temp.setGradoA(readGradoA);
-                            temp.setGrupoA(readGrupoA);
-                            temp.setDireccion(readDireccion);
-                            temp.setTelefono(readTelefono);
+                        temp.setId(readID);
+                        temp.setNombre(readNombre);
+                        temp.setGradoA(readGradoA);
+                        temp.setGrupoA(readGrupoA);
+                        temp.setMateria(readMateria);
+                        temp.setDireccion(readDireccion);
+                        temp.setTelefono(readTelefono);
 
 
-                            maestros.add(temp);
-                        }
+                        maestros.add(temp);
+                    }
                     
                         comboIDMaestro.removeAll();
 
@@ -3377,7 +3381,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                 maestro.setNombre(txtNombreMaestro.getText());
                 maestro.setGradoA(comboGradoAcad.getSelectedItem().toString());
                 maestro.setGrupoA(comboGrupoAcad.getSelectedItem().toString());
-                maestro.setGrupoA(comboMateriaM.getSelectedItem().toString());
+                maestro.setMateria(comboMateriaM.getSelectedItem().toString());
                 maestro.setDireccion(txtDireccionMa.getText());
                 maestro.setTelefono(txtTelefonoM.getText());
                 
@@ -3781,7 +3785,13 @@ public class panelPrincipal extends javax.swing.JFrame {
                         semestres.clear();
                         JOptionPane.showMessageDialog(this, "El semestre fue eliminado.");
                         found = true;
-                        
+                        comboSemestreC.removeAllItems();
+                        comboPeriodo.removeAllItems();
+
+                        for(int j=0; j<semestres.size(); j++){
+                            comboSemestreC.addItem(semestres.get(j).getPeriodo());
+                            comboPeriodo.addItem(semestres.get(j).getPeriodo());
+                        }
                     } catch (FileNotFoundException ex) {
                         //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (IOException ex) {
@@ -3798,6 +3808,7 @@ public class panelPrincipal extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(this, "El periodo no cumple con el formato establecido.");
         }
+        
         
     }//GEN-LAST:event_btnEliminarSActionPerformed
 
@@ -4516,6 +4527,7 @@ public class panelPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No hay carreras guardadas");
         }
         
+        
     }//GEN-LAST:event_btnEliminarCActionPerformed
 
     private void txtBuscarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarSActionPerformed
@@ -4547,6 +4559,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                         String readNombre = archivoRead.readUTF();
                         String readGradoA = archivoRead.readUTF();
                         String readGrupoA = archivoRead.readUTF();
+                        String readMateria = archivoRead.readUTF();
                         String readDireccion = archivoRead.readUTF();
                         String readTelefono = archivoRead.readUTF();
                         String readSeparador = archivoRead.readUTF();
@@ -4557,12 +4570,13 @@ public class panelPrincipal extends javax.swing.JFrame {
                         temp.setNombre(readNombre);
                         temp.setGradoA(readGradoA);
                         temp.setGrupoA(readGrupoA);
+                        temp.setMateria(readMateria);
                         temp.setDireccion(readDireccion);
                         temp.setTelefono(readTelefono);
 
 
                         maestros.add(temp);
-                }
+                    }
                 
                 for(int i=0; i<maestros.size(); i++){
                     if(toEditMaestros.equals(maestros.get(i).getNombre())){
@@ -4616,6 +4630,7 @@ public class panelPrincipal extends javax.swing.JFrame {
             aux.setId(maestros.size()+1);
             aux.setGradoA(comboGradoAcad.getSelectedItem().toString());
             aux.setGrupoA(comboGrupoAcad.getSelectedItem().toString());
+            aux.setMateria(comboMateriaM.getSelectedItem().toString());
             aux.setDireccion(txtDireccionMa.getText());
             aux.setTelefono(txtTelefonoM.getText());
             
@@ -4636,16 +4651,17 @@ public class panelPrincipal extends javax.swing.JFrame {
                     archivoWrite = new DataOutputStream(new FileOutputStream(fileMaestro));
                     
                     for(int i=0; i<maestros.size() ; i++){
-                        archivoWrite.writeInt(maestros.get(i).getId());
-                        archivoWrite.writeUTF(maestros.get(i).getNombre());
-                        archivoWrite.writeUTF(maestros.get(i).getGradoA());
-                        archivoWrite.writeUTF(maestros.get(i).getGrupoA());
-                        archivoWrite.writeUTF(maestros.get(i).getDireccion());
-                        archivoWrite.writeUTF(maestros.get(i).getTelefono());
-                        
-                        archivoWrite.writeUTF("#");
+                    archivoWrite.writeInt(maestros.get(i).getId());
+                    archivoWrite.writeUTF(maestros.get(i).getNombre());
+                    archivoWrite.writeUTF(maestros.get(i).getGradoA());
+                    archivoWrite.writeUTF(maestros.get(i).getGrupoA());
+                    archivoWrite.writeUTF(maestros.get(i).getMateria());
+                    archivoWrite.writeUTF(maestros.get(i).getDireccion());
+                    archivoWrite.writeUTF(maestros.get(i).getTelefono());
+                    archivoWrite.writeUTF("#");
 
-                    }
+                }
+
                     
                     archivoWrite.close();
                     JOptionPane.showMessageDialog(this, "El Maestro fue actualizada.");
@@ -4718,6 +4734,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                         String readNombre = archivoRead.readUTF();
                         String readGradoA = archivoRead.readUTF();
                         String readGrupoA = archivoRead.readUTF();
+                        String readMateria = archivoRead.readUTF();
                         String readDireccion = archivoRead.readUTF();
                         String readTelefono = archivoRead.readUTF();
                         String readSeparador = archivoRead.readUTF();
@@ -4728,6 +4745,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                         temp.setNombre(readNombre);
                         temp.setGradoA(readGradoA);
                         temp.setGrupoA(readGrupoA);
+                        temp.setMateria(readMateria);
                         temp.setDireccion(readDireccion);
                         temp.setTelefono(readTelefono);
 
@@ -4772,6 +4790,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                         String readNombre = archivoRead.readUTF();
                         String readGradoA = archivoRead.readUTF();
                         String readGrupoA = archivoRead.readUTF();
+                        String readMateria = archivoRead.readUTF();
                         String readDireccion = archivoRead.readUTF();
                         String readTelefono = archivoRead.readUTF();
                         String readSeparador = archivoRead.readUTF();
@@ -4782,12 +4801,13 @@ public class panelPrincipal extends javax.swing.JFrame {
                         temp.setNombre(readNombre);
                         temp.setGradoA(readGradoA);
                         temp.setGrupoA(readGrupoA);
+                        temp.setMateria(readMateria);
                         temp.setDireccion(readDireccion);
                         temp.setTelefono(readTelefono);
 
 
                         maestros.add(temp);
-                }
+                    }
             String maestroToDelete = JOptionPane.showInputDialog(this, "Ingrese el nombre del maestro que desea eliminar: ");
            
             boolean found = false;
@@ -4802,16 +4822,18 @@ public class panelPrincipal extends javax.swing.JFrame {
 
                     archivoWrite = new DataOutputStream(new FileOutputStream(fileMaestro));
 
-                    for(int j=0; j<carreras.size() ; j++){
-                        archivoWrite.writeInt(maestros.get(j).getId());
-                        archivoWrite.writeUTF(maestros.get(j).getNombre());
-                        archivoWrite.writeUTF(maestros.get(j).getGradoA());
-                        archivoWrite.writeUTF(maestros.get(j).getGrupoA());
-                        archivoWrite.writeUTF(maestros.get(j).getDireccion());
-                        archivoWrite.writeUTF(maestros.get(j).getTelefono());
+                    for(int j=0; j<maestros.size() ; j++){
+                    archivoWrite.writeInt(maestros.get(j).getId());
+                    archivoWrite.writeUTF(maestros.get(j).getNombre());
+                    archivoWrite.writeUTF(maestros.get(j).getGradoA());
+                    archivoWrite.writeUTF(maestros.get(j).getGrupoA());
+                    archivoWrite.writeUTF(maestros.get(j).getMateria());
+                    archivoWrite.writeUTF(maestros.get(j).getDireccion());
+                    archivoWrite.writeUTF(maestros.get(j).getTelefono());
+                    archivoWrite.writeUTF("#");
 
-                        archivoWrite.writeUTF("#");
-                    }
+                }
+
                     
                     archivoWrite.close();
                     JOptionPane.showMessageDialog(this, "El maestro ha sido eliminado exitosamente.");
