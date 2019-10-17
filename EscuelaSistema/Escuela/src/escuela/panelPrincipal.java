@@ -740,8 +740,6 @@ public class panelPrincipal extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        txtBuscarH = new javax.swing.JTextField();
-        btnBuscarH = new javax.swing.JButton();
         comboHoraI = new javax.swing.JComboBox<>();
         comboIDGrupoH = new javax.swing.JComboBox<>();
         btnGenerarH = new javax.swing.JButton();
@@ -1678,9 +1676,6 @@ public class panelPrincipal extends javax.swing.JFrame {
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel27.setText("ID Grupo");
 
-        btnBuscarH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnBuscarH.setText("Buscar");
-
         comboHoraI.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         comboHoraI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "07:00-08:00", "08:00-09:00", "09:00-10:00", "10:00-11:00", "11:00-12:00", "12:00-13:00", "13:00-14:00", " ", " " }));
 
@@ -1700,9 +1695,19 @@ public class panelPrincipal extends javax.swing.JFrame {
 
         btnEliminarH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEliminarH.setText("Eliminar");
+        btnEliminarH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarHActionPerformed(evt);
+            }
+        });
 
         btnEditarH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEditarH.setText("Editar");
+        btnEditarH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarHActionPerformed(evt);
+            }
+        });
 
         jLabel42.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel42.setText("Día");
@@ -1833,12 +1838,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel22)
                             .addComponent(btnEditarH))
                         .addGap(22, 22, 22)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(txtBuscarH, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBuscarH))
-                            .addComponent(btnEliminarH)))
+                        .addComponent(btnEliminarH))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1924,11 +1924,7 @@ public class panelPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel22)
-                .addGap(37, 37, 37)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBuscarH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarH))
-                .addGap(23, 23, 23)
+                .addGap(85, 85, 85)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
                     .addComponent(comboHoraI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -5774,13 +5770,26 @@ public class panelPrincipal extends javax.swing.JFrame {
             int posDia = diaClaseInt * 7;
             int posFinal = posDia + horaClaseInt;
             boolean listo = false;
+            int counterToCheck = 0;
             for(int i=0; i<materias.size() && !listo; i++){
+                /*while(materias.get(nextClass).getHorarioUsados() >= 4 && ){
+                    nextClass++;
+                    
+                    if(counterToCheck < materias.size()){
+                        
+                    }
+                    
+                }
+                */
                 String claseParaHorario = materias.get(nextClass).getNombreM();
+                
+                
                 nextClass++;
                 if(nextClass >= materias.size()){
                     nextClass = 0;
                 }
                 if(!paraTable.get(posFinal).isUsado()){
+                    materias.get(nextClass).addUsados();
                     listo = true;
                     paraTable.get(posFinal).setUsado(true);
                     switch(posFinal){
@@ -5943,6 +5952,66 @@ public class panelPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnGenerarHActionPerformed
 
+    private void btnEditarHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarHActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarHActionPerformed
+
+    private void btnEliminarHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarHActionPerformed
+        horarioL7.setVisible(false);
+        horarioL8.setVisible(false);
+        horarioL9.setVisible(false);
+        horarioL10.setVisible(false);
+        horarioL11.setVisible(false);
+        horarioL12.setVisible(false);
+        horarioL13.setVisible(false);
+        
+        horarioM7.setVisible(false);
+        horarioM8.setVisible(false);
+        horarioM9.setVisible(false);
+        horarioM10.setVisible(false);
+        horarioM11.setVisible(false);
+        horarioM12.setVisible(false);
+        horarioM13.setVisible(false);
+        
+        horarioI7.setVisible(false);
+        horarioI8.setVisible(false);
+        horarioI9.setVisible(false);
+        horarioI10.setVisible(false);
+        horarioI11.setVisible(false);
+        horarioI12.setVisible(false);
+        horarioI13.setVisible(false);
+        
+        horarioJ7.setVisible(false);
+        horarioJ8.setVisible(false);
+        horarioJ9.setVisible(false);
+        horarioJ10.setVisible(false);
+        horarioJ11.setVisible(false);
+        horarioJ12.setVisible(false);
+        horarioJ13.setVisible(false);
+        
+        horarioV7.setVisible(false);
+        horarioV8.setVisible(false);
+        horarioV9.setVisible(false);
+        horarioV10.setVisible(false);
+        horarioV11.setVisible(false);
+        horarioV12.setVisible(false);
+        horarioV13.setVisible(false);
+        
+        paraTable.clear();
+        
+        for(int i=0; i<35; i++){
+            HorariosTabla aux = new HorariosTabla();
+            
+            aux.setUsado(false);
+            aux.setHorarioDia(i);
+            aux.setMaestro("Sin maestro");
+            aux.setMateria("Sin materia");
+            
+            paraTable.add(aux);
+        }
+        
+    }//GEN-LAST:event_btnEliminarHActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EditarM;
@@ -5951,7 +6020,6 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarA;
     private javax.swing.JButton btnBuscarC;
     private javax.swing.JButton btnBuscarG;
-    private javax.swing.JButton btnBuscarH;
     private javax.swing.JButton btnBuscarMa;
     private javax.swing.JButton btnBuscarMat;
     private javax.swing.JButton btnBuscarS;
@@ -6166,7 +6234,6 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtBuscarA;
     private javax.swing.JTextField txtBuscarC;
     private javax.swing.JTextField txtBuscarG;
-    private javax.swing.JTextField txtBuscarH;
     private javax.swing.JTextField txtBuscarMa;
     private javax.swing.JTextField txtBuscarMat;
     private javax.swing.JTextField txtBuscarS;

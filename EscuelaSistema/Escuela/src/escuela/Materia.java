@@ -15,7 +15,20 @@ public class Materia {
     private int creditos;
     private String academia;
     private String idCarrera;
+    private int horarioUsados=0;
 
+    public void addUsados(){
+        this.horarioUsados ++;
+    }
+    
+    public int getHorarioUsados() {
+        return horarioUsados;
+    }
+
+    public void setHorarioUsados(int horarioUsados) {
+        this.horarioUsados = horarioUsados;
+    }
+    
     public int addAndIncreaseID(){
         ID++;
         return ID;
