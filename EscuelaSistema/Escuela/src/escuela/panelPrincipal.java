@@ -680,6 +680,8 @@ public class panelPrincipal extends javax.swing.JFrame {
         btnGuardarCambios = new javax.swing.JButton();
         btnCancelUsEdit = new javax.swing.JButton();
         lblID = new javax.swing.JLabel();
+        btnBuscarUs = new javax.swing.JButton();
+        txtBuscarUs = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -1000,6 +1002,20 @@ public class panelPrincipal extends javax.swing.JFrame {
         lblID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblID.setText("0");
 
+        btnBuscarUs.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnBuscarUs.setText("Buscar");
+        btnBuscarUs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarUsActionPerformed(evt);
+            }
+        });
+
+        txtBuscarUs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarUsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -1029,24 +1045,31 @@ public class panelPrincipal extends javax.swing.JFrame {
                                 .addComponent(btnEditar)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnGuardarCambios)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
                                 .addComponent(btnCancelUsEdit))))
-                    .addComponent(jLabel7)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(lblUsuarioID)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre)
-                            .addComponent(txtAPaterno)
-                            .addComponent(txtAMaterno, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                            .addComponent(lblID)))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(lblUsuarioID)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNombre)
+                                    .addComponent(txtAPaterno)
+                                    .addComponent(txtAMaterno, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                                    .addComponent(lblID))
+                                .addGap(145, 145, 145)
+                                .addComponent(txtBuscarUs, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnBuscarUs))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar)
                 .addContainerGap())
@@ -1065,7 +1088,9 @@ public class panelPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscarUs)
+                            .addComponent(txtBuscarUs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -1097,7 +1122,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                     .addComponent(btnEditar)
                     .addComponent(btnGuardarCambios)
                     .addComponent(btnCancelUsEdit))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -3596,7 +3621,14 @@ public class panelPrincipal extends javax.swing.JFrame {
                     }  
                     for(int i =0; i<semestres.size(); i++){
                         if(toSearchSemestre.equals(semestres.get(i).getPeriodo())){
-                            JOptionPane.showMessageDialog(this,"ID: " +Integer.toString(semestres.get(i).getId()) + "\nPeriodo: "+semestres.get(i).getPeriodo()+ "\nFecha Inicio: "+semestres.get(i).getFechaI()+"\nFecha Final: " + semestres.get(i).getFechaF(), "Semestre Encontrado!",JOptionPane.INFORMATION_MESSAGE);
+                            String periodo = semestres.get(i).getPeriodo();
+                            String fechai = semestres.get(i).getFechaI();
+                            String fechaf = semestres.get(i).getFechaF();
+                            
+                            comboPeriodoS.addItem(periodo);
+                            chooserInicioSem.setDateFormatString(fechai);
+                            chooserFinSem.setDateFormatString(fechaf);
+                            
                             txtBuscarS.setText("");
                             return;
                         }
@@ -4279,7 +4311,16 @@ public class panelPrincipal extends javax.swing.JFrame {
                     }   
                     for(int i =0; i<carreras.size(); i++){
                         if(toSearchCarrera.equals(carreras.get(i).getNombre())){
-                            JOptionPane.showMessageDialog(this,"ID: " +Integer.toString(carreras.get(i).getId()) + "\nNombre: "+carreras.get(i).getNombre() + "\nArea: "+carreras.get(i).getArea()+"\nSemetre: " + carreras.get(i).getSemestre() + "\nFecha: " + carreras.get(i).getFechaC(), "Carrera Encontrada!",JOptionPane.INFORMATION_MESSAGE);
+                            String nombre = carreras.get(i).getNombre();
+                            String area = carreras.get(i).getArea();
+                            String semestre = carreras.get(i).getSemestre();
+                            String fechac = carreras.get(i).getFechaC();
+                            
+                            txtNombreC.setText(nombre);
+                            comboAreaC.setToolTipText(area);
+                            comboSemestreC.setToolTipText(semestre);
+                            chooserFechaC.setDateFormatString(fechac);
+                            
                             txtBuscarC.setText("");
                             return;
                         }
@@ -4754,8 +4795,22 @@ public class panelPrincipal extends javax.swing.JFrame {
                     } 
                     for(int i =0; i<maestros.size(); i++){
                         if(toSearchMaestro.equals(maestros.get(i).getNombre())){
-                            JOptionPane.showMessageDialog(this,"ID: " +Integer.toString(maestros.get(i).getId()) + "\nNombre: "+maestros.get(i).getNombre() + "\nGrado Academico: "+maestros.get(i).getGradoA()+"\nGrupo Academico: " + maestros.get(i).getGrupoA() + "\nMateria: " + maestros.get(i).getMateria()+ "\nDireccion: " + maestros.get(i).getDireccion()+ "\nTelefono: " + maestros.get(i).getTelefono(), "Maestro Encontrado!",JOptionPane.INFORMATION_MESSAGE);
+                            
+                            String nombre = maestros.get(i).getNombre();
+                            String grado = maestros.get(i).getGradoA();
+                            String grupo = maestros.get(i).getGrupoA();
+                            String materia =  maestros.get(i).getMateria();
+                            String direccion = maestros.get(i).getDireccion();
+                            String telefono = maestros.get(i).getTelefono();     
+                           
+                            txtNombreMaestro.setText(nombre);
+                            comboGradoAcad.addItem(grado);
+                            comboMateriaM.addItem(materia);
+                            comboGrupoAcad.addItem(grupo);
+                            txtDireccionMa.setText(direccion);
+                            txtTelefonoM.setText(telefono);
                             txtBuscarMa.setText("");
+                            
                             return;
                         }
                     }
@@ -5314,7 +5369,16 @@ public class panelPrincipal extends javax.swing.JFrame {
 
                     for(int i=0; i<materias.size(); i++){
                         if(toBusMaterias.equals(materias.get(i).getNombreM())){
-                            JOptionPane.showMessageDialog(this,"ID: "+Integer.toString(materias.get(i).getID())+"\nNombre: "+materias.get(i).getNombreM()+"\nCreditos: "+materias.get(i).getCreditos()+"\nAcademia: "+(materias.get(i).getAcademia())+"\nID Carrera: "+materias.get(i).getIdcarrera());
+                            String nombre = materias.get(i).getNombreM();
+                            int creditos = materias.get(i).getCreditos();
+                            String academia = materias.get(i).getAcademia();
+                            String idcarrera = materias.get(i).getIdcarrera();
+                            
+                            Integer.toString(creditos);
+                            txtNombreMa.setText(nombre);
+                            txtCreditos.setText(Integer.toString(creditos));
+                            comboIDCarrera.setToolTipText(idcarrera);
+                            comboAcademia.setToolTipText(academia);
                             txtBuscarMat.setText("");
 
                             return;
@@ -5567,7 +5631,35 @@ public class panelPrincipal extends javax.swing.JFrame {
                     }
                     for(int i =0; i<alumnos.size(); i++){
                         if(toSearchCarrera.equals(alumnos.get(i).getNombre())){
-                            JOptionPane.showMessageDialog(this,"ID: " +Integer.toString(alumnos.get(i).getId()) + "\nNombre: "+alumnos.get(i).getNombre() +"\nApellido Paterno: "+alumnos.get(i).getAp()+"\nApellido Materno: "+alumnos.get(i).getAm()+"\nDireccion: "+alumnos.get(i).getDireccion()+"\nTelefono: "+alumnos.get(i).getTelefono()+"\nEmail: "+alumnos.get(i).getEmail()+"\nFecha de Nacimiento: "+alumnos.get(i).getfNacimiento()+"\nFecha: "+alumnos.get(i).getFechaInicio()+"\nCiudad: "+alumnos.get(i).getCiudad()+"\nCarrera: "+alumnos.get(i).getCarrera()+"\nSemestre: "+alumnos.get(i).getSemestre()+"\nGrupo: "+alumnos.get(i).getGrupo()+"\nPeriodo: "+alumnos.get(i).getPeriodo(), "Alumno Encontrado!",JOptionPane.INFORMATION_MESSAGE);
+                            String nombre = alumnos.get(i).getNombre();
+                            String ap = alumnos.get(i).getAp();
+                            String am = alumnos.get(i).getAm();
+                            String direccion = alumnos.get(i).getDireccion();
+                            String telefono = alumnos.get(i).getTelefono();
+                            String email = alumnos.get(i).getEmail();
+                            String fechan = alumnos.get(i).getfNacimiento();
+                            String fecha = alumnos.get(i).getFechaInicio();
+                            String ciudad = alumnos.get(i).getCiudad();
+                            String carrera = alumnos.get(i).getCarrera();
+                            String semestre = alumnos.get(i).getSemestre();
+                            String grupo = alumnos.get(i).getGrupo();
+                            String periodo = alumnos.get(i).getPeriodo();
+                            
+                            txtNombreA.setText(nombre);
+                            txtAP.setText(ap);
+                            txtAM.setText(am);
+                            txtDireccion.setText(direccion);
+                            txtTelefono.setText(telefono);
+                            txtEmail.setText(email);
+                            dateChooserNacimiento.setDateFormatString(fechan);
+                            dateChooserFecha.setDateFormatString(fecha);
+                            txtCiudadA.setText(ciudad);
+                            comboCarreraA.setToolTipText(carrera);
+                            comboSemestre.setToolTipText(semestre);
+                            comboGrupo.setToolTipText(grupo);
+                            comboPeriodo.setToolTipText(periodo);
+                                                            
+                            
                             txtBuscarA.setText("");
                             return;
                         }
@@ -5623,7 +5715,15 @@ public class panelPrincipal extends javax.swing.JFrame {
                     }  
                     for(int i =0; i<grupos.size(); i++){
                         if(toSearchCarrera.equals(grupos.get(i).getNombre())){
-                            JOptionPane.showMessageDialog(this,"ID: " +Integer.toString(grupos.get(i).getId()) + "\nNombre: "+grupos.get(i).getNombre() + "\nID Maestro: "+grupos.get(i).getIdMaestro()+"\nID Materia: " + grupos.get(i).getIdMateria(), "Grupo Encontrado!",JOptionPane.INFORMATION_MESSAGE);
+                            
+                            String nombre = grupos.get(i).getNombre();
+                            String idmaestro = grupos.get(i).getIdMaestro();
+                            String idmateria = grupos.get(i).getIdMateria();
+                            
+                            txtNombreGrupo.setText(nombre);
+                            comboIDMaestro.addItem(idmaestro);
+                            comboIDMaestro.addItem(idmaestro);
+                            
                             txtBuscarG.setText("");
                             return;
                         }
@@ -6034,6 +6134,87 @@ public class panelPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnEliminarHActionPerformed
 
+    private void btnBuscarUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarUsActionPerformed
+        String patronUsuario = "^[a-zA-Z\\s]{5,30}$";
+        Pattern patToCheckUsuario = Pattern.compile(patronUsuario);
+        
+        Matcher regexMatcherMaestro = patToCheckUsuario.matcher(txtBuscarUs.getText());
+        
+        if(regexMatcherMaestro.matches()){
+            users.clear();
+            if(file.length() !=0){
+                String toSearchUsuario = txtBuscarUs.getText();
+                try {
+                    DataInputStream archivoRead;
+                    
+                    archivoRead = new DataInputStream(new FileInputStream(file));
+                    
+                    while(archivoRead.available() > 0){
+                        int readID = archivoRead.readInt();
+                        String readNombre = archivoRead.readUTF();
+                        String readPaterno = archivoRead.readUTF();
+                        String readMaterno = archivoRead.readUTF();
+                        String readNombreUsuario = archivoRead.readUTF();
+                        String readPassword = archivoRead.readUTF();
+                        String readPerfil = archivoRead.readUTF();
+                        String readSeparador = archivoRead.readUTF();
+
+                        Usuario temp = new Usuario();
+
+                        temp.setId(readID);
+                        temp.setNombre(readNombre);
+                        temp.setaPaterno(readPaterno);
+                        temp.setaMaterno(readMaterno);
+                        temp.setNombreUsuario(readNombreUsuario);
+                        temp.setPassword(readPassword);
+                        temp.setPerfil(readPerfil);
+
+                        users.add(temp);
+                    }
+                    for(int i =0; i<users.size(); i++){
+                        if(toSearchUsuario.equals(users.get(i).getNombre())){
+                            
+                            String nombre = users.get(i).getNombre();
+                            String ap = users.get(i).getaPaterno();
+                            String am = users.get(i).getaMaterno();
+                            String nu =  users.get(i).getNombreUsuario();
+                            String pass = users.get(i).getPassword();
+                            String perfil = users.get(i).getPerfil();     
+                           
+                            txtNombre.setText(nombre);
+                            txtAPaterno.setText(ap);
+                            txtAMaterno.setText(am);
+                            txtNombreUsuario.setText(nu);
+                            txtPassword.setText(pass);
+                            comboPerfil.setToolTipText(perfil);
+                            
+                            txtBuscarUs.setText("");
+                            
+                            return;
+                        }
+                    }
+                    JOptionPane.showMessageDialog(this, "No se encontro el Usuario.");
+                } catch (FileNotFoundException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "No hay usuarios guardados.");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"No cuenta con el formato correcto." );
+        }
+        txtBuscarUs.setText("");
+    }//GEN-LAST:event_btnBuscarUsActionPerformed
+
+    private void txtBuscarUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarUsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarUsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EditarM;
@@ -6045,6 +6226,7 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarMa;
     private javax.swing.JButton btnBuscarMat;
     private javax.swing.JButton btnBuscarS;
+    private javax.swing.JButton btnBuscarUs;
     private javax.swing.JButton btnCambiosS;
     private javax.swing.JButton btnCancelUsEdit;
     private javax.swing.JButton btnCancelar;
@@ -6259,6 +6441,7 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtBuscarMa;
     private javax.swing.JTextField txtBuscarMat;
     private javax.swing.JTextField txtBuscarS;
+    private javax.swing.JTextField txtBuscarUs;
     private javax.swing.JTextField txtCiudadA;
     private javax.swing.JTextField txtCreditos;
     private javax.swing.JTextField txtDireccion;
