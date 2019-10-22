@@ -749,8 +749,6 @@ public class panelPrincipal extends javax.swing.JFrame {
         btnGenerarH = new javax.swing.JButton();
         btnEliminarH = new javax.swing.JButton();
         btnEditarH = new javax.swing.JButton();
-        jLabel42 = new javax.swing.JLabel();
-        comboDiaH = new javax.swing.JComboBox<>();
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
@@ -1674,14 +1672,14 @@ public class panelPrincipal extends javax.swing.JFrame {
         jLabel22.setText("Horario");
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel25.setText("Hora Inicio");
+        jLabel25.setText("Horarios");
         jLabel25.setToolTipText("");
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel27.setText("ID Grupo");
 
         comboHoraI.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        comboHoraI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "07:00-08:00", "08:00-09:00", "09:00-10:00", "10:00-11:00", "11:00-12:00", "12:00-13:00", "13:00-14:00", " ", " " }));
+        comboHoraI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "07:00-08:00", "08:00-09:00", "09:00-10:00", "10:00-11:00", "11:00-12:00", "12:00-13:00", "13:00-14:00", "Lunes", "Martes", "Miercoles", "Viernes" }));
 
         comboIDGrupoH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1712,11 +1710,6 @@ public class panelPrincipal extends javax.swing.JFrame {
                 btnEditarHActionPerformed(evt);
             }
         });
-
-        jLabel42.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel42.setText("Día");
-
-        comboDiaH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes" }));
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel43.setText("Horas");
@@ -1844,26 +1837,21 @@ public class panelPrincipal extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addComponent(btnEliminarH))
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel25)
-                                .addComponent(jLabel27))
-                            .addComponent(jLabel42))
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel25)
+                            .addComponent(jLabel27))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboHoraI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel50)
-                                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(jPanel8Layout.createSequentialGroup()
                                             .addComponent(comboIDGrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGap(215, 215, 215)
                                             .addComponent(jLabel49))
-                                        .addGroup(jPanel8Layout.createSequentialGroup()
-                                            .addComponent(comboDiaH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(259, 259, 259)
-                                            .addComponent(jLabel43)))
+                                        .addComponent(jLabel43))
                                     .addComponent(jLabel51)
                                     .addComponent(jLabel52)
                                     .addComponent(jLabel53)
@@ -1921,7 +1909,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                                     .addComponent(horarioV8)
                                     .addComponent(horarioV7)
                                     .addComponent(jLabel48))))))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1932,25 +1920,20 @@ public class panelPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
                     .addComponent(comboHoraI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel42)
-                            .addComponent(comboDiaH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel43)
-                            .addComponent(jLabel44)
-                            .addComponent(jLabel45)
-                            .addComponent(jLabel46)
-                            .addComponent(jLabel47)
-                            .addComponent(jLabel48))))
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboIDGrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel27)
+                    .addComponent(jLabel27))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel43)
+                    .addComponent(jLabel44)
+                    .addComponent(jLabel45)
+                    .addComponent(jLabel46)
+                    .addComponent(jLabel47)
+                    .addComponent(jLabel48))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel49)
                     .addComponent(horarioL7)
                     .addComponent(horarioM7)
@@ -2008,7 +1991,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                     .addComponent(horarioI13)
                     .addComponent(horarioJ13)
                     .addComponent(horarioV13))
-                .addContainerGap(280, Short.MAX_VALUE))
+                .addContainerGap(284, Short.MAX_VALUE))
         );
 
         panelTabs.addTab("Horarios", jPanel8);
@@ -5737,72 +5720,70 @@ public class panelPrincipal extends javax.swing.JFrame {
         else{
             String horaClase = comboHoraI.getSelectedItem().toString();
             int horaClaseInt = 0;
-            String diaClase = comboDiaH.getSelectedItem().toString();
-            int diaClaseInt = 0;
             
-            switch(diaClase){
-                case "Lunes":
-                    diaClaseInt = 0;
-                    break;
-                case "Martes":
-                    diaClaseInt = 1;
-                    break;
-                case "Miercoles":
-                    diaClaseInt = 2;
-                    break;
-                    
-                case "Jueves":
-                    diaClaseInt = 3;
-                    break;
-                case "Viernes":
-                    diaClaseInt = 4;
-                    break;
-                default:
-                    break;
-            }
+            boolean usingDate = false;
+            int counterDay = 0;
+            
             switch(horaClase){
                 case "07:00-08:00":
                     horaClaseInt = 0;
+                    usingDate = true;
                     break;
                 case "08:00-09:00":
                     horaClaseInt = 1;
+                    usingDate = true;
                     break;
                 case "09:00-10:00":
                     horaClaseInt = 2;
+                    usingDate = true;
                     break;
                     
                 case "10:00-11:00":
                     horaClaseInt = 3;
+                    usingDate = true;
                     break;
                 case "11:00-12:00":
                     horaClaseInt = 4;
+                    usingDate = true;
                     break;
                 
                 case "12:00-13:00":
+                    usingDate = true;
                     horaClaseInt = 5;
                     break;
                 
                 case "13:00-14:00":
+                    usingDate = true;
                     horaClaseInt = 6;
                     break;
+                case "Lunes":
+                    horaClaseInt = 0;
+                    usingDate = false;
+                    break;
+                case "Martes":
+                    horaClaseInt = 7;
+                    usingDate = false;
+                    break;
+                case "Miercoles":
+                    horaClaseInt = 14;
+                    break;
                     
+                case "Jueves":
+                    horaClaseInt = 21;
+                    usingDate = false;
+                    break;
+                case "Viernes":
+                    horaClaseInt = 28;
+                    usingDate = false;
+                    break;
+
                 default:
                     break;
             }
-            int posDia = diaClaseInt * 7;
-            int posFinal = posDia + horaClaseInt;
             boolean listo = false;
             int counterToCheck = 0;
             for(int i=0; i<materias.size() && !listo; i++){
-                /*while(materias.get(nextClass).getHorarioUsados() >= 4 && ){
-                    nextClass++;
-                    
-                    if(counterToCheck < materias.size()){
-                        
-                    }
-                    
-                }
-                */
+
                 String claseParaHorario = materias.get(nextClass).getNombreM();
                 
                 
@@ -5810,155 +5791,187 @@ public class panelPrincipal extends javax.swing.JFrame {
                 if(nextClass >= materias.size()){
                     nextClass = 0;
                 }
-                if(!paraTable.get(posFinal).isUsado()){
+                boolean disponible = false;
+                while(horaClaseInt < 35 && !disponible){
+                    if(paraTable.get(horaClaseInt).isUsado()){
+                        horaClaseInt+=1;
+                        counterDay +=1;
+                        if(counterDay > 6){
+                            horaClaseInt = 35;
+                        }
+                    }
+                    else{
+                        disponible = true;
+                    }
+                }
+                
+                if(!paraTable.get(horaClaseInt).isUsado() && disponible){
                     materias.get(nextClass).addUsados();
                     listo = true;
-                    paraTable.get(posFinal).setUsado(true);
-                    switch(posFinal){
-                        case 0:
-                            horarioL7.setText(claseParaHorario);
-                            horarioL7.setVisible(true);
-                            break;
-                        case 1:
-                            horarioL8.setText(claseParaHorario);
-                            horarioL8.setVisible(true);
-                            break;
-                        case 2:
-                            horarioL9.setText(claseParaHorario);
-                            horarioL9.setVisible(true);
-                            break;
-                        case 3:
-                            horarioL10.setText(claseParaHorario);
-                            horarioL10.setVisible(true);
-                            break;
-                        case 4:
-                            horarioL11.setText(claseParaHorario);
-                            horarioL11.setVisible(true);
-                            break;
-                        case 5:
-                            horarioL12.setText(claseParaHorario);
-                            horarioL12.setVisible(true);
-                            break;
-                        case 6:
-                            horarioL13.setText(claseParaHorario);
-                            horarioL13.setVisible(true);
-                            break;
-                        case 7:
-                            horarioM7.setText(claseParaHorario);
-                            horarioM7.setVisible(true);
-                            break;
-                        case 8:
-                            horarioM8.setText(claseParaHorario);
-                            horarioM8.setVisible(true);
-                            break;
-                        case 9:
-                            horarioM9.setText(claseParaHorario);
-                            horarioM9.setVisible(true);
-                            break;
-                        case 10:
-                            horarioM10.setText(claseParaHorario);
-                            horarioM10.setVisible(true);
-                            break;
-                        case 11:
-                            horarioM11.setText(claseParaHorario);
-                            horarioM11.setVisible(true);
-                            break;
-                        case 12:
-                            horarioM12.setText(claseParaHorario);
-                            horarioM12.setVisible(true);
-                            break;
-                        case 13:
-                            horarioM13.setText(claseParaHorario);
-                            horarioM13.setVisible(true);
-                            break;
-                        case 14:
-                            horarioI7.setText(claseParaHorario);
-                            horarioI7.setVisible(true);
-                            break;
-                        case 15:
-                            horarioI8.setText(claseParaHorario);
-                            horarioI8.setVisible(true);
-                            break;
-                        case 16:
-                            horarioI9.setText(claseParaHorario);
-                            horarioI9.setVisible(true);
-                            break;
-                        case 17:
-                            horarioI10.setText(claseParaHorario);
-                            horarioI10.setVisible(true);
-                            break;
-                        case 18:
-                            horarioI11.setText(claseParaHorario);
-                            horarioI11.setVisible(true);
-                            break;
-                        case 19:
-                            horarioI12.setText(claseParaHorario);
-                            horarioI12.setVisible(true);
-                            break;
-                        case 20:
-                            horarioI13.setText(claseParaHorario);
-                            horarioI13.setVisible(true);
-                            break;    
-                        case 21:
-                            horarioJ7.setText(claseParaHorario);
-                            horarioJ7.setVisible(true);
-                            break;
-                        case 22:
-                            horarioJ8.setText(claseParaHorario);
-                            horarioJ8.setVisible(true);
-                            break;
-                        case 23:
-                            horarioJ9.setText(claseParaHorario);
-                            horarioJ9.setVisible(true);
-                            break;
-                        case 24:
-                            horarioJ10.setText(claseParaHorario);
-                            horarioJ10.setVisible(true);
-                            break;
-                        case 25:
-                            horarioJ11.setText(claseParaHorario);
-                            horarioJ11.setVisible(true);
-                            break;
-                        case 26:
-                            horarioJ12.setText(claseParaHorario);
-                            horarioJ12.setVisible(true);
-                            break;
-                        case 27:
-                            horarioJ13.setText(claseParaHorario);
-                            horarioJ13.setVisible(true);
-                            break;
-                        case 28:
-                            horarioV7.setText(claseParaHorario);
-                            horarioV7.setVisible(true);
-                            break;
-                        case 29:
-                            horarioV8.setText(claseParaHorario);
-                            horarioV8.setVisible(true);
-                            break;
-                        case 30:
-                            horarioV9.setText(claseParaHorario);
-                            horarioV9.setVisible(true);
-                            break;
-                        case 31:
-                            horarioV10.setText(claseParaHorario);
-                            horarioV10.setVisible(true);
-                            break;
-                        case 32:
-                            horarioV11.setText(claseParaHorario);
-                            horarioV11.setVisible(true);
-                            break;
-                        case 33:
-                            horarioV12.setText(claseParaHorario);
-                            horarioV12.setVisible(true);
-                            break;
-                        case 34:
-                            horarioV13.setText(claseParaHorario);
-                            horarioV13.setVisible(true);
-                            break;
-                        default:
-                            break;
+                    paraTable.get(horaClaseInt).setUsado(true);
+                    while(horaClaseInt<35){
+                        switch(horaClaseInt){
+                            case 0:
+                                horarioL7.setText(claseParaHorario);
+                                horarioL7.setVisible(true);
+                                break;
+                            case 1:
+                                horarioL8.setText(claseParaHorario);
+                                horarioL8.setVisible(true);
+                                break;
+                            case 2:
+                                horarioL9.setText(claseParaHorario);
+                                horarioL9.setVisible(true);
+                                break;
+                            case 3:
+                                horarioL10.setText(claseParaHorario);
+                                horarioL10.setVisible(true);
+                                break;
+                            case 4:
+                                horarioL11.setText(claseParaHorario);
+                                horarioL11.setVisible(true);
+                                break;
+                            case 5:
+                                horarioL12.setText(claseParaHorario);
+                                horarioL12.setVisible(true);
+                                break;
+                            case 6:
+                                horarioL13.setText(claseParaHorario);
+                                horarioL13.setVisible(true);
+                                break;
+                            case 7:
+                                horarioM7.setText(claseParaHorario);
+                                horarioM7.setVisible(true);
+                                break;
+                            case 8:
+                                horarioM8.setText(claseParaHorario);
+                                horarioM8.setVisible(true);
+                                break;
+                            case 9:
+                                horarioM9.setText(claseParaHorario);
+                                horarioM9.setVisible(true);
+                                break;
+                            case 10:
+                                horarioM10.setText(claseParaHorario);
+                                horarioM10.setVisible(true);
+                                break;
+                            case 11:
+                                horarioM11.setText(claseParaHorario);
+                                horarioM11.setVisible(true);
+                                break;
+                            case 12:
+                                horarioM12.setText(claseParaHorario);
+                                horarioM12.setVisible(true);
+                                break;
+                            case 13:
+                                horarioM13.setText(claseParaHorario);
+                                horarioM13.setVisible(true);
+                                break;
+                            case 14:
+                                horarioI7.setText(claseParaHorario);
+                                horarioI7.setVisible(true);
+                                break;
+                            case 15:
+                                horarioI8.setText(claseParaHorario);
+                                horarioI8.setVisible(true);
+                                break;
+                            case 16:
+                                horarioI9.setText(claseParaHorario);
+                                horarioI9.setVisible(true);
+                                break;
+                            case 17:
+                                horarioI10.setText(claseParaHorario);
+                                horarioI10.setVisible(true);
+                                break;
+                            case 18:
+                                horarioI11.setText(claseParaHorario);
+                                horarioI11.setVisible(true);
+                                break;
+                            case 19:
+                                horarioI12.setText(claseParaHorario);
+                                horarioI12.setVisible(true);
+                                break;
+                            case 20:
+                                horarioI13.setText(claseParaHorario);
+                                horarioI13.setVisible(true);
+                                break;    
+                            case 21:
+                                horarioJ7.setText(claseParaHorario);
+                                horarioJ7.setVisible(true);
+                                break;
+                            case 22:
+                                horarioJ8.setText(claseParaHorario);
+                                horarioJ8.setVisible(true);
+                                break;
+                            case 23:
+                                horarioJ9.setText(claseParaHorario);
+                                horarioJ9.setVisible(true);
+                                break;
+                            case 24:
+                                horarioJ10.setText(claseParaHorario);
+                                horarioJ10.setVisible(true);
+                                break;
+                            case 25:
+                                horarioJ11.setText(claseParaHorario);
+                                horarioJ11.setVisible(true);
+                                break;
+                            case 26:
+                                horarioJ12.setText(claseParaHorario);
+                                horarioJ12.setVisible(true);
+                                break;
+                            case 27:
+                                horarioJ13.setText(claseParaHorario);
+                                horarioJ13.setVisible(true);
+                                break;
+                            case 28:
+                                horarioV7.setText(claseParaHorario);
+                                horarioV7.setVisible(true);
+                                break;
+                            case 29:
+                                horarioV8.setText(claseParaHorario);
+                                horarioV8.setVisible(true);
+                                break;
+                            case 30:
+                                horarioV9.setText(claseParaHorario);
+                                horarioV9.setVisible(true);
+                                break;
+                            case 31:
+                                horarioV10.setText(claseParaHorario);
+                                horarioV10.setVisible(true);
+                                break;
+                            case 32:
+                                horarioV11.setText(claseParaHorario);
+                                horarioV11.setVisible(true);
+                                break;
+                            case 33:
+                                horarioV12.setText(claseParaHorario);
+                                horarioV12.setVisible(true);
+                                break;
+                            case 34:
+                                horarioV13.setText(claseParaHorario);
+                                horarioV13.setVisible(true);
+                                break;
+                            default:
+                                break;
+                        }
+                        if(usingDate){
+                            horaClaseInt += 7;
+                        }
+                        else{
+                            horaClaseInt += 1;
+                            counterDay +=1;
+                            if(counterDay  > 6){
+                                horaClaseInt = 35;
+                            }
+                        }
+                        claseParaHorario = materias.get(nextClass).getNombreM();
+                
+                        nextClass++;
+                        if(nextClass >= materias.size()){
+                            nextClass = 0;
+                        }    
                     }
-                    
+                        
                 }
                 else{
                     listo = true;
@@ -5966,7 +5979,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                 }
                     
             }
-            
+            horaClaseInt = 0;
         }
         
         
@@ -6088,7 +6101,6 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboAcademia;
     private javax.swing.JComboBox<String> comboAreaC;
     private javax.swing.JComboBox<String> comboCarreraA;
-    private javax.swing.JComboBox<String> comboDiaH;
     private javax.swing.JComboBox<String> comboGradoAcad;
     private javax.swing.JComboBox<String> comboGrupo;
     private javax.swing.JComboBox<String> comboGrupoAcad;
@@ -6185,7 +6197,6 @@ public class panelPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
