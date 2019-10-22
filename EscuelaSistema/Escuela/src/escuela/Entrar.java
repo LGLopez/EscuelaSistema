@@ -143,7 +143,6 @@ public class Entrar extends javax.swing.JFrame {
         contraseñaCampo = new javax.swing.JPasswordField();
         jCheckBox1 = new javax.swing.JCheckBox();
         btnEntrar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         registrar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
@@ -214,13 +213,6 @@ public class Entrar extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Mostrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         registrar.setText("Registrar");
         registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,7 +241,6 @@ public class Entrar extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnSalir)
-                    .addComponent(jButton2)
                     .addComponent(jCheckBox1)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -287,9 +278,7 @@ public class Entrar extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEntrar)
                     .addComponent(registrar))
-                .addGap(38, 38, 38)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
+                .addGap(79, 79, 79)
                 .addComponent(btnSalir)
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -378,17 +367,6 @@ public class Entrar extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnEntrarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        for(int i =0; i<users.size(); i++){
-            System.out.print(users.get(i).getNombreUsuario());
-            System.out.println();
-            System.out.print(users.get(i).getId());
-            System.out.println();
-        }
-        
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         panelPrincipal n = new panelPrincipal("Registrar");
         n.setVisible(true);
@@ -444,7 +422,6 @@ public class Entrar extends javax.swing.JFrame {
     private javax.swing.JButton btnEntrar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JPasswordField contraseñaCampo;
-    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;

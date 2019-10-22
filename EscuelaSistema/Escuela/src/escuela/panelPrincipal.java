@@ -616,6 +616,9 @@ public class panelPrincipal extends javax.swing.JFrame {
             
             paraTable.add(aux);
         }
+        
+        comboIDGrupoH.setVisible(false);
+        jLabel27.setVisible(false);
                 
         } catch (FileNotFoundException ex) {
             //Logger.getLogger(panelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -1697,14 +1700,14 @@ public class panelPrincipal extends javax.swing.JFrame {
         jLabel22.setText("Horario");
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel25.setText("Horarios");
+        jLabel25.setText("Hora Inicio");
         jLabel25.setToolTipText("");
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel27.setText("ID Grupo");
 
         comboHoraI.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        comboHoraI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "07:00-08:00", "08:00-09:00", "09:00-10:00", "10:00-11:00", "11:00-12:00", "12:00-13:00", "13:00-14:00", "Lunes", "Martes", "Miercoles", "Viernes" }));
+        comboHoraI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "07:00-08:00", "08:00-09:00", "09:00-10:00", "10:00-11:00", "11:00-12:00", "12:00-13:00", "13:00-14:00", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes" }));
 
         comboIDGrupoH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1869,14 +1872,11 @@ public class panelPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboHoraI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addGap(288, 288, 288)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel50)
-                                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jPanel8Layout.createSequentialGroup()
-                                            .addComponent(comboIDGrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(215, 215, 215)
-                                            .addComponent(jLabel49))
-                                        .addComponent(jLabel43))
+                                    .addComponent(jLabel49)
+                                    .addComponent(jLabel43)
                                     .addComponent(jLabel51)
                                     .addComponent(jLabel52)
                                     .addComponent(jLabel53)
@@ -1933,8 +1933,9 @@ public class panelPrincipal extends javax.swing.JFrame {
                                     .addComponent(horarioV9)
                                     .addComponent(horarioV8)
                                     .addComponent(horarioV7)
-                                    .addComponent(jLabel48))))))
-                .addContainerGap(85, Short.MAX_VALUE))
+                                    .addComponent(jLabel48)))
+                            .addComponent(comboIDGrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1947,9 +1948,9 @@ public class panelPrincipal extends javax.swing.JFrame {
                     .addComponent(comboHoraI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboIDGrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel27))
-                .addGap(5, 5, 5)
+                    .addComponent(jLabel27)
+                    .addComponent(comboIDGrupoH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel43)
                     .addComponent(jLabel44)
@@ -2016,7 +2017,7 @@ public class panelPrincipal extends javax.swing.JFrame {
                     .addComponent(horarioI13)
                     .addComponent(horarioJ13)
                     .addComponent(horarioV13))
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addContainerGap(285, Short.MAX_VALUE))
         );
 
         panelTabs.addTab("Horarios", jPanel8);
@@ -5730,7 +5731,7 @@ public class panelPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarGActionPerformed
 
     private void btnGenerarHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarHActionPerformed
-        maestros.clear();
+                maestros.clear();
         materias.clear();
         
         boolean emptyFile = true;
@@ -6084,6 +6085,7 @@ public class panelPrincipal extends javax.swing.JFrame {
         
         
         
+
         
     }//GEN-LAST:event_btnGenerarHActionPerformed
 
